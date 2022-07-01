@@ -1,4 +1,9 @@
-
+#immagine{
+	padding-top:20vh;
+	background-image: url("unibo.png");
+	background-size: 82% 99%;
+	
+}
 
 .blank{ display: inline-block; padding: 20;}
 
