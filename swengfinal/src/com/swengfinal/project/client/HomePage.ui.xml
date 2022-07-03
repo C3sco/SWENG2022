@@ -39,6 +39,10 @@
 	       	<gwt:Button ui:field = "btnDip" text="Dipartimenti"
                  />
 	       </li>
+	        <li  id="Contatti">
+	       	<gwt:Button ui:field = "btnContatti" text="Contatti"
+                 />
+	       </li>
 	        <li  id="login">
 	       	<gwt:Button ui:field = "btnLogin" text="Login"
                    />
@@ -57,5 +61,6 @@
 	    		<li>Bruxelles, New York, Shanghai</li><br></br>
 	    	</ul>
 	    </div>
+	    
 	</g:HTMLPanel>
 </ui:UiBinder> 

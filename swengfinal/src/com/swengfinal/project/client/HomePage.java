@@ -7,6 +7,8 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiField;
@@ -31,6 +33,9 @@ public class HomePage extends Composite {
 		btnDip.getElement().getStyle().setHeight(40.0, Unit.PX);
 		btnDip.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnDip.getElement().getStyle().setMarginRight(10, Unit.PX);
+		btnContatti.getElement().getStyle().setHeight(40.0, Unit.PX);
+		btnContatti.getElement().getStyle().setWidth(90.0, Unit.PX);
+		btnContatti.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnLogin.getElement().getStyle().setHeight(40.0, Unit.PX);
 		btnLogin.getElement().getStyle().setWidth(70.0, Unit.PX);
 		
@@ -40,7 +45,20 @@ public class HomePage extends Composite {
 	
 	@UiHandler("btnLogin")
    void doClickSubmit(ClickEvent event) {
-		Window.alert("Login Successful!");
+		RootPanel.get("container").clear();
+		//RootPanel.get("container").add(new Login());
+   }
+	
+	@UiHandler("btnDip")
+   void doClickDip(ClickEvent event) {
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new Dipartimenti());
+   }
+	
+	@UiHandler("btnDip")
+   void doClickContatti(ClickEvent event) {
+		RootPanel.get("container").clear();
+		//RootPanel.get("container").add(new Contatti());
    }
 	
 	@UiField
@@ -51,6 +69,11 @@ public class HomePage extends Composite {
 	
 	@UiField
 	Button btnDip;
+	
+	@UiField
+	Button btnContatti;
+	
+	
 	
 
 }
