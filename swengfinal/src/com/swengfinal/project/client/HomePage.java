@@ -55,10 +55,16 @@ public class HomePage extends Composite {
 		RootPanel.get("container").add(new Dipartimenti());
    }
 	
-	@UiHandler("btnDip")
+	@UiHandler("btnContatti")
    void doClickContatti(ClickEvent event) {
 		RootPanel.get("container").clear();
 		//RootPanel.get("container").add(new Contatti());
+   }
+	
+	@UiHandler("btnHome")
+   void doClickHome(ClickEvent event) {
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePage());
    }
 	
 	@UiField
@@ -72,6 +78,8 @@ public class HomePage extends Composite {
 	
 	@UiField
 	Button btnContatti;
+	
+	
 	
 	
 	
