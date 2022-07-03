@@ -25,8 +25,16 @@ public class HomePage extends Composite {
 	public HomePage() {
 		
 		initWidget(uiBinder.createAndBindUi(this));
+		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
+		btnHome.getElement().getStyle().setHeight(40.0, Unit.PX);
+		btnHome.getElement().getStyle().setWidth(70.0, Unit.PX);
+		btnDip.getElement().getStyle().setHeight(40.0, Unit.PX);
+		btnDip.getElement().getStyle().setWidth(90.0, Unit.PX);
+		btnDip.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnLogin.getElement().getStyle().setHeight(40.0, Unit.PX);
 		btnLogin.getElement().getStyle().setWidth(70.0, Unit.PX);
+		
+		
 		
 	}
 	
@@ -37,6 +45,12 @@ public class HomePage extends Composite {
 	
 	@UiField
 	Button btnLogin;
+	
+	@UiField
+	Button btnHome;
+	
+	@UiField
+	Button btnDip;
 	
 
 }

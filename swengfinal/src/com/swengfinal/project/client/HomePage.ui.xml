@@ -4,7 +4,7 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	>
 	<ui:style>
-		ul {
+		#navbar{
 		  list-style-type: none;
 		  margin: 0;
 		  padding: 0;
@@ -14,38 +14,48 @@
 		
 		li {
 		  float: left;
-		  margin-left: 10px;
-		  
 		  
 		}
-		
-		li:nth-child(2){
-		  margin-left: 10px;
-		  
-		  
-		}
-		
-		
 		
 		
 		li a:hover:not(.active) {
 		  background-color: #111;
 		}
 		
+		#Sedi{
+			background-color: white;
+		}
+		
 		
 	</ui:style>
 	
 	<g:HTMLPanel>
-		<ul>
-	       <li  id="login">
-	       	<gwt:Button ui:field = "btnLogin" text="Login"
-                   />
-	       </li>
+		<ul id="navbar">
 	       <li  id="Home">
 	       	<gwt:Button ui:field = "btnHome" text="Home"
                  />
 	       </li>
+	       <li  id="Dipa">
+	       	<gwt:Button ui:field = "btnDip" text="Dipartimenti"
+                 />
+	       </li>
+	        <li  id="login">
+	       	<gwt:Button ui:field = "btnLogin" text="Login"
+                   />
+	       </li>
 	    </ul>
-	    
+	    <div id="infoUni">
+	    	<h2>La nostra storia</h2>
+	    	<p>L'Università di Bologna ha origini molto antiche che la indicano come la prima università del mondo occidentale. La sua storia si intreccia con quella di grandi personaggi che operarono nel campo della scienza e delle lettere ed è riferimento imprescindibile nel panorama della cultura europea.</p>
+	    	<h2>Sedi e strutture</h2>
+	    	<p>L’Università di Bologna si articola come Ateneo Multicampus per permettere la diffusione dell'offerta formativa e l'attivazione di una stabile attività di ricerca sul territorio. </p>
+	    	<ul id="Sedi">
+	    		<li>Campus Cesena</li><br></br>
+	    		<li>Campus Forlì</li><br></br>
+	    		<li>Campus Ravenna</li><br></br>
+	    		<li>Representacion en la Republica Argentina, Centro de Altos Estudios de la Universidad de Bologna</li><br></br>
+	    		<li>Bruxelles, New York, Shanghai</li><br></br>
+	    	</ul>
+	    </div>
 	</g:HTMLPanel>
 </ui:UiBinder> 
