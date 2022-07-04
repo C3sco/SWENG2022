@@ -53,12 +53,17 @@
 	    	<p>L'Università di Bologna ha origini molto antiche che la indicano come la prima università del mondo occidentale. La sua storia si intreccia con quella di grandi personaggi che operarono nel campo della scienza e delle lettere ed è riferimento imprescindibile nel panorama della cultura europea.</p>
 	    	<h2>Sedi e strutture</h2>
 	    	<p>L’Università di Bologna si articola come Ateneo Multicampus per permettere la diffusione dell'offerta formativa e l'attivazione di una stabile attività di ricerca sul territorio. </p>
-	    	<ul id="Sedi">
-	    		<li>Campus Cesena</li><br></br>
-	    		<li>Campus Forlì</li><br></br>
-	    		<li>Campus Ravenna</li><br></br>
-	    		<li>Representacion en la Republica Argentina, Centro de Altos Estudios de la Universidad de Bologna</li><br></br>
-	    		<li>Bruxelles, New York, Shanghai</li><br></br>
+	    	<ul id="Sedi" style="list-style-type:square">
+	    		<li>Campus Cesena</li>
+	    		<br></br>
+	    		<li>Campus Forlì</li>
+	    		<br></br>
+	    		<li>Campus Ravenna</li>
+	    		<br></br>
+	    		<li>Representacion en la Republica Argentina, Centro de Altos Estudios de la Universidad de Bologna</li>
+	    		<br></br>
+	    		<li>Bruxelles, New York, Shanghai</li>
+	    		<br></br>
 	    	</ul>
 	    </div>
 	    

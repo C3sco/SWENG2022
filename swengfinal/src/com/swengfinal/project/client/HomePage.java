@@ -58,7 +58,7 @@ public class HomePage extends Composite {
 	@UiHandler("btnContatti")
    void doClickContatti(ClickEvent event) {
 		RootPanel.get("container").clear();
-		//RootPanel.get("container").add(new Contatti());
+		RootPanel.get("container").add(new Contatti());
    }
 	
 	@UiHandler("btnHome")

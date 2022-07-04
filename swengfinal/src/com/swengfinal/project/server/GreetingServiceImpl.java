@@ -4,6 +4,11 @@ import com.swengfinal.project.client.GreetingService;
 import com.swengfinal.project.shared.FieldVerifier;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+import org.mapdb.DB;
+import org.mapdb.DBMaker;
+import org.mapdb.HTreeMap;
+import org.mapdb.Serializer;
+
 /**
  * The server-side implementation of the RPC service.
  */
@@ -18,15 +23,26 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 			throw new IllegalArgumentException("Name must be at least 4 characters long");
 		}
 
-		String serverInfo = getServletContext().getServerInfo();
-		String userAgent = getThreadLocalRequest().getHeader("User-Agent");
 
-		// Escape data from the client to avoid cross-site script vulnerabilities.
-		input = escapeHtml(input);
-		userAgent = escapeHtml(userAgent);
+		DB db = DBMaker.fileDB(DB_FILE).make();
 
-		return "Hello, " + input + "!<br><br>I am running " + serverInfo + ".<br><br>It looks like you are using:<br>"
-				+ userAgent;
+		// creo una semplice mappa String -> String nel db
+		// il tipo HTreeMap è thread safe
+		HTreeMap<String, Integer> map = db.hashMap(SIMPLE_MAP).keySerializer(Serializer.STRING)
+				.valueSerializer(Serializer.INTEGER).createOrOpen();
+
+		if (map.containsKey(input)) {
+			System.out.println(input + " contenuto inviato " + map.get(input) + " volte!");
+			map.put(input, map.get(input) + 1);
+		} else {
+			System.out.println(input + " non presente nel DB! Aggiungo!");
+			map.put(input, 1);
+
+		}
+
+		db.close();
+		return escapeHtml("Ciao " + input + "!");
+	}
 	}
 
 	/**
