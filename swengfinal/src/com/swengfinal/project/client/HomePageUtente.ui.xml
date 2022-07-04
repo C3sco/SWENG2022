@@ -2,6 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	xmlns:gwt = 'urn:import:com.google.gwt.user.client.ui'>
+	 
 	<ui:style>
 		#navbar{
 		  list-style-type: none;
@@ -18,7 +19,7 @@
 		
 		#infoUtente{
 			width: 70vw;
-			height: 50vh;
+			height: 55vh;
 			border: 1px solid #303030;
 			margin-top: 6vh;
 			margin-left: 15vw;

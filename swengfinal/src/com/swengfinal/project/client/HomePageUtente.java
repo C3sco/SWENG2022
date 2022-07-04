@@ -50,19 +50,19 @@ public class HomePageUtente extends Composite {
 	@UiHandler("btnIscrizione")
 	void doClickDip(ClickEvent event) {
 			RootPanel.get("container").clear();
-			//RootPanel.get("container").add(new Dipartimenti());
+			RootPanel.get("container").add(new PageCorsiDisponibili());
 	}
 	
 	@UiHandler("btnRegistrazione")
 	void doClickContatti(ClickEvent event) {
 			RootPanel.get("container").clear();
-			//RootPanel.get("container").add(new Contatti());
+			RootPanel.get("container").add(new RegistrazioneEsame());
 	}
 	
 	@UiHandler("btnVoti")
 	void doClickHome(ClickEvent event) {
 			RootPanel.get("container").clear();
-			//RootPanel.get("container").add(new HomePage());
+			RootPanel.get("container").add(new PageVoti());
 	}
 	
 	@UiHandler("btnLogout")
