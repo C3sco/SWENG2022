@@ -42,11 +42,14 @@ public class Login extends Composite {
 		txtPassword.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
 		btnSubmit.getElement().getStyle().setHeight(40.0, Unit.PX);
 		btnSubmit.getElement().getStyle().setWidth(70.0, Unit.PX);
+		btnRegistrazione.getElement().getStyle().setHeight(50.0, Unit.PX);
+		btnRegistrazione.getElement().getStyle().setWidth(90.0, Unit.PX);
+		btnRegistrazione.getElement().getStyle().setMarginLeft(10.0, Unit.PX);
 	}
 		
 		//final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 		
-		//greetingService.registrazione(listaDati, new AsyncCallback<String>();
+		
 
 	@UiHandler("btnLogin")
 	   void doClickSubmit(ClickEvent event) {
@@ -71,11 +74,48 @@ public class Login extends Composite {
 			RootPanel.get("container").clear();
 			RootPanel.get("container").add(new HomePage());
 	}
+	@UiHandler("btnRegistrazione")
+	   void doClickRegistrazione(ClickEvent event) {
+			RootPanel.get("container").clear();
+			RootPanel.get("container").add(new Registrazione());
+	   }
 	
 	@UiHandler("btnSubmit")
 	void doClickLogin(ClickEvent event) {
+		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+		
+		greetingService.login(txtMail.getText(), txtPassword.getText(), new AsyncCallback<Integer>(){
+			
+			public void onFailure(Throwable c) {
+				System.out.println("Errore");
+			}
+			
+			@Override
+			public void onSuccess(Integer result) {
+			Account.email = (txtMail.getText());
+			Account.tipoAccount = result;
+			
 			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePageUtente());
+			switch(result) {
+			case 0:
+				Alert alert = new Alert("Errore!");
+				System.out.print(alert);
+				RootPanel.get("container").add(new HomePage());
+				break;
+			case 1:
+				RootPanel.get("container").add(new HomePageUtente());
+				break;
+			default:
+				Alert alert2 = new Alert("Errore!");
+				System.out.print(alert2);
+				RootPanel.get("container").add(new HomePage());
+				break;
+				
+			}
+			
+			}
+		});
+			
 	}
 	
 	@UiField
@@ -89,6 +129,9 @@ public class Login extends Composite {
 	
 	@UiField
 	Button btnContatti;
+	
+	@UiField
+	Button btnRegistrazione;
 	
 	@UiField
 	TextBox txtMail;

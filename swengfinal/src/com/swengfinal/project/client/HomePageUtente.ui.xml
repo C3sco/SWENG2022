@@ -29,6 +29,7 @@
 		}
 		
 		#logout{
+			position:top;
 			float:right;
 		}
 		

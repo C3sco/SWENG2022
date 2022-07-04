@@ -46,6 +46,10 @@
 	       	<gwt:Button ui:field = "btnLogin" text="Login"
                    />
 	       </li>
+	        <li  id="Registrazione">
+	       	<gwt:Button ui:field = "btnRegistrazione" text="Registrazione"
+                   />
+	       </li>
 	    </ul>
 		<form>
 		  <div class="form-group">
