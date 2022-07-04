@@ -44,8 +44,7 @@ public class dbUtenti {
 						dati.get(4),
 						dati.get(5),
 						dati.get(6),
-						dati.get(7),
-						dati.get(8));
+						dati.get(7));
 			
 			Users.put(user.getEmail(),user);
 			db.commit();

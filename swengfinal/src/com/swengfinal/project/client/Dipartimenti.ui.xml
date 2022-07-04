@@ -34,6 +34,10 @@
 	       	<gwt:Button ui:field = "btnLogin" text="Login"
                    />
 	       </li>
+	        <li  id="Registrazione">
+	       	<gwt:Button ui:field = "btnRegistrazione" text="Registrazione"
+                   />
+	       </li>
 	    </ul>
 	    <h2>Dipartimenti</h2>
 	    <p>I Dipartimenti sono le articolazioni organizzative dell'Ateneo per lo svolgimento delle funzioni relative alla ricerca scientifica e alle attività didattiche e formative. L'elenco riporta la nuova articolazione dei Dipartimenti, attivati in applicazione della Legge 240/2010</p>
