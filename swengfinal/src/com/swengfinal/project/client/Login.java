@@ -7,6 +7,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -42,6 +43,10 @@ public class Login extends Composite {
 		btnSubmit.getElement().getStyle().setHeight(40.0, Unit.PX);
 		btnSubmit.getElement().getStyle().setWidth(70.0, Unit.PX);
 	}
+		
+		//final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+		
+		//greetingService.registrazione(listaDati, new AsyncCallback<String>();
 
 	@UiHandler("btnLogin")
 	   void doClickSubmit(ClickEvent event) {

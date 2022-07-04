@@ -9,11 +9,15 @@ import org.mapdb.DBMaker;
 import org.mapdb.HTreeMap;
 import org.mapdb.Serializer;
 
+import java.io.File;
+import java.util.ArrayList;
+
 /**
  * The server-side implementation of the RPC service.
  */
 @SuppressWarnings("serial")
 public class GreetingServiceImpl extends RemoteServiceServlet implements GreetingService {
+
 
 	public String greetServer(String input) throws IllegalArgumentException {
 		// Verify that the input is valid. 
@@ -22,26 +26,17 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 			// the client.
 			throw new IllegalArgumentException("Name must be at least 4 characters long");
 		}
-
-
-		DB db = DBMaker.fileDB(DB_FILE).make();
-
-		// creo una semplice mappa String -> String nel db
-		// il tipo HTreeMap è thread safe
-		HTreeMap<String, Integer> map = db.hashMap(SIMPLE_MAP).keySerializer(Serializer.STRING)
-				.valueSerializer(Serializer.INTEGER).createOrOpen();
-
-		if (map.containsKey(input)) {
-			System.out.println(input + " contenuto inviato " + map.get(input) + " volte!");
-			map.put(input, map.get(input) + 1);
-		} else {
-			System.out.println(input + " non presente nel DB! Aggiungo!");
-			map.put(input, 1);
-
-		}
-
-		db.close();
-		return escapeHtml("Ciao " + input + "!");
+		return "SIUM";
+	}
+	
+	@Override
+	public String registrazione(ArrayList<String> dati) throws IllegalArgumentException {
+		return dbUtenti.registrazione(dati);
+	}
+	
+	@Override
+	public int login(String username, String password) {
+		return dbUtenti.login(username, password);
 	}
 
 	/**
