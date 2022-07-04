@@ -43,7 +43,6 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		db.close();
 		return escapeHtml("Ciao " + input + "!");
 	}
-	}
 
 	/**
 	 * Escape an html string. Escaping data received from the client helps to
