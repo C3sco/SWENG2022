@@ -28,15 +28,15 @@ public class HomePage extends Composite {
 		
 		initWidget(uiBinder.createAndBindUi(this));
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
-		btnHome.getElement().getStyle().setHeight(40.0, Unit.PX);
+		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnHome.getElement().getStyle().setWidth(70.0, Unit.PX);
-		btnDip.getElement().getStyle().setHeight(40.0, Unit.PX);
+		btnDip.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnDip.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnDip.getElement().getStyle().setMarginRight(10, Unit.PX);
-		btnContatti.getElement().getStyle().setHeight(40.0, Unit.PX);
+		btnContatti.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnContatti.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnContatti.getElement().getStyle().setMarginRight(10, Unit.PX);
-		btnLogin.getElement().getStyle().setHeight(40.0, Unit.PX);
+		btnLogin.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnLogin.getElement().getStyle().setWidth(70.0, Unit.PX);
 		
 		
@@ -46,7 +46,7 @@ public class HomePage extends Composite {
 	@UiHandler("btnLogin")
    void doClickSubmit(ClickEvent event) {
 		RootPanel.get("container").clear();
-		//RootPanel.get("container").add(new Login());
+		RootPanel.get("container").add(new Login());
    }
 	
 	@UiHandler("btnDip")
