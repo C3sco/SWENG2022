@@ -38,9 +38,5 @@ public class Swengfinal implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		RootPanel.get("container").add(new HomePage()); 
-	}
-
-	
-		
-	
+	}	
 }
