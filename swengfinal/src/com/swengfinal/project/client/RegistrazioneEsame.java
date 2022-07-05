@@ -11,6 +11,7 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -85,6 +86,7 @@ public class RegistrazioneEsame extends Composite {
 	
 	void addOptionCorsi() {
 		
+		/**
 		menuCorsi.addItem("Ingeneria del software", new Command() {
 	         @Override
 	         public void execute() {
@@ -93,24 +95,43 @@ public class RegistrazioneEsame extends Composite {
 	      });
 		
 		
-		
 		menuCorsi.addItem("Ingeneria del software", new Command() {
 	         @Override
 	         public void execute() {
 	            showSelectedMenuItem("Ingeneria del software");
 	         }
 	      });
+		 
 		
+		menuCorsi.addItem("Basi di Dati", new Command() {
+	         @Override
+	         public void execute() {
+	            showSelectedMenuItem("Ingeneria del software");
+	         }
+	      });
+		 * 
+		 */
 		
+		// Next featuer: listBox.addItem(corso)
+		// aggiungere alla listbox tutti i corsi per creare menu a tendina. 
+		
+		menuCorsi.addItem("Ingegneria del Software");
+		menuCorsi.addItem("Basi di Dati");
+
 	}
 	
 	void addOptionAppelli() {
+		/**
+		 * 
 		menuAppelli.addItem("Appello del "+"21/03/2022", new Command() {
 	         @Override
 	         public void execute() {
 	            showSelectedMenuItem("Appello del "+"21/03/2022");
 	         }
 	      });
+		 */
+		
+		menuAppelli.addItem("Appello del 21/03/2022");
 	}
 	
 	void showSelectedMenuItem(String menuItemName){
@@ -135,12 +156,19 @@ public class RegistrazioneEsame extends Composite {
 	@UiField
 	Button btnEsame;
 	
+	/**
 	@UiField
 	MenuBar menuCorsi;
 	
 	@UiField
 	MenuBar menuAppelli;
+	 * 
+	 */
 	
+	@UiField
+	ListBox menuCorsi; 
 	
+	@UiField
+	ListBox menuAppelli;
 	
 }

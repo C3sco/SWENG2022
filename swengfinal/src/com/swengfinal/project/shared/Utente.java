@@ -14,9 +14,6 @@ public class Utente implements Serializable {
 	private String cognome;
 	private String luogoNascita;
 	private String dataNascita;
-	
-
-
 
 	public Utente()	{
 	}

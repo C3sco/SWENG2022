@@ -47,10 +47,8 @@ public class Login extends Composite {
 		btnRegistrazione.getElement().getStyle().setMarginLeft(10.0, Unit.PX);
 	}
 		
-		//final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+	//final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 		
-		
-
 	@UiHandler("btnLogin")
 	   void doClickSubmit(ClickEvent event) {
 			RootPanel.get("container").clear();
