@@ -61,7 +61,7 @@
 		    <gwt:TextBox ui:field="txtPassword"></gwt:TextBox>
 		  </div>
 		 
-		  <gwt:Button ui:field="btnSubmit" text="Submit"></gwt:Button>
+		  <gwt:Button ui:field="btnSubmitLogin" text="Submit"></gwt:Button>
 		</form>
 	</g:HTMLPanel>
 </ui:UiBinder> 

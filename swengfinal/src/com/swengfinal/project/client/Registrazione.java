@@ -66,8 +66,11 @@ public class Registrazione extends Composite {
 		txtCognome.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
 		txtLuogoNascita.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
 		txtDataNascita.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
+		listTipologia.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
 		btnSubmit.getElement().getStyle().setHeight(40.0, Unit.PX);
 		btnSubmit.getElement().getStyle().setWidth(70.0, Unit.PX);
+		
+		addTipologia();
 	}
 
 	@UiHandler("btnLogin")
@@ -99,8 +102,16 @@ public class Registrazione extends Composite {
 			RootPanel.get("container").add(new Registrazione());
 	   }
 	
+	void addTipologia() {
+		listTipologia.addItem("Studente");
+		listTipologia.addItem("Docente");
+		listTipologia.addItem("Segreteria");
+	}
+	
 	@UiHandler("btnSubmit")
 	void doClickSubmit2(ClickEvent event) {
+		
+		final String tmp = listTipologia.getSelectedItemText();
 		
 		ArrayList<String> datiUtenti = new ArrayList<String>();
 		datiUtenti.add(txtMail.getText());
@@ -111,7 +122,7 @@ public class Registrazione extends Composite {
 		datiUtenti.add(txtCognome.getText());
 		datiUtenti.add(txtLuogoNascita.getText());
 		datiUtenti.add(txtDataNascita.getText());
-
+		datiUtenti.add(tmp);
 		
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 		
@@ -120,14 +131,15 @@ public class Registrazione extends Composite {
 			public void onFailure(Throwable c) {
 				Alert a = new Alert("Errore!");
 				System.out.println(a);
+				
 			}
 			
 			@Override
 			public void onSuccess(String result) {
 				if(result!=null) {
 					RootPanel.get("container").clear();
-					Account.email = txtMail.getText();
-					Account.tipoAccount = 1;
+					//Account.email = txtMail.getText();
+					//Account.tipoAccount = 1;
 				
 					RootPanel.get("container").add(new HomePageUtente());
 				}else {
@@ -138,6 +150,7 @@ public class Registrazione extends Composite {
 		});
 			
 	}
+	
 	
 	@UiField
 	Button btnLogin;
@@ -177,6 +190,9 @@ public class Registrazione extends Composite {
 	
 	@UiField
 	TextBox txtDataNascita;
+	
+	@UiField
+	ListBox listTipologia;
 	
 	@UiField
 	Button btnSubmit;

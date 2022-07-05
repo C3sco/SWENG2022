@@ -15,7 +15,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.swengfinal.project.client.PageCorsiDisponibili.Corso;
+import com.swengfinal.project.client.PageCorsiDisponibili;
 
 public class PageVoti extends Composite {
 

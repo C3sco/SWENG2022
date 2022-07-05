@@ -139,8 +139,5 @@ public class RegistrazioneEsame extends Composite {
 	MenuBar menuCorsi;
 	
 	@UiField
-	MenuBar menuAppelli;
-	
-	
-	
+	MenuBar menuAppelli;	
 }

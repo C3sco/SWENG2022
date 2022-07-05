@@ -40,8 +40,8 @@ public class Login extends Composite {
 		btnLogin.getElement().getStyle().setWidth(70.0, Unit.PX);
 		txtMail.getElement().getStyle().setMarginLeft(10.0, Unit.PX);
 		txtPassword.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
-		btnSubmit.getElement().getStyle().setHeight(40.0, Unit.PX);
-		btnSubmit.getElement().getStyle().setWidth(70.0, Unit.PX);
+		btnSubmitLogin.getElement().getStyle().setHeight(40.0, Unit.PX);
+		btnSubmitLogin.getElement().getStyle().setWidth(70.0, Unit.PX);
 		btnRegistrazione.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnRegistrazione.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnRegistrazione.getElement().getStyle().setMarginLeft(10.0, Unit.PX);
@@ -80,14 +80,16 @@ public class Login extends Composite {
 			RootPanel.get("container").add(new Registrazione());
 	   }
 	
-	@UiHandler("btnSubmit")
+	@UiHandler("btnSubmitLogin")
 	void doClickLogin(ClickEvent event) {
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 		
 		greetingService.login(txtMail.getText(), txtPassword.getText(), new AsyncCallback<Integer>(){
 			
 			public void onFailure(Throwable c) {
-				System.out.println("Errore");
+				Alert a = new Alert("Errore!");
+				System.out.println(a);
+				
 			}
 			
 			@Override
@@ -140,5 +142,5 @@ public class Login extends Composite {
 	TextBox txtPassword;
 	
 	@UiField
-	Button btnSubmit;
+	Button btnSubmitLogin;
 }

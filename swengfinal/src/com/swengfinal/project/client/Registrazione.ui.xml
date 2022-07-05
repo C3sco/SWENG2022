@@ -84,6 +84,11 @@
 		    <label for="exampleInputPassword1">Data di Nascita</label>
 		    <gwt:TextBox ui:field="txtDataNascita"></gwt:TextBox>
 		  </div>
+		  <div class="form-group">
+		    <label for="exampleInputPassword1">Tipologia:</label>
+		    <gwt:ListBox ui:field="listTipologia"></gwt:ListBox>
+		  </div>
+		  
 		 
 		  <gwt:Button ui:field="btnSubmit" text="Submit"></gwt:Button>
 		</form>
