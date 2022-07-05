@@ -5,6 +5,7 @@ import com.swengfinal.project.client.GreetingService;
 import com.swengfinal.project.shared.FieldVerifier;
 import com.swengfinal.project.shared.Utente;
 import com.swengfinal.project.shared.Amministratore;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import org.mapdb.BTreeMap;
@@ -60,22 +61,38 @@ public class dbUtenti {
 		else return "Errore";
 	}
 	
-	public static int login(String email, String password) throws IllegalArgumentException{
+	public static Utente login(String email, String password) throws IllegalArgumentException{
+		
 		DB db = getDB();
 		BTreeMap<String,Utente> Users = db.getTreeMap("UtentiMap");
 		if(checkMail(email)) {
 			Utente user = Users.get(email);
 			if(user.getPw().equals(password)) {
-				return 1;
+				return user;
+			}else return null;
+		}else return null;
+	}
+			
+			//Alert a = new Alert("Test");
+			//System.out.println(a + user.getTipologia());
+				
+				/*
+				if(user.getTipologia().equals("Utente")) {
+					return 1;
+				}else if(user.getTipologia()=="Segreteria") {
+					return 3;
+				}else if(user.getTipologia()=="Docente") {
+					return 4;
+				}else if(user.getTipologia()=="Amministratore") {
+					return 2;
+				}else {
+					return -2;
+				}
 				//if((user.getClass()==Utente.class)) return 1;
 				//if((user.getClass()==Amminsitratore.class)) return 2;
-			}
-			else {
-				return -1;
-			}
-		}
-		return 0;
-	}
+			}else return 5;
+		}else return 6;*/
+	
 	
 	public static String getInfoUtente(String email) {
 		DB db = getDB();

@@ -17,8 +17,11 @@ public interface GreetingService extends RemoteService {
 	 * Metodi utente
 	 */
 	String registrazione(ArrayList<String> dati) throws IllegalArgumentException;
-	int login(String username, String password) throws IllegalArgumentException;
+	
+	Utente login(String username, String password) throws IllegalArgumentException;
+	
 	String getInfoUtente(String email)throws IllegalArgumentException;
+	
 	Utente getUtente(String email) throws IllegalArgumentException;
 	
 	/**

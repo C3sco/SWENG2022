@@ -1,5 +1,6 @@
 package com.swengfinal.project.client;
 
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -13,6 +14,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+import com.swengfinal.project.shared.Utente;
 
 public class Login extends Composite {
 
@@ -80,22 +82,40 @@ public class Login extends Composite {
 	
 	@UiHandler("btnSubmit")
 	void doClickLogin(ClickEvent event) {
-		RootPanel.get("container").clear();
-		/*final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-		
-		greetingService.login(txtMail.getText(), txtPassword.getText(), new AsyncCallback<Integer>(){
+		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+		//Window.alert(txtPassword.getText() + " " + txtMail.getText());
+		greetingService.login(txtMail.getText(), txtPassword.getText(), new AsyncCallback<Utente>() {
+			
+			
 			
 			public void onFailure(Throwable c) {
-				System.out.println("Errore");
+
+				RootPanel.get("container").clear();
+				RootPanel.get("container").add(new HomePage());
 			}
 			
 			@Override
-			public void onSuccess(Integer result) {
-			Account.email = (txtMail.getText());
-			Account.tipoAccount = result;
+			public void onSuccess(Utente user) {
+			Account.email = txtMail.getText();
+			//Account.tipoAccount = user.getTipologia();
+			
+		/*
+			Alert alert13 = new Alert("INT: " + result);
+			System.out.print(alert13);*/
 			
 			RootPanel.get("container").clear();
+			if(user.getTipologia()=="Studente") {
+				RootPanel.get("container").add(new HomePageUtente());
+			}else if(user.getTipologia()=="Docente") {
+				RootPanel.get("container").add(new HomePageDocente());
+			}
+			
+			else {
+				RootPanel.get("container").add(new HomePage());
+			}
+/*
 			switch(result) {
+			
 			case 0:
 				Alert alert = new Alert("Errore!");
 				System.out.print(alert);
@@ -104,19 +124,36 @@ public class Login extends Composite {
 			case 1:
 				RootPanel.get("container").add(new HomePageUtente());
 				break;
+			case 2: //admin
+				break;
+			case 3:  //segreteria
+				break;
+			case 4:  //docente
+				RootPanel.get("container").add(new HomePageDocente());
+				break;
+			case 5:	 //errore password
+				Alert alert3 = new Alert("case 5, errore di password!");
+				System.out.print(alert3);
+				RootPanel.get("container").add(new HomePage());
+				break;
+			case 6:  //errore mail
+				Alert alert4 = new Alert("case 6, errore di email");
+				System.out.print(alert4);
+				RootPanel.get("container").add(new HomePage());
+				break;
 			default:
-				Alert alert2 = new Alert("Errore!");
+				Alert alert2 = new Alert("ERRORE");
 				System.out.print(alert2);
 				RootPanel.get("container").add(new HomePage());
 				break;
 				
-			}
+			}*/
 			
 			}
-		});*/
-		RootPanel.get("container").add(new HomePageDocente());
+		});
 		
 			
+		
 	}
 	
 	@UiField
