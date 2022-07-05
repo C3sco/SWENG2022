@@ -1,0 +1,163 @@
+package com.swengfinal.project.client;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.uibinder.client.UiTemplate;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.Widget;
+
+public class PageEsameDocente extends Composite {
+
+	private static PageEsameDocenteUiBinder uiBinder = GWT.create(PageEsameDocenteUiBinder.class);
+
+	@UiTemplate("PageEsameDocente.ui.xml")
+	interface PageEsameDocenteUiBinder extends UiBinder<Widget, PageEsameDocente> {
+	}
+
+	public PageEsameDocente() {
+		initWidget(uiBinder.createAndBindUi(this));
+		
+		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
+		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
+		btnHome.getElement().getStyle().setWidth(70.0, Unit.PX);
+		btnCorso.getElement().getStyle().setHeight(50.0, Unit.PX);
+		btnCorso.getElement().getStyle().setWidth(90.0, Unit.PX);
+		btnCorso.getElement().getStyle().setMarginRight(10, Unit.PX);
+		btnEsame.getElement().getStyle().setHeight(50.0, Unit.PX);
+		btnEsame.getElement().getStyle().setWidth(90.0, Unit.PX);
+		btnEsame.getElement().getStyle().setMarginRight(10, Unit.PX);
+		btnVoti.getElement().getStyle().setHeight(50.0, Unit.PX);
+		btnVoti.getElement().getStyle().setWidth(70.0, Unit.PX);
+		btnLogout.getElement().getStyle().setHeight(50.0, Unit.PX);
+		btnLogout.getElement().getStyle().setWidth(90.0, Unit.PX);
+		btnLogout.getElement().getStyle().setMarginLeft(800.0, Unit.PX);
+		txtData.getElement().getStyle().setMarginLeft(30.0, Unit.PX);
+		txtCfu.getElement().getStyle().setMarginLeft(40.0, Unit.PX);
+		txtAula.getElement().getStyle().setMarginLeft(30.0, Unit.PX);
+		txtOra.getElement().getStyle().setMarginLeft(36.0, Unit.PX);
+		btnCreazione.getElement().getStyle().setMargin(10, Unit.PX);
+		menuUpdateCorsi.getElement().getStyle().setMarginLeft(28.0, Unit.PX);
+		menuUpdateEsame.getElement().getStyle().setMarginLeft(27.0, Unit.PX);
+		txtUpdateData.getElement().getStyle().setMarginLeft(36.0, Unit.PX);
+		txtUpdateCfu.getElement().getStyle().setMarginLeft(15.0, Unit.PX);
+		txtUpdateAula.getElement().getStyle().setMarginLeft(36.0, Unit.PX);
+		txtUpdateOra.getElement().getStyle().setMarginLeft(15.0, Unit.PX);
+		btnUpdate.getElement().getStyle().setMargin(10, Unit.PX);
+		btnCancellazione.getElement().getStyle().setMarginLeft(350, Unit.PX);
+		menuCorsi.getElement().getStyle().setMarginLeft(28.0, Unit.PX);
+		
+	}
+	
+	@UiHandler("btnHome")
+	   void doClickSubmit(ClickEvent event) {
+			RootPanel.get("container").clear();
+			RootPanel.get("container").add(new HomePageDocente());
+	   }
+	
+	@UiHandler("btnCorso")
+	void doClickDip(ClickEvent event) {
+			RootPanel.get("container").clear();
+			RootPanel.get("container").add(new PageCorsoDocente());
+	}
+	
+	@UiHandler("btnEsame")
+	void doClickContatti(ClickEvent event) {
+			RootPanel.get("container").clear();
+			RootPanel.get("container").add(new PageEsameDocente());
+	}
+	
+	@UiHandler("btnVoti")
+	void doClickHome(ClickEvent event) {
+			RootPanel.get("container").clear();
+			RootPanel.get("container").add(new PageVotiDocente());
+	}
+	
+	@UiHandler("btnLogout")
+	void doClickLogout(ClickEvent event) {
+			RootPanel.get("container").clear();
+			RootPanel.get("container").add(new HomePage());
+	}
+	
+	@UiHandler("btnCreazione")
+	void doClickCreazioneCorso(ClickEvent event) {
+			Window.alert("Esame creato");
+	}
+	
+	@UiHandler("btnCancellazione")
+	void doClickDelete(ClickEvent event) {
+			Window.alert("Esame eliminato");
+	}
+	
+	@UiHandler("btnUpdate")
+	void doClickUpdate(ClickEvent event) {
+			Window.alert("Esame modificato");
+	}
+	
+	
+	@UiField
+	Button btnCorso;
+	
+	@UiField
+	Button btnHome;
+	
+	@UiField
+	Button btnEsame;
+	
+	@UiField
+	Button btnVoti;
+	
+	@UiField
+	Button btnLogout;
+	
+	@UiField
+	TextBox txtData;
+	
+	@UiField
+	TextBox txtCfu;
+	
+	@UiField
+	TextBox txtAula;
+	
+	@UiField
+	TextBox txtOra;
+	
+	@UiField
+	TextBox txtUpdateData;
+	
+	@UiField
+	TextBox txtUpdateCfu;
+	
+	@UiField
+	TextBox txtUpdateAula;
+	
+	@UiField
+	TextBox txtUpdateOra;
+	
+	@UiField
+	ListBox menuCorsi;
+	
+	@UiField
+	ListBox menuUpdateEsame;
+	
+	@UiField
+	ListBox menuUpdateCorsi;
+	
+	@UiField
+	Button btnCreazione;
+	
+	@UiField
+	Button btnCancellazione;
+	
+	@UiField
+	Button btnUpdate;
+
+}

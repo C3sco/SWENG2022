@@ -80,7 +80,8 @@ public class Login extends Composite {
 	
 	@UiHandler("btnSubmit")
 	void doClickLogin(ClickEvent event) {
-		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+		RootPanel.get("container").clear();
+		/*final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 		
 		greetingService.login(txtMail.getText(), txtPassword.getText(), new AsyncCallback<Integer>(){
 			
@@ -112,7 +113,9 @@ public class Login extends Composite {
 			}
 			
 			}
-		});
+		});*/
+		RootPanel.get("container").add(new HomePageDocente());
+		
 			
 	}
 	
