@@ -11,6 +11,7 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -84,8 +85,8 @@ public class RegistrazioneEsame extends Composite {
 	}
 	
 	void addOptionCorsi() {
-		
-		menuCorsi.addItem("Ingeneria del software", new Command() {
+		/**
+		 * 		menuCorsi.addItem("Ingeneria del software", new Command() {
 	         @Override
 	         public void execute() {
 	            showSelectedMenuItem("Ingeneria del software");
@@ -100,21 +101,31 @@ public class RegistrazioneEsame extends Composite {
 	            showSelectedMenuItem("Ingeneria del software");
 	         }
 	      });
+
+		 */
 		
+		menuCorsi.addItem("Ingegneria del Software");
+		menuCorsi.addItem("Basi di Dati");
+
 		
 	}
 	
 	void addOptionAppelli() {
+		/**
 		menuAppelli.addItem("Appello del "+"21/03/2022", new Command() {
 	         @Override
 	         public void execute() {
 	            showSelectedMenuItem("Appello del "+"21/03/2022");
 	         }
 	      });
+		 * 
+		 */
+		
+		menuAppelli.addItem("Appello del 21/03/2022");
 	}
 	
 	void showSelectedMenuItem(String menuItemName){
-	      Window.alert("Menu item: "+menuItemName+" selected");
+	      Window.alert("Menu item: " + menuItemName + " selected");
 	}
 	
 	@UiField
@@ -136,10 +147,10 @@ public class RegistrazioneEsame extends Composite {
 	Button btnEsame;
 	
 	@UiField
-	MenuBar menuCorsi;
+	ListBox menuCorsi;
 	
 	@UiField
-	MenuBar menuAppelli;
+	ListBox menuAppelli;
 	
 	
 	
