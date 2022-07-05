@@ -38,11 +38,6 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	public int login(String username, String password) {
 		return dbUtenti.login(username, password);
 	}
-	
-	@Override
-	public String getInfoUtente(String email) {
-		return dbUtenti.getInfoUtente(email);
-	}
 
 	/**
 	 * Escape an html string. Escaping data received from the client helps to

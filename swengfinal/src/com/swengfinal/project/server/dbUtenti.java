@@ -35,18 +35,16 @@ public class dbUtenti {
 	
 	public static String registrazione(ArrayList<String> dati) {
 		DB db = getDB();
-		System.out.println(getDB().getAll());
 		BTreeMap<String,Utente> Users;
 		
-		if(!checkMail(dati.get(0))) {
+		if(!checkMail(dati.get(2))) {
 			Users = db.getTreeMap("UtentiMap");
 			
 			Utente user = new Utente(dati.get(0),dati.get(1),dati.get(2),dati.get(3),
 						dati.get(4),
 						dati.get(5),
 						dati.get(6),
-						dati.get(7), 
-						dati.get(8));
+						dati.get(7));
 			
 			Users.put(user.getEmail(),user);
 			db.commit();
@@ -71,21 +69,6 @@ public class dbUtenti {
 			}
 		}
 		return 0;
-	}
-	public static String getInfoUtente(String email) {
-
-		DB db = getDB();
-		BTreeMap<String, Utente> UtentiMap = db.getTreeMap("mappaUtenti");
-
-		Utente u = UtentiMap.get(email);
-
-		String info = "Username :" + u.getNomeUtente() + "\nEmail : " + email + 
-				"\nNome : " + u.getNome() + "\nCognome : " + u.getCognome()
-				 + "\nData Nascita : " + u.getDataNascita()
-				+ "\nLuogo Nascita : " + u.getLuogoNascita();
-
-
-		return info;
 	}
 
 }

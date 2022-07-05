@@ -13,7 +13,5 @@ public interface GreetingServiceAsync {
 	void registrazione(ArrayList<String> dati, AsyncCallback<String> callback) throws IllegalArgumentException;
 	
 	void login(String username, String password, AsyncCallback<Integer> callback) throws IllegalArgumentException;
-	
-	void getInfoUtente(String email, AsyncCallback<String> callback) throws IllegalArgumentException;
 
 }

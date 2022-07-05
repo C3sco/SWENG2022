@@ -2,8 +2,6 @@ package com.swengfinal.project.shared;
 
 import java.io.Serializable;
 
-import org.apache.tools.ant.taskdefs.Get;
-
 public class Utente implements Serializable { 
 
 	private static final long serialVersionUID = 1L;
@@ -16,13 +14,15 @@ public class Utente implements Serializable {
 	private String cognome;
 	private String luogoNascita;
 	private String dataNascita;
-	private String tipologia; 
 	
+
+
+
 	public Utente()	{
 	}
 
 	public Utente(String email, String password, String nomeUtente, String matricola, String nome, String cognome,
-			String luogoNascita, String dataNascita, String tipologia) {
+			String luogoNascita, String dataNascita) {
 		this.nomeUtente = nomeUtente;
 		this.password = password;
 		this.email = email;
@@ -31,7 +31,7 @@ public class Utente implements Serializable {
 		this.cognome = cognome;
 		this.luogoNascita = luogoNascita;
 		this.dataNascita=dataNascita;
-		this.tipologia = tipologia;
+		
 	
 	}
 	
@@ -67,10 +67,4 @@ public class Utente implements Serializable {
 		return this.dataNascita;		
 	}
 
-	public String getTipologia() {
-		return tipologia;
-	}
-	public void setTipologia(String tipologia) {
-		this.tipologia = tipologia;
-	}
 }

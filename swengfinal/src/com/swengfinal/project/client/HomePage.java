@@ -1,7 +1,5 @@
 package com.swengfinal.project.client;
 
-import org.mapdb.DB;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -15,7 +13,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class HomePage extends Composite {
 
@@ -70,23 +67,7 @@ public class HomePage extends Composite {
    void doClickHome(ClickEvent event) {
 		RootPanel.get("container").clear();
 		RootPanel.get("container").add(new HomePage());
-	}
-		/*
-		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-		
-		greetingService.getInfoUtente("a2", new AsyncCallback<String>(){
-			public void onFailure(Throwable c) {
-				System.out.println("Errore");
-			}
-			
-			@Override
-			public void onSuccess(String result) {
-				Alert a = new Alert(result);
-				System.out.println(a);
-				RootPanel.get("container").add(new HomePage());
-			}
-		});
-	}*/
+   }
 	
 	@UiHandler("btnRegistrazione")
 	   void doClickRegistrazione(ClickEvent event) {
