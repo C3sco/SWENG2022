@@ -52,4 +52,9 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		}
 		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 	}
+
+	@Override
+	public String creazioneCorso(ArrayList<String> dati) throws IllegalArgumentException {
+		return dbCorso.creazioneCorso(dati);
+	}
 }

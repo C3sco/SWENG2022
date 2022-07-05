@@ -12,9 +12,18 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface GreetingService extends RemoteService {
 	String greetServer(String name) throws IllegalArgumentException;
 	
+	/**
+	 * Metodi utente
+	 */
 	String registrazione(ArrayList<String> dati) throws IllegalArgumentException;
-	
 	int login(String username, String password) throws IllegalArgumentException;
+	
+	
+	/**
+	 * Metodi corso
+	 */
+	String creazioneCorso(ArrayList<String> dati) throws IllegalArgumentException;
+	
 }
 
 
