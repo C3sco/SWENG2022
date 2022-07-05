@@ -126,4 +126,15 @@ public class dbCorso {
 		return "Corso modificato";
 		
 	}
+	
+	
+	public static ArrayList<Corso> getCorso(int idDocente){
+		ArrayList<Corso> corsi = new ArrayList<Corso>();
+		
+		//
+		//
+		
+		return corsi;
+		
+	}
 }
