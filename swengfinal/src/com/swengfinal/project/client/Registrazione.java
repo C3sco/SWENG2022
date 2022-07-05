@@ -140,7 +140,7 @@ public class Registrazione extends Composite {
 					//Account.email = txtMail.getText();
 					//Account.tipoAccount = 1;
 				
-					RootPanel.get("container").add(new HomePageUtente());
+					RootPanel.get("container").add(new Login());
 				}else {
 					Alert a = new Alert("Errore!");
 					System.out.println(a);

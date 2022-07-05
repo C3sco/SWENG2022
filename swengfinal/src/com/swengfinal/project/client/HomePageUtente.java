@@ -57,7 +57,7 @@ public class HomePageUtente extends Composite {
 				public void onSuccess(Utente user) {
 					lblNome.setText(user.getNome());
 					lblCognome.setText(user.getCognome());
-					lblMail.setText(user.getTipologia());
+					lblMail.setText(user.getEmail());
 					
 
 				}
