@@ -2,6 +2,7 @@ package com.swengfinal.project.server;
 
 import com.swengfinal.project.client.GreetingService;
 import com.swengfinal.project.shared.FieldVerifier;
+import com.swengfinal.project.shared.Utente;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import org.mapdb.DB;
@@ -35,21 +36,20 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	}
 	
 	@Override
-	public int login(String username, String password) {
+	public int login(String username, String password) throws IllegalArgumentException{
 		return dbUtenti.login(username, password);
 	}
-
-	/**
-	 * Escape an html string. Escaping data received from the client helps to
-	 * prevent cross-site script vulnerabilities.
-	 * 
-	 * @param html the html string to escape
-	 * @return the escaped string
-	 */
-	private String escapeHtml(String html) {
-		if (html == null) {
-			return null;
-		}
-		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+	
+	@Override
+	public String getInfoUtente(String email) throws IllegalArgumentException{
+		return dbUtenti.getInfoUtente(email);
 	}
+
+	@Override
+	public Utente getUtente(String email) throws IllegalArgumentException {
+		return dbUtenti.getUtente(email);
+	}
+	
+
+	
 }

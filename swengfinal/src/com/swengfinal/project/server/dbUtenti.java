@@ -76,5 +76,26 @@ public class dbUtenti {
 		}
 		return 0;
 	}
+	
+	public static String getInfoUtente(String email) {
+		DB db = getDB();
+		BTreeMap<String, Utente> Users = db.getTreeMap("UtentiMap");
+
+		Utente user = Users.get(email);
+
+		String all = "Email :" + user.getEmail() + "\nPassword : " + user.getPw() + "\nUsername : " + user.getNomeUtente() + 
+				"\nMatricola : " + user.getMatricola() + "\nNome : " + user.getNome() + "\nCognome : " + user.getCognome()
+				 + "\nData Nascita : " + user.getDataNascita()
+				+ "\nLuogo Nascita : " + user.getLuogoNascita() + "\nTipologia" + user.getTipologia();
+		return all;
+	}
+	
+	public static Utente getUtente(String email) {
+		DB db = getDB();
+		BTreeMap<String, Utente> Users = db.getTreeMap("UtentiMap");
+		Utente user = Users.get(email);
+		return user;
+
+	}
 
 }
