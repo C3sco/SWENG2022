@@ -14,15 +14,13 @@ public class Utente implements Serializable {
 	private String cognome;
 	private String luogoNascita;
 	private String dataNascita;
-	
-
-
+	private String tipologia;
 
 	public Utente()	{
 	}
 
 	public Utente(String email, String password, String nomeUtente, String matricola, String nome, String cognome,
-			String luogoNascita, String dataNascita) {
+			String luogoNascita, String dataNascita, String tipologia) {
 		this.nomeUtente = nomeUtente;
 		this.password = password;
 		this.email = email;
@@ -30,8 +28,8 @@ public class Utente implements Serializable {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.luogoNascita = luogoNascita;
-		this.dataNascita=dataNascita;
-		
+		this.dataNascita = dataNascita;
+		this.tipologia = tipologia; 
 	
 	}
 	
@@ -65,6 +63,10 @@ public class Utente implements Serializable {
 
 	public String getDataNascita(){
 		return this.dataNascita;		
+	}
+	
+	public String getTipologia() {
+		return this.tipologia;
 	}
 
 }

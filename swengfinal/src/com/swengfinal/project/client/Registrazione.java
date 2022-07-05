@@ -42,7 +42,14 @@ public class Registrazione extends Composite {
 
 
 	public Registrazione() {
+		
+
+		
 		initWidget(uiBinder.createAndBindUi(this));
+		listTipologia.addItem("Studente");
+		listTipologia.addItem("Docente");
+		listTipologia.addItem("Segreteria");
+		listTipologia.addItem("Amministratore");
 		
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -66,6 +73,7 @@ public class Registrazione extends Composite {
 		txtCognome.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
 		txtLuogoNascita.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
 		txtDataNascita.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
+		listTipologia.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
 		btnSubmit.getElement().getStyle().setHeight(40.0, Unit.PX);
 		btnSubmit.getElement().getStyle().setWidth(70.0, Unit.PX);
 	}
@@ -102,6 +110,7 @@ public class Registrazione extends Composite {
 	@UiHandler("btnSubmit")
 	void doClickSubmit2(ClickEvent event) {
 		
+		
 		ArrayList<String> datiUtenti = new ArrayList<String>();
 		datiUtenti.add(txtMail.getText());
 		datiUtenti.add(txtPassword.getText());
@@ -111,9 +120,11 @@ public class Registrazione extends Composite {
 		datiUtenti.add(txtCognome.getText());
 		datiUtenti.add(txtLuogoNascita.getText());
 		datiUtenti.add(txtDataNascita.getText());
+		datiUtenti.add(listTipologia.getSelectedItemText());
 
 		
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+		
 		
 		greetingService.registrazione(datiUtenti, new AsyncCallback<String>() {
 			
@@ -124,15 +135,16 @@ public class Registrazione extends Composite {
 			
 			@Override
 			public void onSuccess(String result) {
-				if(result!=null) {
+				if(result.equals("Registrazione completata")) {
 					RootPanel.get("container").clear();
-					Account.email = txtMail.getText();
-					Account.tipoAccount = 1;
+					//Account.email = txtMail.getText();
+					//Account.tipoAccount = 1;
 				
 					RootPanel.get("container").add(new HomePageUtente());
 				}else {
-					System.out.println("CIAO");
-				}
+					Alert a = new Alert("Errore!");
+					System.out.println(a);
+				} 	
 				
 			}
 		});
@@ -177,6 +189,9 @@ public class Registrazione extends Composite {
 	
 	@UiField
 	TextBox txtDataNascita;
+	
+	@UiField
+	ListBox listTipologia;
 	
 	@UiField
 	Button btnSubmit;
