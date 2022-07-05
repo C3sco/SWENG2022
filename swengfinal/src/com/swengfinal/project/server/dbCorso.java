@@ -18,11 +18,11 @@ public class dbCorso {
 		return db;
 	}
 	
-	private static boolean checkCorso(Integer idCorso) {
+	private static boolean checkCorso(Integer idCorso) { //se corso esiste allora ritorna true
 		boolean find = false;
 		
 		DB db = getDB();
-		BTreeMap<Integer, Corso> corsi = db.getTreeMap("CorsiMap");
+		BTreeMap<Integer, Corso> corsi = db.getTreeMap("CorsiMap"); //mappa che potrebbe indicarmi tutti i corsi
 		
 		for(Entry<Integer, Corso> test : corsi.entrySet()) {
 			if(test.getValue().getIdCorso() == idCorso) {
@@ -30,6 +30,18 @@ public class dbCorso {
 			}
 		}
 		return find;
+	}
+	
+	private static int posizioneCorso(ArrayList<String> dati, String nomeCorso)
+	{
+		DB db = getDB();
+		BTreeMap<Integer, Corso> corsi = db.getTreeMap("CorsiMap");
+		for(Entry<Integer, Corso> test : corsi.entrySet()) {
+			if(test.getValue().getNomeCorso().equals(nomeCorso)) {
+				return test.getValue().getIdCorso(); //ritorna id del Corso
+			}
+		}
+		return 0;
 	}
 	
 	public static String creazioneCorso(ArrayList<String> dati) { 
@@ -74,10 +86,44 @@ public class dbCorso {
 		}	
 	}
 	
-	public static void modificaCorso() {
+	public static String modificaCorso(ArrayList<String> dati, String nomeCorso) {
 		DB db = getDB();
 		BTreeMap<Integer, Corso> corsi = db.getTreeMap("CorsiMap");
+		if(checkCorso(Integer.parseInt(dati.get(0))))
+		{
+			int idCorso=posizioneCorso(dati,nomeCorso);
+			Corso corso = corsi.get(idCorso);
+			if(dati.get(3)!="")
+			{
+				corso.setDescrizione(dati.get(3));
+			}
+			if(dati.get(4)!="")
+			{
+				corso.setDataInizio(dati.get(4));
+			}
+			if(dati.get(5)!="")
+			{
+				corso.setDataFine(dati.get(5));
+			}
+				
+				/*data inizio,data fine,descrizione*/
+			
+		}
 		
+		
+		/*
+		 * 
+		 * 
+		 * Possiamo fare in diversi modi:
+		 * 1° carichiamo tutti i dati delle varie textbox e li inseriamo come se fosse un nuovo corso
+		 * 2° carichiamo carichiamo solo i dati che non sono vuoti nelle textbox altrimenti carichiamo quelli del corso
+		 * per fare ci� dobbiamo fare degli if a cascata per controllare ogni singolo campo
+		 * 
+		 */
+		
+		
+		
+		return "Corso modificato";
 		
 	}
 }

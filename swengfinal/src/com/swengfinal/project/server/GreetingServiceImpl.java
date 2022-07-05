@@ -56,4 +56,8 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	public String creazioneCorso(ArrayList<String> dati) throws IllegalArgumentException {
 		return dbCorso.creazioneCorso(dati);
 	}
+	@Override
+	public String updateCorso(ArrayList<String> corsoUpdate, String nomeCorso) throws IllegalArgumentException {
+		return dbCorso.modificaCorso(corsoUpdate, nomeCorso);
+	}
 }

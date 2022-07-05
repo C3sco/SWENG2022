@@ -27,6 +27,7 @@ public interface GreetingServiceAsync {
 	 * Metodi del corso
 	 */
 	void creazioneCorso(ArrayList<String> dati, AsyncCallback<String> callback) throws IllegalArgumentException;
+	void updateCorso(ArrayList<String> datiCorso,String nomeCorso, AsyncCallback<String> callback)throws IllegalArgumentException;
 
 
 	

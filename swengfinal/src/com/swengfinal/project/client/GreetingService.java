@@ -2,6 +2,7 @@ package com.swengfinal.project.client;
 
 import java.util.ArrayList;
 
+
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.swengfinal.project.shared.Utente;
@@ -29,6 +30,7 @@ public interface GreetingService extends RemoteService {
 	 */
 	String creazioneCorso(ArrayList<String> dati) throws IllegalArgumentException;
 	
+	String updateCorso(ArrayList<String> corsoUpdate, String nomeCorso) throws IllegalArgumentException;
 	
 	
 }
