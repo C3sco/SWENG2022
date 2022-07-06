@@ -46,8 +46,8 @@ public class dbCorso {
 	}
 	
 	public static String creazioneCorso(ArrayList<String> dati) { 
-		Alert a = new Alert("1!");
-		System.out.println(a);
+		//Alert a = new Alert("1!");
+		//System.out.println(a);
 		DB db = getDB();
 		BTreeMap<Integer, Corso> corsi = db.getTreeMap("CorsiMap");
 		
@@ -62,8 +62,8 @@ public class dbCorso {
 					dati.get(5)                    // data fine corso 
 					);
 			
-			Alert ab = new Alert("2!");
-			System.out.println(ab);
+			//Alert ab = new Alert("2!");
+			//System.out.println(ab);
 			corsi.put(corso.getIdCorso(), corso);
 			db.commit();
 			db.close();
