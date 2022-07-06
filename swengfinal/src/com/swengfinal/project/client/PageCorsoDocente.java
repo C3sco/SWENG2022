@@ -51,7 +51,7 @@ public class PageCorsoDocente extends Composite {
 		txtNomeCorso.getElement().getStyle().setMarginLeft(10.0, Unit.PX);
 		txtDataFine.getElement().getStyle().setMarginLeft(30.0, Unit.PX);
 		txtDescrizione.getElement().getStyle().setMarginLeft(27.0, Unit.PX);
-		txtDataInizio.getElement().getStyle().setMarginLeft(30.0, Unit.PX);
+		//txtDataInizio.getElement().getStyle().setMarginLeft(15.0, Unit.PX);
 		txtCoDocente.getElement().getStyle().setMarginLeft(15.0, Unit.PX);
 		btnAddEsame.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
 		btnCreazione.getElement().getStyle().setMargin(10, Unit.PX);
@@ -62,6 +62,8 @@ public class PageCorsoDocente extends Composite {
 		btnUpdate.getElement().getStyle().setMargin(10, Unit.PX);
 		btnCancellazione.getElement().getStyle().setMarginLeft(350, Unit.PX);
 		menuCorsi.getElement().getStyle().setMarginLeft(50.0, Unit.PX);
+		
+		fillistbox();
 		
 		
 	}
@@ -135,19 +137,13 @@ public class PageCorsoDocente extends Composite {
 
 			
 			ArrayList<String>dati = new ArrayList<String>();
-			String tmp = (Integer.toString(idCorso++));
-			dati.add(tmp);
-			dati.add(Account.email);
-			dati.add(txtNomeCorso.getText());
-			dati.add(txtDescrizione.getText());
-			dati.add(txtDataInizio.getText());
-			dati.add(txtDataFine.getText());
-			String s = "";
-			for(int i=0;i<dati.size();i++) {
-				s+= dati.get(i) + " ";
-			}
-			Alert a = new Alert(s);
-			System.out.println(a);
+			dati.add(0,"");
+			dati.add(1, Account.email);
+			dati.add(2, txtNomeCorso.getText());
+			dati.add(3, txtDescrizione.getText());
+			dati.add(4, txtDataInizio.getText());
+			dati.add(5, txtDataFine.getText());
+			
 			
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 			

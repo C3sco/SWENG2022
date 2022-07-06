@@ -54,7 +54,7 @@ public class dbCorso {
 
 		//if(!checkCorso(Integer.parseInt(dati.get(0)))) {
 			Corso corso = new Corso(
-					Integer.parseInt(dati.get(0)), // idCorso
+					corsi.size(), 			   // idCorso
 					dati.get(1), 				   // mailDocente
 					dati.get(2),                   // nomeCorso
 					dati.get(3),                   // Descrizione Corso

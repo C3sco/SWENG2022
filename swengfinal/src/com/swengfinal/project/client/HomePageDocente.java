@@ -1,5 +1,7 @@
 package com.swengfinal.project.client;
 
+import java.util.ArrayList;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -15,6 +17,7 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.Utente;
 
 public class HomePageDocente extends Composite {
@@ -65,6 +68,35 @@ public class HomePageDocente extends Composite {
 			});
 		}catch(Error e){
 			};
+			
+			try {
+				final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+				greetingService.getAllCorso(Account.email, new AsyncCallback<ArrayList<Corso>>() {
+					public void onFailure(Throwable caught) {
+						Window.alert("ERRORE!");
+
+					}
+					
+					@Override
+					public void onSuccess(ArrayList<Corso> corsi) {
+						String tmp = "";
+						for(int i=0;i<corsi.size();i++)
+						{
+							
+							tmp += corsi.get(i).getNomeCorso() + ", ";
+							
+
+						}
+						lblCorsi.setText(tmp);
+						
+
+					}
+
+						
+				});
+			}catch(Error e){
+				};
 	}
 	
 	@UiHandler("btnHome")
