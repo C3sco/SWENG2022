@@ -5,7 +5,9 @@ import java.util.ArrayList;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.Utente;
+
 
 /**
  * The client-side stub for the RPC service.
@@ -32,6 +34,8 @@ public interface GreetingService extends RemoteService {
 	String updateCorso(ArrayList<String> corsoUpdate, String nomeCorso) throws IllegalArgumentException;
 	
 	String iscrizioneCorso(String email, int idCorso) throws IllegalArgumentException;
+	
+	ArrayList<Corso> getAllCorso(String email) throws IllegalArgumentException;
 	
 	ArrayList<String> getCorsoStudente(String email) throws IllegalArgumentException;
 	

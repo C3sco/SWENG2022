@@ -140,4 +140,19 @@ public class dbCorso {
 		}
 		return corsiOutput;
 	}
+	
+	
+	public static ArrayList<Corso> getAllCorso(String email)
+	{
+		DB db = getDB();
+		BTreeMap<Integer, Corso> corsi = db.getTreeMap("CorsiMap");
+		ArrayList<Corso> corsiOutput = new ArrayList<Corso>();
+		
+		for(Entry<Integer, Corso> test : corsi.entrySet()) {
+			if(email.equals(test.getValue().getEmailDocente())) {
+					corsiOutput.add(test.getValue());
+			}
+		}
+		return corsiOutput;
+	}
 }

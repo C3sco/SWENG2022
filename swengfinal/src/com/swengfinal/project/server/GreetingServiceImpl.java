@@ -1,6 +1,7 @@
 package com.swengfinal.project.server;
 
 import com.swengfinal.project.client.GreetingService;
+import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.FieldVerifier;
 import com.swengfinal.project.shared.Utente;
 import com.google.gwt.user.client.Window;
@@ -60,5 +61,11 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	@Override
 	public ArrayList<String> getCorsoStudente(String email) throws IllegalArgumentException {
 		return dbCorso.getCorsoStudente(email);
+	}
+	
+	@Override
+	public ArrayList<Corso> getAllCorso(String email) throws IllegalArgumentException
+	{
+		return dbCorso.getAllCorso(email);
 	}
 }

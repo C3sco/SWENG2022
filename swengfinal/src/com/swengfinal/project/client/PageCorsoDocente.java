@@ -18,6 +18,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.sun.java.swing.plaf.windows.resources.windows;
+import com.swengfinal.project.shared.Corso;
+import com.swengfinal.project.shared.Utente;
 
 public class PageCorsoDocente extends Composite {
 	
@@ -60,6 +62,36 @@ public class PageCorsoDocente extends Composite {
 		btnUpdate.getElement().getStyle().setMargin(10, Unit.PX);
 		btnCancellazione.getElement().getStyle().setMarginLeft(350, Unit.PX);
 		menuCorsi.getElement().getStyle().setMarginLeft(50.0, Unit.PX);
+		
+		
+	}
+	
+	
+	void fillistbox()
+	{
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getAllCorso(Account.email, new AsyncCallback<ArrayList<Corso>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				
+				@Override
+				public void onSuccess(ArrayList<Corso> corsi) {
+					for(int i=0;i<corsi.size();i++)
+					{
+						menuCorsi.addItem(corsi.get(i).getNomeCorso());
+					}
+					
+
+				}
+
+					
+			});
+		}catch(Error e){
+			};
 	}
 	
 	@UiHandler("btnHome")
