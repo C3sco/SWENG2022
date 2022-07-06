@@ -1,5 +1,7 @@
 package com.swengfinal.project.client;
 
+import java.util.ArrayList;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -58,15 +60,41 @@ public class HomePageUtente extends Composite {
 					lblNome.setText(user.getNome());
 					lblCognome.setText(user.getCognome());
 					lblMail.setText(user.getEmail());
-					
-
 				}
 
 					
 			});
 		}catch(Error e){
 			};
+			
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+			greetingService.getCorsoStudente(Account.email, new AsyncCallback<ArrayList<String>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				
+				@Override
+				public void onSuccess(ArrayList<String> output) {
+					String test = "";
+					for(int i=0; i<output.size();i++) {
+						test+= output.get(i) + " ";
+					}
+					lblCorsi.setText(test);
+				}
+				
+			});
+		}catch(Error e) {
+			
 		}
+
+			
+			
+			
+	}
+	
+	
 		/*
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);

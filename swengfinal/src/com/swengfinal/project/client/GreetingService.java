@@ -12,7 +12,6 @@ import com.swengfinal.project.shared.Utente;
  */
 @RemoteServiceRelativePath("greet")
 public interface GreetingService extends RemoteService {
-	String greetServer(String name) throws IllegalArgumentException;
 	
 	/**
 	 * Metodi utente
@@ -31,6 +30,10 @@ public interface GreetingService extends RemoteService {
 	String creazioneCorso(ArrayList<String> dati) throws IllegalArgumentException;
 	
 	String updateCorso(ArrayList<String> corsoUpdate, String nomeCorso) throws IllegalArgumentException;
+	
+	String iscrizioneCorso(String email, int idCorso) throws IllegalArgumentException;
+	
+	ArrayList<String> getCorsoStudente(String email) throws IllegalArgumentException;
 	
 	
 }

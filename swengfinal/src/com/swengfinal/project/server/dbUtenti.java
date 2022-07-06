@@ -1,18 +1,11 @@
 package com.swengfinal.project.server;
 
-import com.swengfinal.project.client.Alert;
-import com.swengfinal.project.client.GreetingService;
-import com.swengfinal.project.shared.FieldVerifier;
+
 import com.swengfinal.project.shared.Utente;
-import com.swengfinal.project.shared.Amministratore;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import org.mapdb.BTreeMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
-import org.mapdb.HTreeMap;
-import org.mapdb.Serializer;
 
 import java.io.File;
 import java.util.ArrayList;

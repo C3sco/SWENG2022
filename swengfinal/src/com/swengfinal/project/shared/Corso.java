@@ -1,25 +1,28 @@
 package com.swengfinal.project.shared;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Corso {
-		
-	private static int idCorso; 
-	private static int idDocente;
-	private static String nomeCorso;
-	private static String descrizione;
-	private static String dataInizio;
-	private static String dataFine;
+public class Corso implements Serializable{
 	
-	private static List<String> listaUtenti; 
+	private static final long serialVersionUID = 1L;
+		
+	private int idCorso; 
+	private String emailDocente;
+	private String nomeCorso;
+	private String descrizione;
+	private String dataInizio;
+	private String dataFine;
+	
+	private List<String> listaUtenti; 
 	
 	public Corso() {
 	}
 	
-	public Corso(int idCorso, int idDocente, String nomeCorso, String descrizione, String dataInizio, String dataFine) {
+	public Corso(int idCorso, String emailDocente, String nomeCorso, String descrizione, String dataInizio, String dataFine) {
 		this.idCorso = idCorso;
-		this.idDocente = idDocente;
+		this.emailDocente = emailDocente;
 		this.nomeCorso = nomeCorso;
 		this.descrizione = descrizione;
 		this.dataInizio = dataInizio;
@@ -28,50 +31,50 @@ public class Corso {
 		listaUtenti = new ArrayList<>();
 	}
 	
-	public static List<String> getListaUtenti() {
+	public List<String> getListaUtenti() {
 		return listaUtenti;
 	}
 	
 	
-	public static int getIdCorso() {
+	public int getIdCorso() {
 		return idCorso;
 	}
-	public static void setIdCorso(int idCorso) {
-		Corso.idCorso = idCorso;
+	public void setIdCorso(int idCorso) {
+		this.idCorso = idCorso;
 	}
 	
-	public static int getIdDocente() {
-		return idDocente;
+	public String getEmailDocente() {
+		return emailDocente;
 	}
-	public static void setIdDocente(int idDocente) {
-		Corso.idDocente = idDocente;
+	public void setEmailDocente(String emailDocente) {
+		this.emailDocente = emailDocente;
 	}
 	
-	public static String getNomeCorso() {
+	public String getNomeCorso() {
 		return nomeCorso;
 	}
-	public static void setNomeCorso(String nomeCorso) {
-		Corso.nomeCorso = nomeCorso;
+	public void setNomeCorso(String nomeCorso) {
+		this.nomeCorso = nomeCorso;
 	}
 	
-	public static String getDescrizione() {
+	public String getDescrizione() {
 		return descrizione;
 	}
-	public static void setDescrizione(String descrizione) {
-		Corso.descrizione = descrizione;
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 	
-	public static String getDataInizio() {
+	public String getDataInizio() {
 		return dataInizio;
 	}
-	public static void setDataInizio(String dataInizio) {
-		Corso.dataInizio = dataInizio;
+	public void setDataInizio(String dataInizio) {
+		this.dataInizio = dataInizio;
 	}
 	
-	public static String getDataFine() {
+	public String getDataFine() {
 		return dataFine;
 	}
-	public static void setDataFine(String dataFine) {
-		Corso.dataFine = dataFine;
+	public void setDataFine(String dataFine) {
+		this.dataFine = dataFine;
 	}
 }

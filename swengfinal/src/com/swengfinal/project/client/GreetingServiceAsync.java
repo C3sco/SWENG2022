@@ -9,7 +9,6 @@ import com.swengfinal.project.shared.Utente;
  * The async counterpart of <code>GreetingService</code>.
  */
 public interface GreetingServiceAsync {
-	void greetServer(String input, AsyncCallback<String> callback) throws IllegalArgumentException;
 	
 	
 	/**
@@ -27,8 +26,11 @@ public interface GreetingServiceAsync {
 	 * Metodi del corso
 	 */
 	void creazioneCorso(ArrayList<String> dati, AsyncCallback<String> callback) throws IllegalArgumentException;
+	
 	void updateCorso(ArrayList<String> datiCorso,String nomeCorso, AsyncCallback<String> callback)throws IllegalArgumentException;
+	
+	void iscrizioneCorso(String email, int idCorso, AsyncCallback<String>callback) throws IllegalArgumentException;
 
-
+	void getCorsoStudente(String email, AsyncCallback<ArrayList<String>> callback) throws IllegalArgumentException;
 	
 }
