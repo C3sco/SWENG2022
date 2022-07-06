@@ -1,0 +1,98 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:gwt = 'urn:import:com.google.gwt.user.client.ui'
+	xmlns:c="urn:import:com.google.gwt.user.cellview.client">
+	<ui:style>
+		#navbar{
+		  list-style-type: none;
+		  margin: 0;
+		  padding: 0;
+		  overflow: hidden;
+		  background-color: #303030;
+		}
+		
+		li {
+		  float: left;
+		  
+		}
+		
+		#creazioneAccount{
+			width: 50vw;
+			margin-top: 10vh;
+			margin-bottom: 5vh;
+			margin-left: 25vw;
+			border: 1px solid black;
+	
+		}
+		
+		#group{
+			margin:10px;
+		}
+		
+		#password{
+			margin-left:3vw;
+		}
+		
+		#tipo{
+			margin-left:3vw;
+		}
+		
+		#nome{
+			margin-left:6vw;
+		}
+		
+		#luogo{
+			margin-left:2vw;
+		}
+		
+	</ui:style>
+	<g:HTMLPanel>
+		<ul id="navbar">
+	       <li  id="Home">
+	       	<gwt:Button ui:field = "btnHome" text="Home"
+                 />
+	       </li>
+	       <li  id="CreazioneAccount">
+	       	<gwt:Button ui:field = "btnCreazione" text="Creazione Account"
+                 />
+	       </li>
+	        <li  id="ModificaAccount">
+	       	<gwt:Button ui:field = "btnModifica" text="Modifica Account"
+                 />
+	       </li>
+	       <li  id="Logout">
+	       	<gwt:Button ui:field = "btnLogout" text="Logout"
+                   />
+	       </li>
+	    </ul>
+	    <div id="creazioneAccount">
+	      <div class="form-group" id="group">
+		     <label for="exampleInputPassword1">Email</label>
+		    <gwt:TextBox ui:field="txtEmail"></gwt:TextBox>
+		    <label for="exampleInputPassword1" id="password">Password</label>
+		    <gwt:TextBox ui:field="txtPassword"></gwt:TextBox>
+		  </div>
+		  <div class="form-group" id="group">
+		    <label for="exampleInputPassword1">Matricola</label>
+		    <gwt:TextBox ui:field="txtMatricola"></gwt:TextBox>
+		    <label for="exampleInputPassword1" id="tipo" >Tipologia</label>
+		    <gwt:ListBox ui:field="menuTipo"></gwt:ListBox>
+		  </div>
+		  <div class="form-group" id="group">
+		    <label for="exampleInputPassword1">Cognome</label>
+		    <gwt:TextBox ui:field="txtCognome"></gwt:TextBox>
+		    <label for="exampleInputPassword1" id="nome">Nome</label>
+		    <gwt:TextBox ui:field="txtNome"></gwt:TextBox>
+		  </div>
+		  <div class="form-group" id="group">
+		     <label for="exampleInputPassword1">Data Nascita</label>
+		  <gwt:TextBox ui:field="txtData"></gwt:TextBox>
+		    <label for="exampleInputPassword1" id="luogo">Luogo Nascita</label>
+		    <gwt:TextBox ui:field="txtLuogo"></gwt:TextBox>
+		  </div>
+		 
+		  <gwt:Button ui:field="btnCreazioneAccount" text="Creazione Account"></gwt:Button>
+	    </div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

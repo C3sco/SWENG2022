@@ -99,60 +99,27 @@ public class Login extends Composite {
 			Account.email = txtMail.getText();
 			//Account.tipoAccount = user.getTipologia();
 			
-		/*
-			Alert alert13 = new Alert("INT: " + result);
-			System.out.print(alert13);*/
+		
+			
 			
 			RootPanel.get("container").clear();
 			if(user.getTipologia()=="Studente") {
 				RootPanel.get("container").add(new HomePageUtente());
 			}else if(user.getTipologia()=="Docente") {
 				RootPanel.get("container").add(new HomePageDocente());
+			}else if(user.getTipologia()=="Amministratore") {
+				RootPanel.get("container").add(new HomePageAdmin());
 			}
 			
 			else {
 				RootPanel.get("container").add(new HomePage());
 			}
-/*
-			switch(result) {
-			
-			case 0:
-				Alert alert = new Alert("Errore!");
-				System.out.print(alert);
-				RootPanel.get("container").add(new HomePage());
-				break;
-			case 1:
-				RootPanel.get("container").add(new HomePageUtente());
-				break;
-			case 2: //admin
-				break;
-			case 3:  //segreteria
-				break;
-			case 4:  //docente
-				RootPanel.get("container").add(new HomePageDocente());
-				break;
-			case 5:	 //errore password
-				Alert alert3 = new Alert("case 5, errore di password!");
-				System.out.print(alert3);
-				RootPanel.get("container").add(new HomePage());
-				break;
-			case 6:  //errore mail
-				Alert alert4 = new Alert("case 6, errore di email");
-				System.out.print(alert4);
-				RootPanel.get("container").add(new HomePage());
-				break;
-			default:
-				Alert alert2 = new Alert("ERRORE");
-				System.out.print(alert2);
-				RootPanel.get("container").add(new HomePage());
-				break;
-				
-			}*/
+
 			
 			}
 		});
 		
-			
+	
 		
 	}
 	
