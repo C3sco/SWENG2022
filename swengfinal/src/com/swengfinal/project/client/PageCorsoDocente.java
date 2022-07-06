@@ -1,5 +1,7 @@
 package com.swengfinal.project.client;
 
+import java.util.ArrayList;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -8,6 +10,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.ListBox;
@@ -17,6 +20,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.sun.java.swing.plaf.windows.resources.windows;
 
 public class PageCorsoDocente extends Composite {
+	
+	static int idCorso = 100;
 
 	private static PageCorsoDocenteUiBinder uiBinder = GWT.create(PageCorsoDocenteUiBinder.class);
 
@@ -95,8 +100,58 @@ public class PageCorsoDocente extends Composite {
 	
 	@UiHandler("btnCreazione")
 	void doClickCreazioneCorso(ClickEvent event) {
-			Window.alert("Corso creato");
-	}
+
+			
+			ArrayList<String>dati = new ArrayList<String>();
+			String tmp = (Integer.toString(idCorso++));
+			dati.add(tmp);
+			dati.add(Account.email);
+			dati.add(txtNomeCorso.getText());
+			dati.add(txtDescrizione.getText());
+			dati.add(txtDataInizio.getText());
+			dati.add(txtDataFine.getText());
+			String s = "";
+			for(int i=0;i<dati.size();i++) {
+				s+= dati.get(i) + " ";
+			}
+			Alert a = new Alert(s);
+			System.out.println(a);
+			
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+			
+			greetingService.creazioneCorso(dati, new AsyncCallback<String>() {
+				
+				public void onFailure(Throwable c) {
+					Alert a = new Alert("Errore:" + c);
+					System.out.println(a);
+					RootPanel.get("container").clear();
+					RootPanel.get("container").add(new HomePageDocente());
+				}
+				
+				@Override
+				public void onSuccess(String result) {
+					if(result.equals("Successo")) {
+						RootPanel.get("container").clear();
+						//Account.email = txtMail.getText();
+						//Account.tipoAccount = 1;
+						Alert a = new Alert("Corso creato con successo!");
+						System.out.println(a);
+					
+						RootPanel.get("container").add(new HomePageDocente());
+					}else {
+						Alert a = new Alert("Errore!123");
+						System.out.println(a);
+					} 	
+					
+				}
+			});
+				
+		}
+			
+			
+			
+			
+			
 	
 	@UiHandler("btnCancellazione")
 	void doClickDelete(ClickEvent event) {
