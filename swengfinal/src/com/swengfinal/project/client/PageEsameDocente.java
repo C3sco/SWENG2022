@@ -81,6 +81,7 @@ public class PageEsameDocente extends Composite {
 					for(int i=0;i<corsi.size();i++)
 					{
 						menuCorsi.addItem(corsi.get(i).getNomeCorso());
+						menuUpdateCorsi.addItem(corsi.get(i).getNomeCorso());
 					}
 					
 
@@ -186,7 +187,7 @@ public class PageEsameDocente extends Composite {
 					
 						RootPanel.get("container").add(new HomePageDocente());
 					}else {
-						Alert a = new Alert("Errore!123");
+						Alert a = new Alert("Esame gia esistente");
 						System.out.println(a);
 					} 	
 					 
@@ -196,12 +197,86 @@ public class PageEsameDocente extends Composite {
 	
 	@UiHandler("btnCancellazione")
 	void doClickDelete(ClickEvent event) {
-			Window.alert("Esame eliminato");
+		String nomeCorso=menuUpdateCorsi.getSelectedValue();
+		
+		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+		
+		int id=0;
+		for(int i=0;i<corsiFinal.size();i++) {
+			if(corsiFinal.get(i).getNomeCorso()==menuCorsi.getSelectedValue()) {
+				id = corsiFinal.get(i).getIdCorso();
+			}
+		}
+		
+		greetingService.deleteEsame(id, new AsyncCallback<String>() {
+			
+			public void onFailure(Throwable c) {
+				Alert a = new Alert("Errore:" + c);
+				System.out.println(a);
+				RootPanel.get("container").clear();
+				RootPanel.get("container").add(new HomePageDocente());
+			}
+			
+			@Override
+			public void onSuccess(String result) {
+				if(result.equals("Successo")) {
+					RootPanel.get("container").clear();
+					Alert a = new Alert("Esame eliminato con successo!");
+					System.out.println(a);
+				
+					RootPanel.get("container").add(new HomePageDocente());
+				}else if(result.equals("Errore")){
+					Alert a = new Alert("Non puoi eliminare un esame che non esiste");
+					System.out.println(a);
+				} 	
+				
+			}
+		});
 	}
 	
 	@UiHandler("btnUpdate")
 	void doClickUpdate(ClickEvent event) {
-			Window.alert("Esame modificato");
+		ArrayList<String>dati = new ArrayList<String>();
+		dati.add(0,txtUpdateData.getText());
+		dati.add(1, txtUpdateOra.getText());
+		dati.add(2, txtUpdateCfu.getText());
+		dati.add(3, txtUpdateAula.getText());
+		
+		String nomeCorso=menuUpdateCorsi.getSelectedValue();
+		
+		int id=0;
+		for(int i=0;i<corsiFinal.size();i++) {
+			if(corsiFinal.get(i).getNomeCorso()==menuCorsi.getSelectedValue()) {
+				id = corsiFinal.get(i).getIdCorso();
+			}
+		}
+		
+		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+		
+		greetingService.updateEsame(dati, id, new AsyncCallback<String>() {
+			
+			public void onFailure(Throwable c) {
+				Alert a = new Alert("Errore:" + c);
+				System.out.println(a);
+				RootPanel.get("container").clear();
+				RootPanel.get("container").add(new HomePageDocente());
+			}
+			
+			@Override
+			public void onSuccess(String result) {
+				if(result.equals("Successo")) {
+					RootPanel.get("container").clear();
+					Alert a = new Alert("Esame modificato con successo!");
+					System.out.println(a);
+				
+					RootPanel.get("container").add(new HomePageDocente());
+				}else {
+					Alert a = new Alert("Errore!");
+					System.out.println(a);
+				} 	
+				
+			}
+		});
 	}
 	
 	

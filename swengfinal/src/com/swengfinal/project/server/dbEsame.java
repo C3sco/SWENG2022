@@ -13,7 +13,7 @@ import com.swengfinal.project.shared.Esame;
 
 public class dbEsame {
 	private static DB getDB() {
-		DB db = DBMaker.newFileDB(new File("dbEsame1")).make();
+		DB db = DBMaker.newFileDB(new File("dbEsame2")).make();
 		return db;
 	}
 	
@@ -22,6 +22,9 @@ public class dbEsame {
 		//System.out.println(a);
 		DB db = getDB();
 		BTreeMap<Integer, Esame> esami = db.getTreeMap("EsamiMap");
+		
+		boolean found = false;
+		
 		
 
 		//if(!checkCorso(Integer.parseInt(dati.get(0)))) {
@@ -38,11 +41,21 @@ public class dbEsame {
 			
 			//Alert ab = new Alert("2!");
 			//System.out.println(ab);
-			esami.put(esame.getIdEsame(), esame);
-			db.commit();
-			db.close();
+			for(int i = 0; i < esami.size(); i++) {	
+				if(esami.get(i).getIdCorso()==(idCorso)) {
+					found = true;
+				}
+			}
+			if(!found) {
+				esami.put(esame.getIdEsame(), esame);
+				db.commit();
+				db.close();
+				return "Successo";
+			}else return "Errore";
 			
-			return "Successo";			
+			
+			
+						
 		}
 	
 	public static String iscrizioneEsame(String email, int idCorso) { 
@@ -100,12 +113,17 @@ public class dbEsame {
 		DB db = getDB();
 		BTreeMap<Integer, Corso> esami = db.getTreeMap("EsamiMap");
 		
+		if(esami.size()==0) {
+			return "Errore";
+		}
+		else {
+			esami.remove(idCorso);
+			db.commit();
+			db.close();
+			
+			return "Successo";
+		}
 		
-		esami.remove(idCorso);
-		db.commit();
-		db.close();
-		
-		return "Successo";
 	}
 	
 	public static ArrayList<String> getEsameStudente(String email){

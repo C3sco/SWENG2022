@@ -163,7 +163,7 @@ public class PageCorsoDocente extends Composite {
 					
 						RootPanel.get("container").add(new HomePageDocente());
 					}else {
-						Alert a = new Alert("Errore!123");
+						Alert a = new Alert("Esame gia esistente");
 						System.out.println(a);
 					} 	
 					
@@ -235,8 +235,6 @@ public class PageCorsoDocente extends Composite {
 				public void onSuccess(String result) {
 					if(result.equals("Successo")) {
 						RootPanel.get("container").clear();
-						//Account.email = txtMail.getText();
-						//Account.tipoAccount = 1;
 						Alert a = new Alert("Corso modificato con successo!");
 						System.out.println(a);
 					

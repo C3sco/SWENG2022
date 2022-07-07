@@ -18,6 +18,10 @@ public class Esame implements Serializable{
 	private  String emailDocente;
 	private List<String> listaUtenti; 
 	
+	public Esame() {
+	}
+
+	
 	public Esame(int idEsame, int idCorso, String data, String ora, String aula, String cfu, String nomeEsame, String emailDocente) {
 		this.idEsame = idEsame;
 		this.idCorso = idCorso;
