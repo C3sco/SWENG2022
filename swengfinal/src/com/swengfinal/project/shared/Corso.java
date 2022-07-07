@@ -45,9 +45,6 @@ public class Corso implements Serializable{
 		this.idCorso = idCorso;
 	}
 	
-	public String getCoDocente() {
-		return coDocente;
-	}
 	
 	public String getEmailDocente() {
 		return emailDocente;
@@ -86,5 +83,8 @@ public class Corso implements Serializable{
 	}
 	public void setDataFine(String dataFine) {
 		this.dataFine = dataFine;
+	}
+	public String getCoDocente() {
+		return coDocente;
 	}
 }

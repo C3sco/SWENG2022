@@ -74,7 +74,8 @@ public class HomePageDocente extends Composite {
 
 				greetingService.getAllCorso(Account.email, new AsyncCallback<ArrayList<Corso>>() {
 					public void onFailure(Throwable caught) {
-						Window.alert("ERRORE!");
+						Alert a = new Alert("Errore prendere corso");
+						System.out.println(a);
 
 					}
 					

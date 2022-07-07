@@ -53,5 +53,6 @@ public interface GreetingServiceAsync {
 	void getEsameStudente(String email, AsyncCallback<ArrayList<String>> callback) throws IllegalArgumentException;
 	
 	void deleteEsame(int idCorso, AsyncCallback<String>callback) throws IllegalArgumentException;
+	void  getCorsi(AsyncCallback<ArrayList<Corso>> callback) throws IllegalArgumentException;
 	
 }

@@ -59,8 +59,8 @@ public class dbCorso {
 					dati.get(2),                   // nomeCorso
 					dati.get(3),                   // Descrizione Corso
 					dati.get(4),                   // data inizio corso
-					dati.get(5),
-					dati.get(6)// data fine corso 
+					dati.get(5),                    // data fine corso 
+					dati.get(6)
 					);
 			
 			//Alert ab = new Alert("2!");
@@ -166,5 +166,16 @@ public class dbCorso {
 			}
 		}
 		return corsiOutput;
+	}
+	
+	public static ArrayList<Corso> getCorsi(){
+		DB db = getDB();
+		BTreeMap<Integer, Corso> corsi = db.getTreeMap("CorsiMap");
+		ArrayList<Corso> corsiAll = new ArrayList<Corso>();
+		for(Entry<Integer, Corso> test : corsi.entrySet()) {
+			corsiAll.add(test.getValue());
+		}
+		
+		return corsiAll;
 	}
 }
