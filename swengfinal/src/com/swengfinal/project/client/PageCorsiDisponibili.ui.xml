@@ -20,12 +20,11 @@
 		#registrazioneCorso {
 			position: absolute;
 			top:22vh;
-			left:15vw;
+			left:30vw;
 		    margin-top: 15vh;
 		    margin-bottom: 4vh;
 		    margin-left: 40vw;
 		    width: 30vw;
-		    float:right;
 		}
 		
 		.form-group {
@@ -61,13 +60,10 @@
 		</c:CellTable>
 		
 		<form id="registrazioneCorso">
-		  <div class="form-group">
-		    <label for="exampleInputEmail1">Id Corso</label>
-		    <gwt:TextBox ui:field="txtIdCorso"></gwt:TextBox>
-		  </div>
+		  
 		  <div class="form-group">
 		    <label for="exampleInputPassword1">Nome Corso</label>
-		    <gwt:TextBox ui:field="txtNomeCorso"></gwt:TextBox>
+		    <gwt:ListBox ui:field="txtNomeCorso"></gwt:ListBox>
 		  </div>
 		 
 		  <gwt:Button ui:field="btnCorso" text="Iscrizione"></gwt:Button>

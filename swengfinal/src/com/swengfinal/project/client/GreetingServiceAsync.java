@@ -36,4 +36,6 @@ public interface GreetingServiceAsync {
 
 	void getCorsoStudente(String email, AsyncCallback<ArrayList<String>> callback) throws IllegalArgumentException;
 	
+	void  getCorsi(AsyncCallback<ArrayList<Corso>> callback) throws IllegalArgumentException;
+	
 }

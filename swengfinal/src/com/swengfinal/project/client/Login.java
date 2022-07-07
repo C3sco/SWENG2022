@@ -17,7 +17,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.swengfinal.project.shared.Utente;
 
 public class Login extends Composite {
-
 	private static LoginUiBinder uiBinder = GWT.create(LoginUiBinder.class);
 
 	@UiTemplate("Login.ui.xml")
@@ -97,6 +96,7 @@ public class Login extends Composite {
 			@Override
 			public void onSuccess(Utente user) {
 			Account.email = txtMail.getText();
+			
 			//Account.tipoAccount = user.getTipologia();
 			
 		

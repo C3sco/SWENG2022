@@ -64,8 +64,11 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	}
 	
 	@Override
-	public ArrayList<Corso> getAllCorso(String email) throws IllegalArgumentException
-	{
+	public ArrayList<Corso> getAllCorso(String email) throws IllegalArgumentException {
 		return dbCorso.getAllCorso(email);
+	}
+	
+	public ArrayList<Corso> getCorsi() throws IllegalArgumentException{
+		return dbCorso.getCorsi();
 	}
 }

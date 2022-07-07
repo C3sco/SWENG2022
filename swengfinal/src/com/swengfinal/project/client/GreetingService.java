@@ -39,6 +39,8 @@ public interface GreetingService extends RemoteService {
 	
 	ArrayList<String> getCorsoStudente(String email) throws IllegalArgumentException;
 	
+	ArrayList<Corso> getCorsi() throws IllegalArgumentException;
+	
 	
 }
 
