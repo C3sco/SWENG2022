@@ -51,11 +51,12 @@ public class PageCorsoDocente extends Composite {
 		txtNomeCorso.getElement().getStyle().setMarginLeft(10.0, Unit.PX);
 		txtDataFine.getElement().getStyle().setMarginLeft(30.0, Unit.PX);
 		txtDescrizione.getElement().getStyle().setMarginLeft(27.0, Unit.PX);
+		txtDataInizio.getElement().getStyle().setMarginLeft(15.0, Unit.PX);
 		txtCoDocente.getElement().getStyle().setMarginLeft(15.0, Unit.PX);
 		btnCreazione.getElement().getStyle().setMargin(10, Unit.PX);
 		txtUpdateDataFine.getElement().getStyle().setMarginLeft(30.0, Unit.PX);
 		txtUpdateDescrizione.getElement().getStyle().setMarginLeft(27.0, Unit.PX);
-		txtUpdateDataInizio.getElement().getStyle().setMarginLeft(30.0, Unit.PX);
+		txtUpdateDataInizio.getElement().getStyle().setMarginLeft(15.0, Unit.PX);
 		txtUpdateCoDocente.getElement().getStyle().setMarginLeft(15.0, Unit.PX);
 		btnUpdate.getElement().getStyle().setMargin(10, Unit.PX);
 		btnCancellazione.getElement().getStyle().setMarginLeft(350, Unit.PX);
@@ -74,7 +75,9 @@ public class PageCorsoDocente extends Composite {
 
 			greetingService.getAllCorso(Account.email, new AsyncCallback<ArrayList<Corso>>() {
 				public void onFailure(Throwable caught) {
-					Window.alert("ERRORE!");
+					Alert a = new Alert("Errore prendere corso");
+					System.out.println(a);
+
 
 				}
 				
@@ -137,7 +140,7 @@ public class PageCorsoDocente extends Composite {
 			dati.add(3, txtDescrizione.getText());
 			dati.add(4, txtDataInizio.getText());
 			dati.add(5, txtDataFine.getText());
-			dati.add(6, txtCoDocente.getText());
+			dati.add(6,txtCoDocente.getText());
 			
 			
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
