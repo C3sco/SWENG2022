@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.swengfinal.project.shared.Corso;
+import com.swengfinal.project.shared.Esame;
 import com.swengfinal.project.shared.Utente;
 
 
@@ -38,6 +39,23 @@ public interface GreetingService extends RemoteService {
 	ArrayList<Corso> getAllCorso(String email) throws IllegalArgumentException;
 	
 	ArrayList<String> getCorsoStudente(String email) throws IllegalArgumentException;
+	
+	String deleteCorso(String nomeCorso) throws IllegalArgumentException;
+	
+	/**
+	 * Metodi esame
+	 */
+	String creazioneEsame(ArrayList<String> dati, int idCorso) throws IllegalArgumentException;
+	
+	String updateEsame(ArrayList<String> esameUpdate, int idCorso) throws IllegalArgumentException;
+	
+	String iscrizioneEsame(String email, int idCorso) throws IllegalArgumentException;
+	
+	ArrayList<Esame> getAllEsame(String email) throws IllegalArgumentException;
+	
+	ArrayList<String> getEsameStudente(String email) throws IllegalArgumentException;
+	
+	String deleteEsame(int idCorso) throws IllegalArgumentException;
 	
 	
 }

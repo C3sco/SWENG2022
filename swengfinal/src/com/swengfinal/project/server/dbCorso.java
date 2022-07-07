@@ -15,7 +15,7 @@ import java.util.Map.Entry;
 public class dbCorso {
 
 	private static DB getDB() {
-		DB db = DBMaker.newFileDB(new File("dbCorsi")).make();
+		DB db = DBMaker.newFileDB(new File("dbCorsi2")).make();
 		return db;
 	}
 	
@@ -33,7 +33,7 @@ public class dbCorso {
 		return find;
 	}
 	
-	private static int posizioneCorso(ArrayList<String> dati, String nomeCorso)
+	private static int posizioneCorso( String nomeCorso)
 	{
 		DB db = getDB();
 		BTreeMap<Integer, Corso> corsi = db.getTreeMap("CorsiMap");
@@ -59,7 +59,8 @@ public class dbCorso {
 					dati.get(2),                   // nomeCorso
 					dati.get(3),                   // Descrizione Corso
 					dati.get(4),                   // data inizio corso
-					dati.get(5)                    // data fine corso 
+					dati.get(5),
+					dati.get(6)// data fine corso 
 					);
 			
 			//Alert ab = new Alert("2!");
@@ -94,35 +95,46 @@ public class dbCorso {
 	public static String modificaCorso(ArrayList<String> dati, String nomeCorso) {
 		DB db = getDB();
 		BTreeMap<Integer, Corso> corsi = db.getTreeMap("CorsiMap");
-		if(checkCorso(Integer.parseInt(dati.get(0))))
+		
+		int idCorso=posizioneCorso(nomeCorso);
+		Corso corso = corsi.get(idCorso);
+		corsi.remove(idCorso);
+		if(dati.get(0)!="")
 		{
-			int idCorso=posizioneCorso(dati,nomeCorso);
-			Corso corso = corsi.get(idCorso);
-			if(dati.get(3)!="")
-			{
-				corso.setDescrizione(dati.get(3));
-			}
-			if(dati.get(4)!="")
-			{
-				corso.setDataInizio(dati.get(4));
-			}
-			if(dati.get(5)!="")
-			{
-				corso.setDataFine(dati.get(5));
-			}
-				
-				/*data inizio,data fine,descrizione*/
+			corso.setDescrizione(dati.get(0));
+		}
+		if(dati.get(1)!="")
+		{
+			corso.setDataInizio(dati.get(1));
 			
 		}
-		/*
-		 * Possiamo fare in diversi modi:
-		 * 1° carichiamo tutti i dati delle varie textbox e li inseriamo come se fosse un nuovo corso
-		 * 2° carichiamo carichiamo solo i dati che non sono vuoti nelle textbox altrimenti carichiamo quelli del corso
-		 * per fare ci� dobbiamo fare degli if a cascata per controllare ogni singolo campo
-		 * 
-		 */
-		return "Corso modificato";
+		if(dati.get(2)!="")
+		{
+			corso.setDataFine(dati.get(2));
+		}
+		if(dati.get(3)!="")
+		{
+			corso.setCoDocente(dati.get(3));
+		}
 		
+		corsi.put(idCorso, corso);
+		db.commit();
+		db.close();
+		
+		return "Successo";
+		
+	}
+	
+	public static String deleteCorso(String nomeCorso) {
+		DB db = getDB();
+		BTreeMap<Integer, Corso> corsi = db.getTreeMap("CorsiMap");
+		
+		int idCorso=posizioneCorso(nomeCorso);
+		corsi.remove(idCorso);
+		db.commit();
+		db.close();
+		
+		return "Successo";
 	}
 
 	public static ArrayList<String> getCorsoStudente(String email){

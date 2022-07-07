@@ -100,8 +100,7 @@
 	      <div class="form-group" id="group">
 		    <label for="exampleInputEmail1">Corso</label>
 		    <gwt:ListBox ui:field="menuUpdateCorsi"></gwt:ListBox>
-		    <label for="exampleInputEmail1" id="esame">Esame</label>
-		    <gwt:ListBox ui:field="menuUpdateEsame"></gwt:ListBox>
+		   
 		    
 		  </div>
 		  <div class="form-group" id="group">

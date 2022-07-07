@@ -122,6 +122,8 @@ public class PageCorsiDisponibili extends Composite{
 		 cellTable.setRowCount(corsi.size(), true);
 		 
 		 cellTable.setRowData(0, corsi);
+		 
+		
 	     
 		
 		 

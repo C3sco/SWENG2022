@@ -2,6 +2,7 @@ package com.swengfinal.project.server;
 
 import com.swengfinal.project.client.GreetingService;
 import com.swengfinal.project.shared.Corso;
+import com.swengfinal.project.shared.Esame;
 import com.swengfinal.project.shared.FieldVerifier;
 import com.swengfinal.project.shared.Utente;
 import com.google.gwt.user.client.Window;
@@ -67,5 +68,44 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	public ArrayList<Corso> getAllCorso(String email) throws IllegalArgumentException
 	{
 		return dbCorso.getAllCorso(email);
+	}
+	
+	@Override
+	public String deleteCorso(String nomeCorso) throws IllegalArgumentException
+	{
+		return dbCorso.deleteCorso(nomeCorso);
+	}
+	
+	// metodi esame
+	
+	@Override
+	public String creazioneEsame(ArrayList<String> dati, int idCorso) throws IllegalArgumentException {
+		return dbEsame.creazioneEsame(dati, idCorso);
+	}
+	@Override
+	public String updateEsame(ArrayList<String> esameUpdate, int idCorso) throws IllegalArgumentException {
+		return dbEsame.modificaEsame(esameUpdate, idCorso);
+	}
+	
+	@Override
+	public String iscrizioneEsame(String email, int idCorso) throws IllegalArgumentException {
+		return dbEsame.iscrizioneEsame(email, idCorso);
+	}
+	
+	@Override
+	public ArrayList<String> getEsameStudente(String email) throws IllegalArgumentException {
+		return dbEsame.getEsameStudente(email);
+	}
+	
+	@Override
+	public ArrayList<Esame> getAllEsame(String email) throws IllegalArgumentException
+	{
+		return dbEsame.getAllEsame(email);
+	}
+	
+	@Override
+	public String deleteEsame(int idCorso) throws IllegalArgumentException
+	{
+		return dbEsame.deleteEsame(idCorso);
 	}
 }

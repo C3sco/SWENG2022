@@ -14,19 +14,21 @@ public class Corso implements Serializable{
 	private String descrizione;
 	private String dataInizio;
 	private String dataFine;
+	private String coDocente;
 	
 	private List<String> listaUtenti; 
 	
 	public Corso() {
 	}
 	
-	public Corso(int idCorso, String emailDocente, String nomeCorso, String descrizione, String dataInizio, String dataFine) {
+	public Corso(int idCorso, String emailDocente, String nomeCorso, String descrizione, String dataInizio, String dataFine, String coDocente) {
 		this.idCorso = idCorso;
 		this.emailDocente = emailDocente;
 		this.nomeCorso = nomeCorso;
 		this.descrizione = descrizione;
 		this.dataInizio = dataInizio;
 		this.dataFine = dataFine;
+		this.coDocente=coDocente;
 		
 		listaUtenti = new ArrayList<>();
 	}
@@ -43,6 +45,10 @@ public class Corso implements Serializable{
 		this.idCorso = idCorso;
 	}
 	
+	public String getCoDocente() {
+		return coDocente;
+	}
+	
 	public String getEmailDocente() {
 		return emailDocente;
 	}
@@ -55,6 +61,10 @@ public class Corso implements Serializable{
 	}
 	public void setNomeCorso(String nomeCorso) {
 		this.nomeCorso = nomeCorso;
+	}
+	
+	public void setCoDocente(String coDocente) {
+		this.coDocente = coDocente;
 	}
 	
 	public String getDescrizione() {

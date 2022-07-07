@@ -51,9 +51,7 @@ public class PageCorsoDocente extends Composite {
 		txtNomeCorso.getElement().getStyle().setMarginLeft(10.0, Unit.PX);
 		txtDataFine.getElement().getStyle().setMarginLeft(30.0, Unit.PX);
 		txtDescrizione.getElement().getStyle().setMarginLeft(27.0, Unit.PX);
-		//txtDataInizio.getElement().getStyle().setMarginLeft(15.0, Unit.PX);
 		txtCoDocente.getElement().getStyle().setMarginLeft(15.0, Unit.PX);
-		btnAddEsame.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
 		btnCreazione.getElement().getStyle().setMargin(10, Unit.PX);
 		txtUpdateDataFine.getElement().getStyle().setMarginLeft(30.0, Unit.PX);
 		txtUpdateDescrizione.getElement().getStyle().setMarginLeft(27.0, Unit.PX);
@@ -126,11 +124,7 @@ public class PageCorsoDocente extends Composite {
 			RootPanel.get("container").add(new HomePage());
 	}
 	
-	@UiHandler("btnAddEsame")
-	void doClickAddEsame(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageEsameDocente());
-	}
+	
 	
 	@UiHandler("btnCreazione")
 	void doClickCreazioneCorso(ClickEvent event) {
@@ -143,6 +137,7 @@ public class PageCorsoDocente extends Composite {
 			dati.add(3, txtDescrizione.getText());
 			dati.add(4, txtDataInizio.getText());
 			dati.add(5, txtDataFine.getText());
+			dati.add(6, txtCoDocente.getText());
 			
 			
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -160,8 +155,6 @@ public class PageCorsoDocente extends Composite {
 				public void onSuccess(String result) {
 					if(result.equals("Successo")) {
 						RootPanel.get("container").clear();
-						//Account.email = txtMail.getText();
-						//Account.tipoAccount = 1;
 						Alert a = new Alert("Corso creato con successo!");
 						System.out.println(a);
 					
@@ -183,12 +176,75 @@ public class PageCorsoDocente extends Composite {
 	
 	@UiHandler("btnCancellazione")
 	void doClickDelete(ClickEvent event) {
-			Window.alert("Corso eliminato");
+		String nomeCorso=menuCorsi.getSelectedValue();
+		
+		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+		
+		greetingService.deleteCorso(nomeCorso, new AsyncCallback<String>() {
+				
+				public void onFailure(Throwable c) {
+					Alert a = new Alert("Errore:" + c);
+					System.out.println(a);
+					RootPanel.get("container").clear();
+					RootPanel.get("container").add(new HomePageDocente());
+				}
+				
+				@Override
+				public void onSuccess(String result) {
+					if(result.equals("Successo")) {
+						RootPanel.get("container").clear();
+						Alert a = new Alert("Corso eliminato con successo!");
+						System.out.println(a);
+					
+						RootPanel.get("container").add(new HomePageDocente());
+					}else {
+						Alert a = new Alert("Errore!");
+						System.out.println(a);
+					} 	
+					
+				}
+			}); 
 	}
 	
 	@UiHandler("btnUpdate")
 	void doClickUpdate(ClickEvent event) {
-			Window.alert("Corso modificato");
+		
+			ArrayList<String>dati = new ArrayList<String>();
+			dati.add(0,txtUpdateDescrizione.getText());
+			dati.add(1, txtUpdateDataInizio.getText());
+			dati.add(2, txtUpdateDataFine.getText());
+			dati.add(3, txtUpdateCoDocente.getText());
+			//Window.alert("Corso modificato");
+			String nomeCorso=menuCorsi.getSelectedValue();
+			
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+			
+			greetingService.updateCorso(dati, nomeCorso, new AsyncCallback<String>() {
+				
+				public void onFailure(Throwable c) {
+					Alert a = new Alert("Errore:" + c);
+					System.out.println(a);
+					RootPanel.get("container").clear();
+					RootPanel.get("container").add(new HomePageDocente());
+				}
+				
+				@Override
+				public void onSuccess(String result) {
+					if(result.equals("Successo")) {
+						RootPanel.get("container").clear();
+						//Account.email = txtMail.getText();
+						//Account.tipoAccount = 1;
+						Alert a = new Alert("Corso modificato con successo!");
+						System.out.println(a);
+					
+						RootPanel.get("container").add(new HomePageDocente());
+					}else {
+						Alert a = new Alert("Errore!");
+						System.out.println(a);
+					} 	
+					
+				}
+			}); 
 	}
 	
 	
@@ -237,8 +293,7 @@ public class PageCorsoDocente extends Composite {
 	@UiField
 	ListBox menuCorsi;
 	
-	@UiField
-	Button btnAddEsame;
+	
 	
 	@UiField
 	Button btnCreazione;

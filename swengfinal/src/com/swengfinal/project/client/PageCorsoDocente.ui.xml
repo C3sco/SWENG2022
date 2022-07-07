@@ -48,7 +48,7 @@
 		}
 		
 		#updateData{
-			margin-left:15vw;
+			margin-left:8.5vw;
 		}
 	</ui:style>
 	<g:HTMLPanel>
@@ -91,7 +91,6 @@
 		  <div class="form-group" id="group">
 		    <label for="exampleInputPassword1">Co-Docente</label>
 		    <gwt:TextBox ui:field="txtCoDocente"></gwt:TextBox>
-		    <gwt:Button ui:field="btnAddEsame" text="Aggiungi Esame"></gwt:Button>
 		  </div>
 		  <gwt:Button ui:field="btnCreazione" text="Creazione Corso"></gwt:Button>
 	    </div>
