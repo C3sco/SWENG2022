@@ -39,15 +39,18 @@ import javax.swing.text.TableView.TableCell;
 public class PageCorsiDisponibili extends Composite{
 	private static final ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
 	private static PageCorsiDisponibiliUiBinder uiBinder = GWT.create(PageCorsiDisponibiliUiBinder.class);
-	
+	private static int tmp = 0;
 	@UiTemplate("PageCorsiDisponibili.ui.xml")
 	interface PageCorsiDisponibiliUiBinder extends UiBinder<Widget, PageCorsiDisponibili> {
+		
 	}
-	
-	
-	static int i = 0;
+
 	public PageCorsiDisponibili() {
+		
 		initWidget(uiBinder.createAndBindUi(this));
+
+		getCorsi();
+		newTable();
 		
 
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
@@ -71,14 +74,9 @@ public class PageCorsiDisponibili extends Composite{
 		//txtNomeCorso.getElement().getStyle().setMarginLeft(17.0, Unit.PX);
 		
 
-		getCorsi();
-
-		newTable();
-		
 		
 
-
-	
+		corsiFinal.clear();
 	}
 	
 	/* Ritorna tutti i corsi disponibili per l'utente */
@@ -96,10 +94,9 @@ public class PageCorsiDisponibili extends Composite{
 					
 					for(int i=0;i<corsi.size();i++) {
 						corsiFinal.add(corsi.get(i));
-						txtNomeCorso.addItem(corsi.get(i).getNomeCorso());	
+						txtNomeCorso.addItem(corsi.get(i).getNomeCorso());
 					}
 				}
-		
 			});
 		}catch(Error e){
 			};
@@ -111,14 +108,6 @@ public class PageCorsiDisponibili extends Composite{
 		 
 		cellTable.setRowData(0, corsiFinal);
 
-		TextColumn<Corso> idColumn=new TextColumn<Corso>() {
-			@Override
-			public String getValue(Corso obj) {
-				String tmp = obj.toString();
-				return (tmp);
-			}
-		};
-		cellTable.addColumn(idColumn, "Id");
 		
 		TextColumn<Corso> nameColumn=new TextColumn<Corso>() {
 			@Override
@@ -135,11 +124,7 @@ public class PageCorsiDisponibili extends Composite{
 			}
 		};
 		
-		cellTable.addColumn(iscrizioneColumn, "Professore");
-		
-		
-		 
-		
+		cellTable.addColumn(iscrizioneColumn, "Email");
 	     
 		TextColumn<Corso> dataInizioColumn=new TextColumn<Corso>() {
 			@Override

@@ -86,45 +86,8 @@ public class HomePageUtente extends Composite {
 				
 			});
 		}catch(Error e) {
-			
-		}
-
-			
-			
-			
+		}	
 	}
-	
-	
-		/*
-		try {
-			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-
-			greetingService.getInfoUtente(Account.email, new AsyncCallback<String>() {
-				public void onFailure(Throwable caught) {
-					final DialogBox dialogBox = new DialogBox();
-					dialogBox.setText(caught.getMessage());
-				}
-
-				public void onSuccess(String info) {
-					String [] arraySplit = info.split("\n");
-					
-
-					String htmlProfilo = "<h1>Il tuo profilo</h1>"+
-							arrayInfo[0]+"<br>"+
-							arrayInfo[1]+"<br>"+
-							arrayInfo[2]+"<br>"+
-							arrayInfo[3]+"<br>"+
-							arrayInfo[4]+"<br>"+
-							arrayInfo[5]+"<br>"+
-							arrayInfo[6]+"<br>"+
-							arrayInfo[7]+"<br>"+
-							"Tipo profilo : Utente registrato";
-
-				}
-			});
-		}catch(Error e){
-			};
-		}*/
 
 	@UiHandler("btnHome")
 	   void doClickSubmit(ClickEvent event) {

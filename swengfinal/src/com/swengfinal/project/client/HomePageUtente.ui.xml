@@ -16,13 +16,18 @@
 		  float: left;
 		  
 		}
+		label{
+			margin-top: 10px;
+			background-color: lightgray;
+		}
 		
 		#infoUtente{
 			width: 70vw;
-			height: 55vh;
-			border: 1px solid #303030;
+			height: 60vh;
+			border: 2px outset #303030;
 			margin-top: 6vh;
 			margin-left: 15vw;
+			background-color: lightblue;
 		}
 		
 		#infoUtente p{
@@ -63,23 +68,23 @@
 	    </ul>
 	    <div id="infoUtente">
 	    	<p>
-	    		<label>Nome: </label>
+	    		<label><b>Nome: </b></label>
 	    		<gwt:Label ui:field="lblNome" text="Martin"></gwt:Label>
 	    	</p>
 	    	<p>
-	    		<label>Cognome: </label>
+	    		<label><b>Cognome: </b></label>
 	    		<gwt:Label ui:field="lblCognome" text="Martin"></gwt:Label>
 	    	</p>
 	    	<p>
-	    		<label>Mail: </label>
+	    		<label><b>Mail: </b></label>
 	    		<gwt:Label ui:field="lblMail" text="Martin"></gwt:Label>
 	    	</p>
 	    	<p>
-	    		<label>Corsi iscritti: </label>
+	    		<label><b>Corsi iscritti: </b></label>
 	    		<gwt:Label ui:field="lblCorsi" text="Martin"></gwt:Label>
 	    	</p>
 	    	<p>
-	    		<label>Esami iscritti: </label>
+	    		<label><b>Esami iscritti: </b></label>
 	    		<gwt:Label ui:field="lblEsami" text="Martin"></gwt:Label>
 	    	</p>
 	    </div>
