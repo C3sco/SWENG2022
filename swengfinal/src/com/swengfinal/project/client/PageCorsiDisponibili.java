@@ -1,6 +1,7 @@
 package com.swengfinal.project.client;
 
 
+import com.gargoylesoftware.htmlunit.javascript.host.Console;
 import com.google.gwt.canvas.dom.client.Context;
 import com.google.gwt.cell.client.ValueUpdater;
 import com.google.gwt.core.client.GWT;
@@ -16,15 +17,18 @@ import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.swengfinal.project.shared.Corso;
 
-
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.plaf.TableUI;
@@ -33,7 +37,7 @@ import javax.swing.text.TableView.TableCell;
 
 
 public class PageCorsiDisponibili extends Composite{
-
+	private static final ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
 	private static PageCorsiDisponibiliUiBinder uiBinder = GWT.create(PageCorsiDisponibiliUiBinder.class);
 	
 	@UiTemplate("PageCorsiDisponibili.ui.xml")
@@ -41,7 +45,7 @@ public class PageCorsiDisponibili extends Composite{
 	}
 	
 	
-
+	static int i = 0;
 	public PageCorsiDisponibili() {
 		initWidget(uiBinder.createAndBindUi(this));
 		
@@ -62,39 +66,56 @@ public class PageCorsiDisponibili extends Composite{
 		btnLogout.getElement().getStyle().setMarginLeft(820.0, Unit.PX);
 		cellTable.getElement().getStyle().setFontSize(24.0, Unit.PX);
 		cellTable.getElement().getStyle().setMarginTop(35.0, Unit.PX);
-		cellTable.getElement().getStyle().setMarginLeft(200.0, Unit.PX);
-		txtIdCorso.getElement().getStyle().setMarginLeft(40.0, Unit.PX);
-		txtNomeCorso.getElement().getStyle().setMarginLeft(17.0, Unit.PX);
-	
+		//cellTable.getElement().getStyle().setMarginLeft(200.0, Unit.PX);
+		//txtIdCorso.getElement().getStyle().setMarginLeft(40.0, Unit.PX);
+		//txtNomeCorso.getElement().getStyle().setMarginLeft(17.0, Unit.PX);
 		
-		addTable();
+
+		getCorsi();
+
+		newTable();
 		
-	}
+		
+
 
 	
-	private static class Corso{
-		private final String id;
-		private final String nome;
-		private final String professore;
-		
-		public Corso(String id, String nome, String professore) {
-			this.id=id;
-			this.nome=nome;
-			this.professore=professore;
-		}
 	}
 	
-	
-	private static final java.util.List<Corso> corsi=Arrays.asList(
-				new Corso("01234","Ingegneria del software", "Davide Rossi" )
-			);
-	
-	public void addTable() {
+	/* Ritorna tutti i corsi disponibili per l'utente */
+	public void getCorsi() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getCorsi(new AsyncCallback<ArrayList<Corso>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Corso> corsi) {
+					
+					for(int i=0;i<corsi.size();i++) {
+						corsiFinal.add(corsi.get(i));
+						txtNomeCorso.addItem(corsi.get(i).getNomeCorso());	
+					}
+				}
 		
+			});
+		}catch(Error e){
+			};
+	}
+	
+	public void newTable() {
+
+		cellTable.setRowCount(corsiFinal.size(), true);
+		 
+		cellTable.setRowData(0, corsiFinal);
+
 		TextColumn<Corso> idColumn=new TextColumn<Corso>() {
 			@Override
 			public String getValue(Corso obj) {
-				return obj.id;
+				String tmp = obj.toString();
+				return (tmp);
 			}
 		};
 		cellTable.addColumn(idColumn, "Id");
@@ -102,7 +123,7 @@ public class PageCorsiDisponibili extends Composite{
 		TextColumn<Corso> nameColumn=new TextColumn<Corso>() {
 			@Override
 			public String getValue(Corso obj) {
-				return obj.nome;
+				return obj.getNomeCorso();
 			}
 		};
 		cellTable.addColumn(nameColumn, "Nome");
@@ -110,21 +131,29 @@ public class PageCorsiDisponibili extends Composite{
 		TextColumn<Corso> iscrizioneColumn=new TextColumn<Corso>() {
 			
 			public String getValue(Corso obj) {
-				return obj.professore;
+				return obj.getEmailDocente();
 			}
-			
-		  
 		};
 		
 		cellTable.addColumn(iscrizioneColumn, "Professore");
-		//cellTable.
 		
-		 cellTable.setRowCount(corsi.size(), true);
-		 
-		 cellTable.setRowData(0, corsi);
-	     
+		TextColumn<Corso> dataInizioColumn=new TextColumn<Corso>() {
+			@Override
+			public String getValue(Corso obj) {
+				return obj.getDataInizio();
+			}
+		};
+		cellTable.addColumn(dataInizioColumn, "Data Inizio");
 		
-		 
+		TextColumn<Corso> dataFineColumn=new TextColumn<Corso>() {
+			@Override
+			public String getValue(Corso obj) {
+				return obj.getDataFine();
+			}
+		};
+		cellTable.addColumn(dataFineColumn, "Data Fine");
+		
+		
 		 
 	}
 
@@ -134,11 +163,11 @@ public class PageCorsiDisponibili extends Composite{
 			RootPanel.get("container").clear();
 			RootPanel.get("container").add(new HomePageUtente());
 	   }
-	
+
+
 	@UiHandler("btnIscrizione")
 	void doClickDip(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageCorsiDisponibili());
+		
 			
 	}
 	
@@ -162,8 +191,29 @@ public class PageCorsiDisponibili extends Composite{
 	
 	@UiHandler("btnCorso")
 	void doClickIscrizione(ClickEvent event) {
-			RootPanel.get("container").clear();
-			Window.alert("Iscrizione avvenuta");
+		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+		int id = 0;
+		String nomeCorso = txtNomeCorso.getSelectedValue();
+		for(int i=0;i<corsiFinal.size();i++) {
+			if(corsiFinal.get(i).getNomeCorso()==nomeCorso) {
+				id = corsiFinal.get(i).getIdCorso();
+			}
+		}
+		greetingService.iscrizioneCorso(Account.email, id , new AsyncCallback<String>() {
+			public void onFailure(Throwable caught) {
+
+			}
+			@Override
+			public void onSuccess(String result) {
+				if(result=="Successo") {
+					Alert nice = new Alert("Successo!");
+					System.out.println(nice);
+				}
+			}
+	
+		});
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePageUtente());
 	}
 	
 	@UiField
@@ -182,13 +232,11 @@ public class PageCorsiDisponibili extends Composite{
 	Button btnLogout;
 	
 	@UiField
-	CellTable cellTable;
+	CellTable<Corso> cellTable;
+	
 	
 	@UiField
-	TextBox txtIdCorso;
-	
-	@UiField
-	TextBox txtNomeCorso;
+	ListBox txtNomeCorso;
 	
 	@UiField
 	Button btnCorso;
