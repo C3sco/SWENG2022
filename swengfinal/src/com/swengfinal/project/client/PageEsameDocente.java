@@ -22,6 +22,7 @@ import com.swengfinal.project.shared.Corso;
 public class PageEsameDocente extends Composite {
 
 	private static PageEsameDocenteUiBinder uiBinder = GWT.create(PageEsameDocenteUiBinder.class);
+	private static final ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
 
 	@UiTemplate("PageEsameDocente.ui.xml")
 	interface PageEsameDocenteUiBinder extends UiBinder<Widget, PageEsameDocente> {
@@ -58,8 +59,10 @@ public class PageEsameDocente extends Composite {
 		btnCancellazione.getElement().getStyle().setMarginLeft(350, Unit.PX);
 		menuCorsi.getElement().getStyle().setMarginLeft(28.0, Unit.PX);
 		
-		
+		getCorsi();
 		fillistbox();
+		
+		
 	}
 	
 	void fillistbox()
@@ -84,6 +87,28 @@ public class PageEsameDocente extends Composite {
 				}
 
 					
+			});
+		}catch(Error e){
+			};
+	}
+	
+	public void getCorsi() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getCorsi(new AsyncCallback<ArrayList<Corso>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Corso> corsi) {
+					
+					for(int i=0;i<corsi.size();i++) {
+						corsiFinal.add(corsi.get(i));	
+					}
+				}
+		
 			});
 		}catch(Error e){
 			};
@@ -119,8 +144,10 @@ public class PageEsameDocente extends Composite {
 			RootPanel.get("container").add(new HomePage());
 	}
 	
+	
+	
 	@UiHandler("btnCreazione")
-	void doClickCreazioneCorso(ClickEvent event) {
+	void doClickCreazioneEsame(ClickEvent event) {
 		ArrayList<String>dati = new ArrayList<String>();
 		dati.add(0, "");
 		dati.add(1, "");
@@ -131,9 +158,17 @@ public class PageEsameDocente extends Composite {
 		dati.add(6,  menuCorsi.getSelectedValue());
 		dati.add(7, Account.email);
 		
+		
+		int id=0;
+		for(int i=0;i<corsiFinal.size();i++) {
+			if(corsiFinal.get(i).getNomeCorso()==menuCorsi.getSelectedValue()) {
+				id = corsiFinal.get(i).getIdCorso();
+			}
+		}
+		
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 		
-		greetingService.creazioneEsame(dati, idCorso, new AsyncCallback<String>() {
+		greetingService.creazioneEsame(dati, id, new AsyncCallback<String>() {
 				
 				public void onFailure(Throwable c) {
 					Alert a = new Alert("Errore:" + c);
@@ -146,7 +181,7 @@ public class PageEsameDocente extends Composite {
 				public void onSuccess(String result) {
 					if(result.equals("Successo")) {
 						RootPanel.get("container").clear();
-						Alert a = new Alert("Corso creato con successo!");
+						Alert a = new Alert("Esame creato con successo!");
 						System.out.println(a);
 					
 						RootPanel.get("container").add(new HomePageDocente());

@@ -75,6 +75,10 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		return dbCorso.deleteCorso(nomeCorso);
 	}
 	
+	public ArrayList<Corso> getCorsi() throws IllegalArgumentException{
+		return dbCorso.getCorsi();
+	}
+	
 	// metodi esame
 	
 	@Override
@@ -107,7 +111,5 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	{
 		return dbEsame.deleteEsame(idCorso);
 	}
-	public ArrayList<Corso> getCorsi() throws IllegalArgumentException{
-		return dbCorso.getCorsi();
-	}
+	
 }

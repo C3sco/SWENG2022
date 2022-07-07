@@ -137,9 +137,7 @@ public class PageCorsiDisponibili extends Composite{
 		
 		cellTable.addColumn(iscrizioneColumn, "Professore");
 		
-		 cellTable.setRowCount(corsi.size(), true);
-		 
-		 cellTable.setRowData(0, corsi);
+		
 		 
 		
 	     

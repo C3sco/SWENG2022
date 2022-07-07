@@ -13,7 +13,7 @@ import com.swengfinal.project.shared.Esame;
 
 public class dbEsame {
 	private static DB getDB() {
-		DB db = DBMaker.newFileDB(new File("dbEsame")).make();
+		DB db = DBMaker.newFileDB(new File("dbEsame1")).make();
 		return db;
 	}
 	

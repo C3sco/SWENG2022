@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.swengfinal.project.shared.Corso;
+import com.swengfinal.project.shared.Esame;
 import com.swengfinal.project.shared.Utente;
 
 public class HomePageDocente extends Composite {
@@ -46,6 +47,14 @@ public class HomePageDocente extends Composite {
 		btnLogout.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnLogout.getElement().getStyle().setMarginLeft(800.0, Unit.PX);
 		
+		getUtente();
+		getCorso();
+		getEsame();
+			
+			
+	}
+	
+	public void getUtente() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
@@ -68,36 +77,71 @@ public class HomePageDocente extends Composite {
 			});
 		}catch(Error e){
 			};
-			
-			try {
-				final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+	}
+	
+	public void getCorso() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
-				greetingService.getAllCorso(Account.email, new AsyncCallback<ArrayList<Corso>>() {
-					public void onFailure(Throwable caught) {
-						Alert a = new Alert("Errore prendere corso");
-						System.out.println(a);
+			greetingService.getAllCorso(Account.email, new AsyncCallback<ArrayList<Corso>>() {
+				public void onFailure(Throwable caught) {
+					Alert a = new Alert("Errore prendere corso");
+					System.out.println(a);
+
+				}
+				
+				@Override
+				public void onSuccess(ArrayList<Corso> corsi) {
+					String tmp = "";
+					for(int i=0;i<corsi.size();i++)
+					{
+						
+						tmp += corsi.get(i).getNomeCorso() + ", ";
+						
 
 					}
+					lblCorsi.setText(tmp);
 					
-					@Override
-					public void onSuccess(ArrayList<Corso> corsi) {
-						String tmp = "";
-						for(int i=0;i<corsi.size();i++)
-						{
-							
-							tmp += corsi.get(i).getNomeCorso() + ", ";
-							
 
-						}
-						lblCorsi.setText(tmp);
+				}
+
+					
+			});
+		}catch(Error e){
+			};
+	}
+
+	public void getEsame() {
+		
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getAllEsame(Account.email, new AsyncCallback<ArrayList<Esame>>() {
+				public void onFailure(Throwable caught) {
+					Alert a = new Alert("Errore prendere esame");
+					System.out.println(a);
+
+				}
+				
+				@Override
+				public void onSuccess(ArrayList<Esame> esami) {
+					String tmp = "";
+					for(int i=0;i<esami.size();i++)
+					{
+						
+						tmp += esami.get(i).getNomeEsame() + ", ";
 						
 
 					}
+					lblEsami.setText(tmp);
+					
 
-						
-				});
-			}catch(Error e){
-				};
+				} 
+
+					
+			});
+		}catch(Error e){
+			};
 	}
 	
 	@UiHandler("btnHome")

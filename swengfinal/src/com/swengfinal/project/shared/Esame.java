@@ -2,17 +2,20 @@ package com.swengfinal.project.shared;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-public class Esame {
+public class Esame implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 
-	private static int idEsame;
-	private static int idCorso; 
-	private static String data; 
-	private static String ora; 
-	private static String aula;
-	private static String cfu;
-	private static String nomeEsame;
-	private static String emailDocente;
+	private  int idEsame;
+	private  int idCorso; 
+	private  String data; 
+	private  String ora; 
+	private  String aula;
+	private  String cfu;
+	private  String nomeEsame;
+	private  String emailDocente;
 	private List<String> listaUtenti; 
 	
 	public Esame(int idEsame, int idCorso, String data, String ora, String aula, String cfu, String nomeEsame, String emailDocente) {
@@ -32,60 +35,60 @@ public class Esame {
 		return listaUtenti;
 	}
 	
-	public static int getIdEsame() {
-		return idEsame;
+	public  int getIdEsame() {
+		return this.idEsame;
 	}
-	public static void setIdEsame(int idEsame) {
-		Esame.idEsame = idEsame;
+	public  void setIdEsame(int idEsame) {
+		this.idEsame = idEsame;
 	}
 	
-	public static int getIdCorso() {
+	public int getIdCorso() {
 		return idCorso;
 	}
-	public static void setIdCorso(int idCorso) {
-		Esame.idCorso = idCorso;
+	public void setIdCorso(int idCorso) {
+		this.idCorso = idCorso;
 	}
 	
-	public static String getData() {
+	public String getData() {
 		return data;
 	}
-	public static void setData(String data) {
-		Esame.data = data;
+	public void setData(String data) {
+		this.data = data;
 	}
 	
-	public static String getOra() {
+	public  String getOra() {
 		return ora;
 	}
-	public static void setOra(String ora) {
-		Esame.ora = ora;
+	public void setOra(String ora) {
+		this.ora = ora;
 	}
 	
-	public static String getAula() {
+	public String getAula() {
 		return aula;
 	}
-	public static void setAula(String aula) {
-		Esame.aula = aula;
+	public void setAula(String aula) {
+		this.aula = aula;
 	}
 	
-	public static String getEmailDocente() {
+	public  String getEmailDocente() {
 		return emailDocente;
 		
 	}
-	public static void setEmailDocente(String emailDocente) {
-		Esame.emailDocente=emailDocente;
+	public void setEmailDocente(String emailDocente) {
+		this.emailDocente=emailDocente;
 	}
-	public static String getCfu() {
+	public String getCfu() {
 		return cfu;
 	}
-	public static void setCfu(String cfu) {
-		Esame.cfu = cfu;
+	public void setCfu(String cfu) {
+		this.cfu = cfu;
 	}
 	
-	public static String getNomeEsame() {
+	public String getNomeEsame() {
 		return nomeEsame;
 	}
 	
-	public static void setNomeEsame(String nomeEsame) {
-		Esame.nomeEsame = nomeEsame;
+	public void setNomeEsame(String nomeEsame) {
+		this.nomeEsame = nomeEsame;
 	}
 }
