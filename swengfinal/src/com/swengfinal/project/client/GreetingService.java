@@ -7,6 +7,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.Esame;
+import com.swengfinal.project.shared.Studente;
 import com.swengfinal.project.shared.Utente;
 import com.swengfinal.project.shared.Voto;
 
@@ -33,6 +34,8 @@ public interface GreetingService extends RemoteService {
 	String getInfoUtente(String email)throws IllegalArgumentException;
 	
 	Utente getUtente(String email) throws IllegalArgumentException;
+	
+	ArrayList<Utente> getStudenti() throws IllegalArgumentException;
 	
 	/**
 	 * Metodi corso

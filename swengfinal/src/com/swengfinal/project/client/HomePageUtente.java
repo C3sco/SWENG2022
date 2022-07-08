@@ -29,12 +29,12 @@ public class HomePageUtente extends Composite {
 	interface HomePageUtenteUiBinder extends UiBinder<Widget, HomePageUtente> {
 	}
 
-	private static final ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
+	private static final ArrayList<Integer> corsiFinal = new ArrayList<Integer>();
 	
 	public HomePageUtente() {
 		initWidget(uiBinder.createAndBindUi(this));
 		
-		getCorsi();
+		//getCorsi();
 		
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -50,9 +50,9 @@ public class HomePageUtente extends Composite {
 		btnLogout.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnLogout.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnLogout.getElement().getStyle().setMarginLeft(820.0, Unit.PX);
-		
+		getCorsoStudente();
 		getUtente();
-		getCorsiStudente();
+		//getCorsiStudente();
 		
 
 			
@@ -82,7 +82,7 @@ public class HomePageUtente extends Composite {
 		}catch(Error e){
 			};
 	}
-	
+	/*
 	public void getCorsiStudente() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -110,9 +110,32 @@ public class HomePageUtente extends Composite {
 		}catch(Error e) {
 			
 		}
+	}*/
+	
+	public void getCorsoStudente() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getCorsoStudente(Account.email, new AsyncCallback<ArrayList<Integer>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Integer> idCorsi) {
+					String test = "";
+					for(int i=0;i<idCorsi.size();i++) {
+						test+= idCorsi.get(i);
+						
+					}
+					lblCorsi.setText(test);
+				}
+			});
+		}catch(Error e){
+			};
 	}
 	
-	
+	/*
 	public void getCorsi() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -133,7 +156,7 @@ public class HomePageUtente extends Composite {
 			});
 		}catch(Error e){
 			};
-	}
+	}*/
 
 	@UiHandler("btnHome")
 	   void doClickSubmit(ClickEvent event) {

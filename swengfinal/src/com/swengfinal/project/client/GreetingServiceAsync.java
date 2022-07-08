@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.Esame;
+import com.swengfinal.project.shared.Studente;
 import com.swengfinal.project.shared.Utente;
 import com.swengfinal.project.shared.Voto;
 
@@ -29,7 +30,9 @@ public interface GreetingServiceAsync {
 	
 	void getInfoUtente(String email, AsyncCallback<String> callback)throws IllegalArgumentException;
 
-	void getUtente(String email, AsyncCallback<Utente> callback)throws IllegalArgumentException;	
+	void getUtente(String email, AsyncCallback<Utente> callback)throws IllegalArgumentException;
+	
+	void getStudenti(AsyncCallback<ArrayList<Utente>> callback) throws IllegalArgumentException;
 
 	/**
 	 * Metodi del corso

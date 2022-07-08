@@ -15,13 +15,13 @@ public class Corso implements Serializable{
 	private String dataInizio;
 	private String dataFine;
 	private String coDocente;
-	
-	private List<String> listaUtenti; 
+	private ArrayList<String> listaUtenti; 
 	
 	public Corso() {
 	}
 	
-	public Corso(int idCorso, String emailDocente, String nomeCorso, String descrizione, String dataInizio, String dataFine, String coDocente) {
+	public Corso(int idCorso, String emailDocente, String nomeCorso, String descrizione, 
+			String dataInizio, String dataFine, String coDocente) {
 		this.idCorso = idCorso;
 		this.emailDocente = emailDocente;
 		this.nomeCorso = nomeCorso;
@@ -29,12 +29,15 @@ public class Corso implements Serializable{
 		this.dataInizio = dataInizio;
 		this.dataFine = dataFine;
 		this.coDocente=coDocente;
-		
-		listaUtenti = new ArrayList<>();
+		//this.listaUtenti=listaUtenti;
 	}
 	
-	public List<String> getListaUtenti() {
+	public ArrayList<String> getListaUtenti() {
 		return listaUtenti;
+	}
+	
+	public void setListaUtenti(ArrayList<String> listaUtenti) {
+		this.listaUtenti = listaUtenti;
 	}
 	
 	

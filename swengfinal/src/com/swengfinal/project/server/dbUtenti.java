@@ -171,5 +171,19 @@ public class dbUtenti {
 		return user;
 
 	}
+	
+	public static ArrayList<Utente> getStudenti(){
+		DB db = getDB();
+		BTreeMap<String, Utente> Users = db.getTreeMap("UtentiiMap");
+		ArrayList<Utente> output = new ArrayList<Utente>();
+		for(Entry<String,Utente> test : Users.entrySet()) {
+			if(test.getValue() instanceof Studente) {
+				output.add(test.getValue());
+			}
+		}
+		return output;
+		
+		
+	}
 
 }

@@ -39,13 +39,14 @@
 	    <label>Seleziona una tipologia di utenti</label>
 	    <gwt:ListBox ui:field="menuTipo"></gwt:ListBox>
 	    <div id="infoUser">
-	    </div>
-	    
 	    <c:CellTable ui:field='cellTable'>
 		</c:CellTable>
 		
 		 <c:CellTable ui:field='cellTableDocenti'>
 		</c:CellTable>
+	    </div>
+	    
+	    
 		
 		
 	</g:HTMLPanel>

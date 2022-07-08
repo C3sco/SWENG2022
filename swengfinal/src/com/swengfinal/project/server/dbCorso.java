@@ -74,7 +74,29 @@ public class dbCorso {
 		
 	
 	/*  */
-	
+
+	public static String iscrizioneCorso(String email, int idCorso) { 
+		DB db = getDB();
+		BTreeMap<Integer, Corso> corsi = db.getTreeMap("CorsiMap");
+		
+		Corso corso = corsi.get(idCorso);
+		boolean found = false;
+		
+		for(int i = 0; i < corso.getListaUtenti().size(); i++) {	
+			if(corso.getListaUtenti().get(i).equals(email)) {
+				found = true;
+			}
+		}
+		if(!found) {
+			corso.getListaUtenti().add(email);  // Aggiunta mail studente al relativo corso
+			db.commit();
+			db.close();
+			return "Successo";
+			
+		}else return "Errore";
+		
+	}
+
 	
 	public static String modificaCorso(ArrayList<String> dati, String nomeCorso) {
 		DB db = getDB();

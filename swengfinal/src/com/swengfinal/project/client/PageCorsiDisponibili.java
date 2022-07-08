@@ -183,7 +183,7 @@ public class PageCorsiDisponibili extends Composite{
 	@UiHandler("btnCorso")
 	void doClickIscrizione(ClickEvent event) {
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-		int id = 0;
+		Integer id = 0;
 		String nomeCorso = txtNomeCorso.getSelectedValue();
 		for(int i=0;i<corsiFinal.size();i++) {
 			if(corsiFinal.get(i).getNomeCorso()==nomeCorso) {

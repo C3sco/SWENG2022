@@ -18,16 +18,13 @@ public class dbIscrizioneCorso {
 		return db;
 	}
 	
-	public static String iscrizioneCorso(String email, int idCorso) { 
+	public static String iscrizioneCorso(String email, Integer idCorso) { 
 		DB db = getDB();
 		BTreeMap<Integer, IscrizioneCorso> iscrizioni = db.getTreeMap("IscrizioniCorso");
 		
 		IscrizioneCorso iscrizione = new IscrizioneCorso(idCorso, email);
 		boolean found = false;
 		
-		if(email!="studente@unibo.it") {
-			return "Errore";
-		}
 		
 		for(int i = 0; i <iscrizioni.size(); i++) {	
 			if((iscrizioni.get(i).getIdCorso()==idCorso) && (iscrizioni.get(i).getMailStudente().equals(email))) {
