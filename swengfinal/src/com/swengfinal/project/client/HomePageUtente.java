@@ -86,8 +86,16 @@ public class HomePageUtente extends Composite {
 				
 			});
 		}catch(Error e) {
-		}	
+			
+		}
+
+			
+			
+			
 	}
+	
+	
+	
 
 	@UiHandler("btnHome")
 	   void doClickSubmit(ClickEvent event) {

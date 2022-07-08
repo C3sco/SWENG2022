@@ -1,6 +1,11 @@
 package com.swengfinal.project.server;
 
 
+import com.swengfinal.project.client.Alert;
+import com.swengfinal.project.shared.Amministratore;
+import com.swengfinal.project.shared.Docente;
+import com.swengfinal.project.shared.Segreteria;
+import com.swengfinal.project.shared.Studente;
 import com.swengfinal.project.shared.Utente;
 
 import org.mapdb.BTreeMap;
@@ -16,7 +21,7 @@ import java.util.Map.Entry;
 
 public class dbUtenti {
 	private static DB getDB() {
-		DB db = DBMaker.newFileDB(new File("dbFinalUsers")).make();
+		DB db = DBMaker.newFileDB(new File("dbUsers")).make();
 		return db;
 	}
 	
@@ -31,19 +36,78 @@ public class dbUtenti {
 		} return find;
 	}
 	
-	public static String registrazione(ArrayList<String> dati) {
+	public static String registrazioneStudente(ArrayList<String> dati) {
 		DB db = getDB();
 		BTreeMap<String,Utente> Users;
 		
 		if(!checkMail(dati.get(0))) {
 			Users = db.getTreeMap("UtentiMap");
 			
-			Utente user = new Utente(dati.get(0),dati.get(1),dati.get(2),dati.get(3),
+			Studente user = new Studente(dati.get(0),dati.get(1),dati.get(2),dati.get(3),
 						dati.get(4),
 						dati.get(5),
-						dati.get(6),
-						dati.get(7),
-						dati.get(8));
+						dati.get(6));
+			
+			
+			Users.put(user.getEmail(),user);
+			db.commit();
+			db.close();
+			//Alert gg = new Alert("Utente registrato con mail: " + user.getEmail() + " e password: " + user.getPw());
+			return "Registrazione completata";
+		}
+		else return "Errore";
+	}
+	
+	public static String registrazioneDocente(ArrayList<String> dati) {
+		DB db = getDB();
+		BTreeMap<String,Utente> Users;
+		
+		if(!checkMail(dati.get(0))) {
+			Users = db.getTreeMap("UtentiMap");
+			
+			Docente user = new Docente(dati.get(0),dati.get(1),dati.get(2),dati.get(3),
+						dati.get(4),
+						dati.get(5));
+			
+			Users.put(user.getEmail(),user);
+			db.commit();
+			db.close();
+			//Alert gg = new Alert("Utente registrato con mail: " + user.getEmail() + " e password: " + user.getPw());
+			return "Registrazione completata";
+		}
+		else return "Errore";
+	}
+	
+	public static String registrazioneAdmin(ArrayList<String> dati) {
+		DB db = getDB();
+		BTreeMap<String,Utente> Users;
+		
+		if(!checkMail(dati.get(0))) {
+			Users = db.getTreeMap("UtentiMap");
+			
+			Amministratore user = new Amministratore(dati.get(0),dati.get(1),dati.get(2),dati.get(3),
+						dati.get(4),
+						dati.get(5));
+			
+			Users.put(user.getEmail(),user);
+			db.commit();
+			db.close();
+			//Alert gg = new Alert("Utente registrato con mail: " + user.getEmail() + " e password: " + user.getPw());
+			return "Registrazione completata";
+		}
+		else return "Errore";
+	}
+	
+	public static String registrazioneSegreteria(ArrayList<String> dati) {
+		DB db = getDB();
+		BTreeMap<String, Utente> Users;
+		
+		if(!checkMail(dati.get(0))) {
+			Users = db.getTreeMap("UtentiMap");
+			
+			Segreteria user = new Segreteria(dati.get(0),dati.get(1),dati.get(2),dati.get(3),
+						dati.get(4),
+						dati.get(5));
 			
 			Users.put(user.getEmail(),user);
 			db.commit();
@@ -93,10 +157,10 @@ public class dbUtenti {
 
 		Utente user = Users.get(email);
 
-		String all = "Email :" + user.getEmail() + "\nPassword : " + user.getPw() + "\nUsername : " + user.getNomeUtente() + 
-				"\nMatricola : " + user.getMatricola() + "\nNome : " + user.getNome() + "\nCognome : " + user.getCognome()
+		String all = "Email :" + user.getEmail() + "\nPassword : " + user.getPw() + "\nUsername : " + 
+				"\nMatricola : " + "\nNome : " + user.getNome() + "\nCognome : " + user.getCognome()
 				 + "\nData Nascita : " + user.getDataNascita()
-				+ "\nLuogo Nascita : " + user.getLuogoNascita() + "\nTipologia" + user.getTipologia();
+				+ "\nLuogo Nascita : " + user.getLuogoNascita() + "\nTipologia";
 		return all;
 	}
 	

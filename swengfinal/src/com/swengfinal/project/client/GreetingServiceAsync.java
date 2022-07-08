@@ -16,7 +16,13 @@ public interface GreetingServiceAsync {
 	/**
 	 * Metodi dell'utente 
 	 */
-	void registrazione(ArrayList<String> dati, AsyncCallback<String> callback) throws IllegalArgumentException;
+	void registrazioneStudente(ArrayList<String> dati, AsyncCallback<String> callback) throws IllegalArgumentException;
+	
+	void registrazioneSegreteria(ArrayList<String> dati, AsyncCallback<String> callback) throws IllegalArgumentException;
+	
+	void registrazioneAdmin(ArrayList<String> dati, AsyncCallback<String> callback) throws IllegalArgumentException;
+	
+	void registrazioneDocente(ArrayList<String> dati, AsyncCallback<String> callback) throws IllegalArgumentException;
 	
 	void login(String username, String password, AsyncCallback<Utente> callback) throws IllegalArgumentException;
 	

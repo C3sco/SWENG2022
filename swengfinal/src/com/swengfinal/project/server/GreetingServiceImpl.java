@@ -23,8 +23,23 @@ import java.util.ArrayList;
 public class GreetingServiceImpl extends RemoteServiceServlet implements GreetingService {
 
 	@Override
-	public String registrazione(ArrayList<String> dati) throws IllegalArgumentException {
-		return dbUtenti.registrazione(dati);
+	public String registrazioneStudente(ArrayList<String> dati) throws IllegalArgumentException {
+		return dbUtenti.registrazioneStudente(dati);
+	}
+	
+	@Override
+	public String registrazioneDocente(ArrayList<String> dati) throws IllegalArgumentException {
+		return dbUtenti.registrazioneDocente(dati);
+	}
+	
+	@Override
+	public String registrazioneSegreteria(ArrayList<String> dati) throws IllegalArgumentException {
+		return dbUtenti.registrazioneSegreteria(dati);
+	}
+	
+	@Override
+	public String registrazioneAdmin(ArrayList<String> dati) throws IllegalArgumentException {
+		return dbUtenti.registrazioneAdmin(dati);
 	}
 	
 	@Override

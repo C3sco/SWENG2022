@@ -8,12 +8,16 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+import com.swengfinal.project.shared.Amministratore;
+import com.swengfinal.project.shared.Docente;
+import com.swengfinal.project.shared.Studente;
 import com.swengfinal.project.shared.Utente;
 
 public class Login extends Composite {
@@ -103,11 +107,12 @@ public class Login extends Composite {
 			
 			
 			RootPanel.get("container").clear();
-			if(user.getTipologia()=="Studente") {
+			if(user instanceof Studente) {
 				RootPanel.get("container").add(new HomePageUtente());
-			}else if(user.getTipologia()=="Docente") {
+				
+			}else if(user instanceof Docente) {
 				RootPanel.get("container").add(new HomePageDocente());
-			}else if(user.getTipologia()=="Amministratore") {
+			}else if(user instanceof Amministratore) {
 				RootPanel.get("container").add(new HomePageAdmin());
 			}
 			

@@ -24,14 +24,14 @@ public class TabellaDocenti extends Composite {
 	public TabellaDocenti() {
 		initWidget(uiBinder.createAndBindUi(this));
 		
-		cellTableDocenti.getElement().getStyle().setFontSize(24.0, Unit.PX);
+		/*cellTableDocenti.getElement().getStyle().setFontSize(24.0, Unit.PX);
 		cellTableDocenti.getElement().getStyle().setMarginTop(15.0, Unit.PX);
 		cellTableDocenti.getElement().getStyle().setMarginLeft(70.0, Unit.PX);
 		
-		addTable();
+		addTable();*/
 	}
 	
-	private static final java.util.List<Utente> docenti=Arrays.asList(
+	/*private static final java.util.List<Utente> docenti=Arrays.asList(
 			new Utente("Martin","Martin", "Martin", "Martin", "Martin", "Martin", "Martin", "Martin", "Martin" )
 		);
 
@@ -113,6 +113,6 @@ public class TabellaDocenti extends Composite {
 		 
 		}
 		@UiField
-		CellTable cellTableDocenti;
+		CellTable cellTableDocenti;*/
 	
 	}

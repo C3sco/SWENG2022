@@ -24,15 +24,15 @@ public class TabellaUtenti extends Composite {
 	public TabellaUtenti() {
 		initWidget(uiBinder.createAndBindUi(this));
 		
-		cellTableUtenti.getElement().getStyle().setFontSize(24.0, Unit.PX);
+		/*cellTableUtenti.getElement().getStyle().setFontSize(24.0, Unit.PX);
 		cellTableUtenti.getElement().getStyle().setMarginTop(15.0, Unit.PX);
 		cellTableUtenti.getElement().getStyle().setMarginLeft(50.0, Unit.PX);
 		
-		addTable();
+		addTable();*/
 	}
 	
 	
-	private static final java.util.List<Utente> studenti=Arrays.asList(
+	/*private static final java.util.List<Utente> studenti=Arrays.asList(
 				new Utente("Martin","Martin", "Martin", "Martin", "Martin", "Martin", "Martin", "Martin", "Martin" )
 			);
 	
@@ -123,6 +123,6 @@ public class TabellaUtenti extends Composite {
 		 
 	}
 	@UiField
-	CellTable cellTableUtenti;
+	CellTable cellTableUtenti;*/
 
 }

@@ -10,9 +10,9 @@ public class Amministratore extends Utente implements Serializable  {
 		
 	}
 
-	public Amministratore(String email, String password, String nomeUtente, String matricola, String nome,
-			String cognome, String luogoNascita, String dataNascita, String tipologia) {
-		super(email, password, nomeUtente, matricola, nome, cognome, luogoNascita, dataNascita,tipologia);
+	public Amministratore(String email, String password, String nome,
+			String cognome, String luogoNascita, String dataNascita) {
+		super(email, password,  nome, cognome, luogoNascita, dataNascita);
 	}
 
 }

@@ -46,10 +46,10 @@ public class Registrazione extends Composite {
 
 		
 		initWidget(uiBinder.createAndBindUi(this));
-		listTipologia.addItem("Studente");
-		listTipologia.addItem("Docente");
-		listTipologia.addItem("Segreteria");
-		listTipologia.addItem("Amministratore");
+		menu.addItem("Studente");
+		menu.addItem("Docente");
+		menu.addItem("Segreteria");
+		menu.addItem("Amministratore");
 		
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -65,19 +65,22 @@ public class Registrazione extends Composite {
 		btnRegistrazione.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnRegistrazione.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnRegistrazione.getElement().getStyle().setMarginLeft(10.0, Unit.PX);
-		txtMail.getElement().getStyle().setMarginLeft(10.0, Unit.PX);
-		txtPassword.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
-		txtNomeUtente.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
-		txtMatricola.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
-		txtNome.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
-		txtCognome.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
-		txtLuogoNascita.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
-		txtDataNascita.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
-		listTipologia.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
-		btnSubmit.getElement().getStyle().setHeight(40.0, Unit.PX);
-		btnSubmit.getElement().getStyle().setWidth(70.0, Unit.PX);
+		
 	}
-
+	
+	@UiHandler("menu")
+	 void doClickType(ClickEvent event) {
+		if(menu.getSelectedValue().equals("Studente")) {
+			RootPanel.get("form").clear();
+			RootPanel.get("form").add(new FormStudente());
+		}
+		else {
+			RootPanel.get("form").clear();
+			RootPanel.get("form").add(new FormOtherUser(menu.getSelectedValue()));
+		}
+		
+	}
+	
 	@UiHandler("btnLogin")
 	   void doClickSubmit(ClickEvent event) {
 			RootPanel.get("container").clear();
@@ -107,49 +110,7 @@ public class Registrazione extends Composite {
 			RootPanel.get("container").add(new Registrazione());
 	   }
 	
-	@UiHandler("btnSubmit")
-	void doClickSubmit2(ClickEvent event) {
-		
-		
-		ArrayList<String> datiUtenti = new ArrayList<String>();
-		datiUtenti.add(txtMail.getText());
-		datiUtenti.add(txtPassword.getText());
-		datiUtenti.add(txtNomeUtente.getText());
-		datiUtenti.add(txtMatricola.getText());
-		datiUtenti.add(txtNome.getText());
-		datiUtenti.add(txtCognome.getText());
-		datiUtenti.add(txtLuogoNascita.getText());
-		datiUtenti.add(txtDataNascita.getText());
-		datiUtenti.add(listTipologia.getSelectedItemText());
-
-		
-		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-		
-		
-		greetingService.registrazione(datiUtenti, new AsyncCallback<String>() {
-			
-			public void onFailure(Throwable c) {
-				Alert a = new Alert("Errore!");
-				System.out.println(a);
-			}
-			
-			@Override
-			public void onSuccess(String result) {
-				if(result.equals("Registrazione completata")) {
-					RootPanel.get("container").clear();
-					//Account.email = txtMail.getText();
-					//Account.tipoAccount = 1;
-				
-					RootPanel.get("container").add(new Login());
-				}else {
-					Alert a = new Alert("Errore!");
-					System.out.println(a);
-				} 	
-				
-			}
-		});
-			
-	}
+	
 	
 	@UiField
 	Button btnLogin;
@@ -167,34 +128,7 @@ public class Registrazione extends Composite {
 	Button btnRegistrazione;
 	
 	@UiField
-	TextBox txtMail;
-	
-	@UiField
-	TextBox txtPassword;
-	
-	@UiField
-	TextBox txtNomeUtente;
-	
-	@UiField
-	TextBox txtMatricola;
-	
-	@UiField
-	TextBox txtNome;
-	
-	@UiField
-	TextBox txtCognome;
-	
-	@UiField
-	TextBox txtLuogoNascita;
-	
-	@UiField
-	TextBox txtDataNascita;
-	
-	@UiField
-	ListBox listTipologia;
-	
-	@UiField
-	Button btnSubmit;
+	ListBox menu;
 }
 
 
