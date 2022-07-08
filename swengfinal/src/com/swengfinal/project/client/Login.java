@@ -108,6 +108,7 @@ public class Login extends Composite {
 			
 			RootPanel.get("container").clear();
 			if(user instanceof Studente) {
+				Account.matricola=((Studente) user).getMatricola();
 				RootPanel.get("container").add(new HomePageUtente());
 				
 			}else if(user instanceof Docente) {

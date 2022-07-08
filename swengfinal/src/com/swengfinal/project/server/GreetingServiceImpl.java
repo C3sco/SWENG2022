@@ -5,6 +5,7 @@ import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.Esame;
 import com.swengfinal.project.shared.FieldVerifier;
 import com.swengfinal.project.shared.Utente;
+import com.swengfinal.project.shared.Voto;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 @SuppressWarnings("serial")
 public class GreetingServiceImpl extends RemoteServiceServlet implements GreetingService {
 
+	// metodi utenti
 	@Override
 	public String registrazioneStudente(ArrayList<String> dati) throws IllegalArgumentException {
 		return dbUtenti.registrazioneStudente(dati);
@@ -125,6 +127,13 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	public String deleteEsame(int idCorso) throws IllegalArgumentException
 	{
 		return dbEsame.deleteEsame(idCorso);
+	}
+	
+	//metodo invio voto
+	
+	@Override
+	public String addVoto(ArrayList<String> dati ) throws IllegalArgumentException {
+		return dbVoto.addVoto(dati);
 	}
 	
 }

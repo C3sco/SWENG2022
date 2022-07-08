@@ -17,7 +17,7 @@
 		}
 		
 		#invioEsame{
-			margin-left: 13.1vw;
+			margin-left: 2vw;
 		}
 		
 		#voto{
@@ -62,8 +62,6 @@
 	    </ul>
 	    <div id="invioVoti">
 	      <div class="form-group" id="group">
-	      	<label for="exampleInputEmail1">Corso</label>
-		    <gwt:ListBox ui:field="menuCorsi"></gwt:ListBox>
 		    <label for="exampleInputEmail1" id="invioEsame">Esame</label>
 		    <gwt:ListBox ui:field="menuEsame"></gwt:ListBox>
 		  </div>

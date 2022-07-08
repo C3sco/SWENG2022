@@ -8,11 +8,13 @@ public class Voto implements Serializable{
 	
 	private String nomeEsame;
 	private String matricola;
-	private int voto;
+	private String voto;
+	private Integer idVoto;
 	
 	public Voto() {}
 	
-	public Voto(String nomeEsame, String matricola, int voto) {
+	public Voto(Integer idVoto, String nomeEsame, String matricola, String voto) {
+		this.idVoto=idVoto;
 		this.nomeEsame=nomeEsame;
 		this.matricola=matricola;
 		this.voto=voto;
@@ -34,11 +36,19 @@ public class Voto implements Serializable{
 		this.nomeEsame = nomeEsame;
 	}
 	
-	public int getVoto() {
+	public String getVoto() {
 		return voto;
 	}
 	
-	public void setVoto(int voto) {
+	public void setVoto(String voto) {
 		this.voto = voto;
+	}
+	
+	public Integer getIdVoto() {
+		return idVoto;
+	}
+	
+	public void setIdVoto(Integer idVoto) {
+		this.idVoto = idVoto;
 	}
 }

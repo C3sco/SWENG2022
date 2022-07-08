@@ -6,6 +6,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.Esame;
 import com.swengfinal.project.shared.Utente;
+import com.swengfinal.project.shared.Voto;
 
 /**
  * The async counterpart of <code>GreetingService</code>.
@@ -59,6 +60,12 @@ public interface GreetingServiceAsync {
 	void getEsameStudente(String email, AsyncCallback<ArrayList<String>> callback) throws IllegalArgumentException;
 	
 	void deleteEsame(int idCorso, AsyncCallback<String>callback) throws IllegalArgumentException;
+	
 	void  getCorsi(AsyncCallback<ArrayList<Corso>> callback) throws IllegalArgumentException;
+	
+	/**
+	 * Metodi esame
+	 */
+	void addVoto(ArrayList<String> dati, AsyncCallback<String>callback) throws IllegalArgumentException;
 	
 }

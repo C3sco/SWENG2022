@@ -1,5 +1,7 @@
 package com.swengfinal.project.client;
 
+import java.util.ArrayList;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -7,12 +9,15 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+import com.swengfinal.project.shared.Corso;
+import com.swengfinal.project.shared.Esame;
 
 public class PageVotiDocente extends Composite {
 
@@ -39,11 +44,41 @@ public class PageVotiDocente extends Composite {
 		btnLogout.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnLogout.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnLogout.getElement().getStyle().setMarginLeft(800.0, Unit.PX);
-		menuCorsi.getElement().getStyle().setMarginLeft(45.0, Unit.PX);
 		menuEsame.getElement().getStyle().setMarginLeft(30.0, Unit.PX);
 		txtVoto.getElement().getStyle().setMarginLeft(30.0, Unit.PX);
 		txtMatricola.getElement().getStyle().setMarginLeft(26.0, Unit.PX);
 		btnInvioVoto.getElement().getStyle().setMargin(10, Unit.PX);
+		
+		fillistbox();
+	}
+	
+	void fillistbox()
+	{
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getAllEsame(Account.email, new AsyncCallback<ArrayList<Esame>>() {
+				public void onFailure(Throwable caught) {
+					Alert a = new Alert("Errore prendere corso");
+					System.out.println(a);
+
+
+				}
+				
+				@Override
+				public void onSuccess(ArrayList<Esame> esami) {
+					for(int i=0;i<esami.size();i++)
+					{
+						menuEsame.addItem(esami.get(i).getNomeEsame());
+					}
+					
+
+				}
+
+					
+			});
+		}catch(Error e){
+			};
 	}
 	
 	@UiHandler("btnHome")
@@ -76,6 +111,47 @@ public class PageVotiDocente extends Composite {
 			RootPanel.get("container").add(new HomePage());
 	}
 	
+	@UiHandler("btnInvioVoto")
+	void doClickSendVoto(ClickEvent event) {
+			RootPanel.get("container").clear();
+			RootPanel.get("container").add(new HomePage());
+			
+			ArrayList<String>dati = new ArrayList<String>();
+			dati.add(0, menuEsame.getSelectedValue());
+			dati.add(1, txtMatricola.getText());
+			dati.add(2, txtVoto.getText());
+			
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+			
+			greetingService.addVoto(dati, new AsyncCallback<String>() {
+				
+				public void onFailure(Throwable c) {
+					Alert a = new Alert("Errore:" + c);
+					System.out.println(a);
+					RootPanel.get("container").clear();
+					RootPanel.get("container").add(new HomePageDocente());
+				}
+				
+				@Override
+				public void onSuccess(String result) {
+					if(result.equals("Successo")) {
+						
+						Alert a = new Alert("Voto inviato alla segreteria!");
+					 	System.out.println(a);
+					 	RootPanel.get("container").clear();
+						RootPanel.get("container").add(new PageVotiDocente());
+					}else if(result.equals("Errore")){
+						RootPanel.get("container").clear();
+						Alert a = new Alert("Esame gia sostenuto, voto esistente");
+						System.out.println(a);
+						RootPanel.get("container").add(new PageVotiDocente());
+					}   	
+					
+				}  
+			});
+			
+	}
+	
 	@UiField
 	Button btnCorso;
 	
@@ -93,9 +169,6 @@ public class PageVotiDocente extends Composite {
 	
 	@UiField
 	Button btnInvioVoto;
-	
-	@UiField
-	ListBox menuCorsi;
 	
 	@UiField
 	ListBox menuEsame;
