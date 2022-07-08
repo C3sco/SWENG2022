@@ -12,13 +12,22 @@
 		}
 		
 		li {
-		  float: left;
-		  
+			float: left;
 		}
 		
 		
-		li a:hover:not(.active) {
-		  background-color: #111;
+		li a {
+			display: block;
+			color: black;
+			text-align: center;
+			padding: 18px 20px;
+			text-decoration: none;
+			font-family: 'Poppins', sans-serif;
+		}
+		
+		
+		li a:hover::after{
+		  background-color: black;
 		}
 		
 		#Sedi{
@@ -29,6 +38,7 @@
 	</ui:style>
 	
 	<g:HTMLPanel>
+
 		<ul id="navbar">
 	       <li  id="Home">
 	       	<gwt:Button ui:field = "btnHome" text="Home"

@@ -40,5 +40,13 @@
 	    <gwt:ListBox ui:field="menuTipo"></gwt:ListBox>
 	    <div id="infoUser">
 	    </div>
+	    
+	    <c:CellTable ui:field='cellTable'>
+		</c:CellTable>
+		
+		 <c:CellTable ui:field='cellTableDocenti'>
+		</c:CellTable>
+		
+		
 	</g:HTMLPanel>
 </ui:UiBinder> 

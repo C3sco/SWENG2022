@@ -17,37 +17,65 @@
 		}
 		
 		#creazioneEsame{
-			width: 50vw;
-			margin-top: 10vh;
-			margin-bottom: 5vh;
-			margin-left: 30vw;
-			border: 1px solid black;
+			
+			display: grid;
+			background-color: lightblue;
+    		padding: 10px;
+    		row-gap: 20px;
+    		text-align: center;
+
+    		border-top-left-radius:     20px;
+			border-top-right-radius:    20px;
+			border-bottom-right-radius: 20px;
+			border-bottom-left-radius:  20px;
 	
 		}
 		
 		#modificaEsame{
-			width: 50vw;
-			margin-top: 10vh;
-			margin-bottom: 10vh;
-			margin-left: 30vw;
-			border: 1px solid black;
+			
+			display: grid;
+			background-color: lightblue;
+    		padding: 10px;
+    		row-gap: 20px;
+    		text-align: center;
+
+    		border-top-left-radius:     20px;
+			border-top-right-radius:    20px;
+			border-bottom-right-radius: 20px;
+			border-bottom-left-radius:  20px;
 	
 		}
-		
-		#dataEsame{
-			margin-left: 14vw;
+		#a1{
+			grid-row: 1;
+			grid-column: 1;
+		}
+		#a2{
+			grid-row: 1;
+			grid-column: 2;
+		}
+
+		#a3{
+			grid-row: 1;
+			grid-column: 3;
+		}
+		#a4{
+			grid-row: 2;
+			grid-column: 1;
+		}
+
+		#a5{
+			grid-row: 2;
+			grid-column: 2;
 		}
 		
-		#esame{
-			margin-left:14.5vw;
-		}
 		
-		#aula,#cfu,#updateOra{
-			margin-left: 3vw;
+		#button1{
+			grid-row:3;
+			grid-column:1;
 		}
-		
-		#group{
-			margin:10px;
+		#button2{
+			grid-row:3;
+			grid-column:2;
 		}
 		
 		
@@ -76,47 +104,78 @@
 	       </li>
 	    </ul>
 	    <h1>Creazione Esame</h1>
+	    
 	    <div id="creazioneEsame">
-	      <div class="form-group" id="group">
+	    
+	      <div class="form-group" id="a1">
 	      	<label for="exampleInputEmail1">Corso</label>
 		    <gwt:ListBox ui:field="menuCorsi"></gwt:ListBox>
+		    </div>
+		    
+		    <div id="a2">
 		    <label for="exampleInputEmail1" id="dataEsame">Data</label>
 		    <gwt:TextBox ui:field="txtData"></gwt:TextBox>
 		  </div>
-		  <div class="form-group" id="group">
+		  
+		  <div class="form-group" id="a3">
 		    <label for="exampleInputPassword1">Cfu</label>
 		    <gwt:TextBox ui:field="txtCfu"></gwt:TextBox>
+		    </div>
+		    
+		    <div id="a4">
 		    <label for="exampleInputPassword1" id="aula">Aula</label>
 		    <gwt:TextBox ui:field="txtAula"></gwt:TextBox>
-		  </div>
-		  <div class="form-group" id="group">
+		    </div>
+		  
+		  <div class="form-group" id="a5">
 		   <label for="exampleInputPassword1" id="ora">Ora</label>
 		    <gwt:TextBox ui:field="txtOra"></gwt:TextBox><br></br>
 		  </div>
+		  
+		  <div id="button1">
 		  <gwt:Button ui:field="btnCreazione" text="Creazione Esame"></gwt:Button>
+		  </div>
+		  
 	    </div>
+	    
 	    <h1>Modifica/Cancellazione Esame</h1>
+	    
 	    <div id="modificaEsame">
-	      <div class="form-group" id="group">
+	    
+	      <div class="form-group" id="a1">
 		    <label for="exampleInputEmail1">Corso</label>
 		    <gwt:ListBox ui:field="menuUpdateCorsi"></gwt:ListBox>
-		   
-		    
 		  </div>
-		  <div class="form-group" id="group">
+		  
+		  <div class="form-group" id="a2">
 		    <label for="exampleInputPassword1">Data</label>
 		    <gwt:TextBox ui:field="txtUpdateData"></gwt:TextBox>
+		    </div>
+		    
+		    <div id="a3">
 		    <label for="exampleInputPassword1" id="cfu">Cfu</label>
 		    <gwt:TextBox ui:field="txtUpdateCfu"></gwt:TextBox>
 		  </div>
-		  <div class="form-group" id="group">
+		  
+		  <div class="form-group" id="a4">
 		    <label for="exampleInputPassword1">Aula</label>
 		    <gwt:TextBox ui:field="txtUpdateAula"></gwt:TextBox>
+		    </div>
+		    
+		    <div id="a5">
 		    <label for="exampleInputPassword1" id="updateOra">Ora</label>
 		    <gwt:TextBox ui:field="txtUpdateOra"></gwt:TextBox>
 		  </div>
+		  
+		  <div id="button1">
 		  <gwt:Button ui:field="btnUpdate" text="Modifica Esame"></gwt:Button>
+		  </div>
+		  
+		  <div id="button2">
 		   <gwt:Button ui:field="btnCancellazione" text="Cancellazione Esame"></gwt:Button>
+		   </div>
+		  
+		   
 	    </div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

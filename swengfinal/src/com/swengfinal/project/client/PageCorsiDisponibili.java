@@ -188,6 +188,8 @@ public class PageCorsiDisponibili extends Composite{
 				id = corsiFinal.get(i).getIdCorso();
 			}
 		}
+		Alert nice = new Alert("Id:" + id + txtNomeCorso.getSelectedValue());
+		System.out.println(nice);
 		greetingService.iscrizioneCorso(Account.email, id , new AsyncCallback<String>() {
 			public void onFailure(Throwable caught) {
 
@@ -197,6 +199,9 @@ public class PageCorsiDisponibili extends Composite{
 				if(result=="Successo") {
 					Alert nice = new Alert("Successo!");
 					System.out.println(nice);
+				}else if(result=="Errore") {
+					Alert e = new Alert("Sei già iscritto a questo esame!");
+					System.out.println(e);
 				}
 			}
 	

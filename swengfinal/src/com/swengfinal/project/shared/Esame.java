@@ -16,7 +16,7 @@ public class Esame implements Serializable{
 	private  String cfu;
 	private  String nomeEsame;
 	private  String emailDocente;
-	private List<String> listaUtenti; 
+	private ArrayList<String> listaUtenti; 
 	
 	public Esame() {
 	}
@@ -35,7 +35,7 @@ public class Esame implements Serializable{
 		listaUtenti = new ArrayList<>();
 	}
 	
-	public List<String> getListaUtenti() {
+	public ArrayList<String> getListaUtenti() {
 		return listaUtenti;
 	}
 	
