@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.Utente;
 
 public class HomePageUtente extends Composite {
@@ -28,8 +29,12 @@ public class HomePageUtente extends Composite {
 	interface HomePageUtenteUiBinder extends UiBinder<Widget, HomePageUtente> {
 	}
 
+	private static final ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
+	
 	public HomePageUtente() {
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		getCorsi();
 		
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -46,6 +51,16 @@ public class HomePageUtente extends Composite {
 		btnLogout.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnLogout.getElement().getStyle().setMarginLeft(820.0, Unit.PX);
 		
+		getUtente();
+		getCorsiStudente();
+		
+
+			
+			
+			
+	}
+	
+	public void getUtente() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
@@ -66,21 +81,28 @@ public class HomePageUtente extends Composite {
 			});
 		}catch(Error e){
 			};
-			
+	}
+	
+	public void getCorsiStudente() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-			greetingService.getCorsoStudente(Account.email, new AsyncCallback<ArrayList<String>>() {
+			greetingService.getCorsoStudente(Account.email, new AsyncCallback<ArrayList<Integer>>() {
 				public void onFailure(Throwable caught) {
 					Window.alert("ERRORE!");
 
 				}
 				
 				@Override
-				public void onSuccess(ArrayList<String> output) {
+				public void onSuccess(ArrayList<Integer> output) {
 					String test = "";
 					for(int i=0; i<output.size();i++) {
-						test+= output.get(i) + " ";
+						for(int a=0; a<corsiFinal.size(); a++) {
+							if(output.get(i)==corsiFinal.get(i).getIdCorso()) {
+								test+= corsiFinal.get(i).getNomeCorso() + " ";
+							}
+						}
 					}
+					
 					lblCorsi.setText(test);
 				}
 				
@@ -88,14 +110,30 @@ public class HomePageUtente extends Composite {
 		}catch(Error e) {
 			
 		}
-
-			
-			
-			
 	}
 	
 	
-	
+	public void getCorsi() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getCorsi(new AsyncCallback<ArrayList<Corso>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Corso> corsi) {
+					
+					for(int i=0;i<corsi.size();i++) {
+						corsiFinal.add(corsi.get(i));
+						
+					}
+				}
+			});
+		}catch(Error e){
+			};
+	}
 
 	@UiHandler("btnHome")
 	   void doClickSubmit(ClickEvent event) {

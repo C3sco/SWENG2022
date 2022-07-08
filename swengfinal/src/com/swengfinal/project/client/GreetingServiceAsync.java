@@ -42,7 +42,7 @@ public interface GreetingServiceAsync {
 	
 	void getAllCorso(String email, AsyncCallback<ArrayList<Corso>>callback) throws IllegalArgumentException;
 
-	void getCorsoStudente(String email, AsyncCallback<ArrayList<String>> callback) throws IllegalArgumentException;
+	void getCorsoStudente(String email, AsyncCallback<ArrayList<Integer>> callback) throws IllegalArgumentException;
 	
 	void deleteCorso(String nomeCorso, AsyncCallback<String>callback) throws IllegalArgumentException;
 	

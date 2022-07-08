@@ -73,12 +73,12 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	
 	@Override
 	public String iscrizioneCorso(String email, int idCorso) throws IllegalArgumentException {
-		return dbCorso.iscrizioneCorso(email, idCorso);
+		return dbIscrizioneCorso.iscrizioneCorso(email, idCorso);
 	}
 	
 	@Override
-	public ArrayList<String> getCorsoStudente(String email) throws IllegalArgumentException {
-		return dbCorso.getCorsoStudente(email);
+	public ArrayList<Integer> getCorsoStudente(String email) throws IllegalArgumentException {
+		return dbIscrizioneCorso.getCorsoStudente(email);
 	}
 	
 	@Override

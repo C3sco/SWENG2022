@@ -74,23 +74,7 @@ public class dbCorso {
 		
 	
 	/*  */
-	public static String iscrizioneCorso(String email, int idCorso) { 
-		DB db = getDB();
-		BTreeMap<Integer, Corso> corsi = db.getTreeMap("CorsiMap");
-		
-		Corso corso = corsi.get(idCorso);
-		boolean found = false;
-		
-		for(int i = 0; i < corso.getListaUtenti().size(); i++) {	
-			if(corso.getListaUtenti().get(i).equals(email)) {
-				found = true;
-			}
-		}
-		if(!found) {
-			corso.getListaUtenti().add(email);  // Aggiunta mail studente al relativo corso
-			return "Successo";
-		}else return "Errore";
-	}
+	
 	
 	public static String modificaCorso(ArrayList<String> dati, String nomeCorso) {
 		DB db = getDB();
@@ -137,21 +121,7 @@ public class dbCorso {
 		return "Successo";
 	}
 
-	public static ArrayList<String> getCorsoStudente(String email){
-		
-		DB db = getDB();
-		BTreeMap<Integer, Corso> corsi = db.getTreeMap("CorsiMap");
-		ArrayList<String> corsiOutput = new ArrayList<String>();
-		
-		for(Entry<Integer, Corso> test : corsi.entrySet()) {
-			for(int i=0;i<test.getValue().getListaUtenti().size();i++) {
-				if(email==test.getValue().getListaUtenti().get(i)) {
-					corsiOutput.add(test.getValue().getNomeCorso());
-				}
-			}
-		}
-		return corsiOutput;
-	}
+	
 	
 	
 	public static ArrayList<Corso> getAllCorso(String email)
