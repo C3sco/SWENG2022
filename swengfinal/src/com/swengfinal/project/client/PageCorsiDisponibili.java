@@ -104,9 +104,7 @@ public class PageCorsiDisponibili extends Composite{
 	
 	public void newTable() {
 
-		cellTable.setRowCount(corsiFinal.size(), true);
-		 
-		cellTable.setRowData(0, corsiFinal);
+		
 
 		
 		TextColumn<Corso> nameColumn=new TextColumn<Corso>() {
@@ -141,6 +139,10 @@ public class PageCorsiDisponibili extends Composite{
 			}
 		};
 		cellTable.addColumn(dataFineColumn, "Data Fine");
+		
+		cellTable.setRowCount(corsiFinal.size(), true);
+		 
+		cellTable.setRowData(0, corsiFinal);
 		
 		
 		 
@@ -188,8 +190,8 @@ public class PageCorsiDisponibili extends Composite{
 				id = corsiFinal.get(i).getIdCorso();
 			}
 		}
-		Alert nice = new Alert("Id:" + id + txtNomeCorso.getSelectedValue());
-		System.out.println(nice);
+		/*Alert nice = new Alert("Id:" + id + txtNomeCorso.getSelectedValue());
+		System.out.println(nice);*/
 		greetingService.iscrizioneCorso(Account.email, id , new AsyncCallback<String>() {
 			public void onFailure(Throwable caught) {
 

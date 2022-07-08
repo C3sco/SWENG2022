@@ -32,13 +32,13 @@ public class dbVoto {
 					voti.size(),
 					dati.get(0), 				   // nomeEsame
 					dati.get(1),                   // matricola
-					dati.get(2)                  // voto
-					);
+					dati.get(2),                  // voto
+					false);
 			
 			//Alert ab = new Alert("2!");
 			//System.out.println(ab);
 			for(int i = 0; i < voti.size(); i++) {	
-				String mat=(voti.get(i).getMatricola()).toString();
+				String mat=(voti.get(i).getMatricola());
 				/*if(mat.equals(voto.getMatricola())) {
 					if(voti.get(i).getNomeEsame().equals(voto.getNomeEsame())) {
 						found=true;

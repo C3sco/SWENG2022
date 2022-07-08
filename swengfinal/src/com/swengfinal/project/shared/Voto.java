@@ -10,14 +10,16 @@ public class Voto implements Serializable{
 	private String matricola;
 	private String voto;
 	private Integer idVoto;
+	private boolean pubblicato;
 	
 	public Voto() {}
 	
-	public Voto(Integer idVoto, String nomeEsame, String matricola, String voto) {
+	public Voto(Integer idVoto, String nomeEsame, String matricola, String voto, boolean pubblicato) {
 		this.idVoto=idVoto;
 		this.nomeEsame=nomeEsame;
 		this.matricola=matricola;
 		this.voto=voto;
+		this.pubblicato=pubblicato;
 	}
 	
 	public String getMatricola() {
@@ -50,5 +52,13 @@ public class Voto implements Serializable{
 	
 	public void setIdVoto(Integer idVoto) {
 		this.idVoto = idVoto;
+	}
+	
+	public boolean getPubblicato() {
+		return pubblicato;
+	}
+	
+	public void setPubblicato(boolean pubblicato) {
+		this.pubblicato = pubblicato;
 	}
 }
