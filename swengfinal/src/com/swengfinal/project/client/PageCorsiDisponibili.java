@@ -103,9 +103,6 @@ public class PageCorsiDisponibili extends Composite{
 	}
 	
 	public void newTable() {
-
-		
-
 		
 		TextColumn<Corso> nameColumn=new TextColumn<Corso>() {
 			@Override

@@ -32,9 +32,13 @@ public class dbIscrizioneCorso {
 			}
 		}
 		if(!found) {
-			iscrizioni.put(iscrizione.getIdCorso(), iscrizione); // Aggiunta mail studente al relativo corso
+			iscrizioni.put(idCorso, iscrizione); // Aggiunta mail studente al relativo corso
+			db.commit();
 			return "Successo";
-		}else return "Errore";
+			
+		}else 
+		db.commit();
+		return "Errore";
 	}
 	
 	public static ArrayList<Integer> getCorsoStudente(String email){

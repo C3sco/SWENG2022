@@ -1,6 +1,7 @@
 package com.swengfinal.project.client;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
@@ -24,6 +25,7 @@ import com.swengfinal.project.shared.Utente;
 public class HomePageUtente extends Composite {
 
 	private static HomePageUtenteUiBinder uiBinder = GWT.create(HomePageUtenteUiBinder.class);
+	private static final ArrayList<Corso> corsiNomi = new ArrayList<Corso>();
 
 	@UiTemplate("HomePageUtente.ui.xml")
 	interface HomePageUtenteUiBinder extends UiBinder<Widget, HomePageUtente> {
@@ -33,8 +35,10 @@ public class HomePageUtente extends Composite {
 	
 	public HomePageUtente() {
 		initWidget(uiBinder.createAndBindUi(this));
+		getUtente();
+		getCorsi();
+		getCorsoStudente();
 		
-		//getCorsi();
 		
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -50,14 +54,37 @@ public class HomePageUtente extends Composite {
 		btnLogout.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnLogout.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnLogout.getElement().getStyle().setMarginLeft(820.0, Unit.PX);
-		getCorsoStudente();
-		getUtente();
+
+		
+		
 		//getCorsiStudente();
 		
 
 			
 			
 			
+	}
+	
+	public void getCorsi() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getCorsi(new AsyncCallback<ArrayList<Corso>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Corso> corsi) {
+					corsiNomi.clear();
+					for(int i=0;i<corsi.size();i++) {
+						corsiNomi.add(corsi.get(i));
+
+					}
+				}
+			});
+		}catch(Error e){
+			};
 	}
 	
 	public void getUtente() {
@@ -82,35 +109,6 @@ public class HomePageUtente extends Composite {
 		}catch(Error e){
 			};
 	}
-	/*
-	public void getCorsiStudente() {
-		try {
-			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-			greetingService.getCorsoStudente(Account.email, new AsyncCallback<ArrayList<Integer>>() {
-				public void onFailure(Throwable caught) {
-					Window.alert("ERRORE!");
-
-				}
-				
-				@Override
-				public void onSuccess(ArrayList<Integer> output) {
-					String test = "";
-					for(int i=0; i<output.size();i++) {
-						for(int a=0; a<corsiFinal.size(); a++) {
-							if(output.get(i)==corsiFinal.get(i).getIdCorso()) {
-								test+= corsiFinal.get(i).getNomeCorso() + " ";
-							}
-						}
-					}
-					
-					lblCorsi.setText(test);
-				}
-				
-			});
-		}catch(Error e) {
-			
-		}
-	}*/
 	
 	public void getCorsoStudente() {
 		try {
@@ -124,11 +122,27 @@ public class HomePageUtente extends Composite {
 				@Override
 				public void onSuccess(ArrayList<Integer> idCorsi) {
 					String test = "";
-					for(int i=0;i<idCorsi.size();i++) {
-						test+= idCorsi.get(i);
-						
+					for(int i=0;i<corsiNomi.size();i++) {
+						for(int j=0;j<idCorsi.size();j++) {
+							if(idCorsi.get(j)==corsiNomi.get(i).getIdCorso()) {
+								test += corsiNomi.get(i).getNomeCorso() + " | ";
+							}
+						}
 					}
+
+						
+						
+						/*
+						for(int j=0;j<corsiNomi.size();j++) {
+							if(corsiNomi.get(i).getIdCorso()==idCorsi.get(i)) {
+								test+= corsiNomi.get(i).getNomeCorso() + ",";
+							}
+						}*/
+						
+						
+					
 					lblCorsi.setText(test);
+
 				}
 			});
 		}catch(Error e){
