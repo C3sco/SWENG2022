@@ -2,18 +2,20 @@ package com.swengfinal.project.server;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Map.Entry;
 
 import org.mapdb.BTreeMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 
+import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.Esame;
 import com.swengfinal.project.shared.Voto;
 
 public class dbVoto {
 	
 	private static DB getDB() {
-		DB db = DBMaker.newFileDB(new File("dbVoti6")).make();
+		DB db = DBMaker.newFileDB(new File("dbVoti7")).make();
 		return db;
 	}
 	
@@ -30,22 +32,16 @@ public class dbVoto {
 		//if(!checkCorso(Integer.parseInt(dati.get(0)))) {
 			Voto voto = new Voto(
 					voti.size(),
-					dati.get(0), 				   // nomeEsame
-					dati.get(1),                   // matricola
-					dati.get(2),                  // voto
+					dati.get(1), 				   // nomeEsame
+					dati.get(2),                   // matricola
+					dati.get(3),                  // voto
 					false);
 			
-			//Alert ab = new Alert("2!");
-			//System.out.println(ab);
-			for(int i = 0; i < voti.size(); i++) {	
-				String mat=(voti.get(i).getMatricola());
-				/*if(mat.equals(voto.getMatricola())) {
-					if(voti.get(i).getNomeEsame().equals(voto.getNomeEsame())) {
-						found=true;
-					}
-					
-				}*/
-				return "Errore";
+			
+			for(Entry<Integer, Voto> test : voti.entrySet()) {
+				if(test.getValue().getMatricola().equals(voto.getMatricola()) && test.getValue().getNomeEsame().equals(voto.getNomeEsame())) {
+					found=true; //ritorna id del Corso
+				}
 			}
 			if(!found) {
 				voti.put(voto.getIdVoto(), voto);

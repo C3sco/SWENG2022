@@ -20,12 +20,14 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.swengfinal.project.shared.Corso;
+import com.swengfinal.project.shared.Esame;
 import com.swengfinal.project.shared.Utente;
 
 public class HomePageUtente extends Composite {
 
 	private static HomePageUtenteUiBinder uiBinder = GWT.create(HomePageUtenteUiBinder.class);
 	private static final ArrayList<Corso> corsiNomi = new ArrayList<Corso>();
+	private static final ArrayList<Esame> esamiStudenti = new ArrayList<Esame>();
 
 	@UiTemplate("HomePageUtente.ui.xml")
 	interface HomePageUtenteUiBinder extends UiBinder<Widget, HomePageUtente> {
@@ -37,7 +39,9 @@ public class HomePageUtente extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 		getUtente();
 		getCorsi();
+		getEsami();
 		getCorsoStudente();
+		getEsamiStudente();
 		
 		
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
@@ -79,6 +83,28 @@ public class HomePageUtente extends Composite {
 					corsiNomi.clear();
 					for(int i=0;i<corsi.size();i++) {
 						corsiNomi.add(corsi.get(i));
+
+					}
+				}
+			});
+		}catch(Error e){
+			};
+	}
+	
+	public void getEsami() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getEsami(new AsyncCallback<ArrayList<Esame>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Esame> esami) {
+					esamiStudenti.clear();
+					for(int i=0;i<esami.size();i++) {
+						esamiStudenti.add(esami.get(i));
 
 					}
 				}
@@ -142,6 +168,35 @@ public class HomePageUtente extends Composite {
 						
 					
 					lblCorsi.setText(test);
+
+				}
+			});
+		}catch(Error e){
+			};
+	}
+	
+	public void getEsamiStudente() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getEsameStudente(Account.email, new AsyncCallback<ArrayList<Integer>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Integer> idCorsi) {
+					String test = "";
+					for(int i=0;i<esamiStudenti.size();i++) {
+						for(int j=0;j<idCorsi.size();j++) {
+							
+							if(idCorsi.get(j)==esamiStudenti.get(i).getIdCorso()) {
+								test += esamiStudenti.get(i).getNomeEsame() + " | ";
+							}
+						}
+					}
+					
+					lblEsami.setText(test);
 
 				}
 			});

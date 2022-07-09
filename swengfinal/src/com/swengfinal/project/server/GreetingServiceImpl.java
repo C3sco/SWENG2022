@@ -115,12 +115,12 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	
 	@Override
 	public String iscrizioneEsame(String email, int idCorso) throws IllegalArgumentException {
-		return dbEsame.iscrizioneEsame(email, idCorso);
+		return dbIscrizioneEsame.iscrizioneEsame(idCorso, email);
 	}
 	
 	@Override
-	public ArrayList<String> getEsameStudente(String email) throws IllegalArgumentException {
-		return dbEsame.getEsameStudente(email);
+	public ArrayList<Integer> getEsameStudente(String email) throws IllegalArgumentException {
+		return dbIscrizioneEsame.getEsamiStudente(email);
 	}
 	
 	@Override
@@ -133,6 +133,12 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	public String deleteEsame(int idCorso) throws IllegalArgumentException
 	{
 		return dbEsame.deleteEsame(idCorso);
+	}
+	
+	@Override
+	public ArrayList<Esame> getEsami() throws IllegalArgumentException
+	{
+		return dbEsame.getEsami();
 	}
 	
 	//metodo invio voto

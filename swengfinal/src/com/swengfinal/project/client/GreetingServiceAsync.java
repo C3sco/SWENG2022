@@ -49,6 +49,8 @@ public interface GreetingServiceAsync {
 	
 	void deleteCorso(String nomeCorso, AsyncCallback<String>callback) throws IllegalArgumentException;
 	
+	void  getCorsi(AsyncCallback<ArrayList<Corso>> callback) throws IllegalArgumentException;
+	
 	/**
 	 * Metodi esame
 	 */
@@ -60,11 +62,11 @@ public interface GreetingServiceAsync {
 	
 	void getAllEsame(String email, AsyncCallback<ArrayList<Esame>> callback) throws IllegalArgumentException;
 	
-	void getEsameStudente(String email, AsyncCallback<ArrayList<String>> callback) throws IllegalArgumentException;
+	void getEsameStudente(String email, AsyncCallback<ArrayList<Integer>> callback) throws IllegalArgumentException;
 	
 	void deleteEsame(int idCorso, AsyncCallback<String>callback) throws IllegalArgumentException;
 	
-	void  getCorsi(AsyncCallback<ArrayList<Corso>> callback) throws IllegalArgumentException;
+	void  getEsami(AsyncCallback<ArrayList<Esame>> callback) throws IllegalArgumentException;
 	
 	/**
 	 * Metodi esame

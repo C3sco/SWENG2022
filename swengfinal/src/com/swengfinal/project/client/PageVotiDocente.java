@@ -117,9 +117,11 @@ public class PageVotiDocente extends Composite {
 			RootPanel.get("container").add(new HomePage());
 			
 			ArrayList<String>dati = new ArrayList<String>();
-			dati.add(0, menuEsame.getSelectedValue());
-			dati.add(1, txtMatricola.getText());
-			dati.add(2, txtVoto.getText());
+			dati.add(0, "");
+			dati.add(1, menuEsame.getSelectedValue());
+			dati.add(2, txtMatricola.getText());
+			dati.add(3, txtVoto.getText());
+			
 			
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 			

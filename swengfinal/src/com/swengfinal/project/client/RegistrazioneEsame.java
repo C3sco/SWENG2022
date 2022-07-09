@@ -1,5 +1,7 @@
 package com.swengfinal.project.client;
 
+import java.util.ArrayList;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -9,12 +11,16 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.swengfinal.project.shared.Corso;
+import com.swengfinal.project.shared.Esame;
 
 public class RegistrazioneEsame extends Composite {
 
@@ -23,9 +29,18 @@ public class RegistrazioneEsame extends Composite {
 	@UiTemplate("RegistrazioneEsame.ui.xml")
 	interface RegistrazioneEsameUiBinder extends UiBinder<Widget, RegistrazioneEsame> {
 	}
+	
+	private static final ArrayList<Integer> corsiStudenti = new ArrayList<Integer>();
+	
+	private static final ArrayList<Esame> esamiStudenti = new ArrayList<Esame>();
 
 	public RegistrazioneEsame() {
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		menuCorsi.clear();
+		
+		getCorsiStudente();
+		addOptionMenuEsami();
 		
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -42,10 +57,59 @@ public class RegistrazioneEsame extends Composite {
 		btnLogout.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnLogout.getElement().getStyle().setMarginLeft(820.0, Unit.PX);
 			
-		addOptionCorsi();
-		addOptionAppelli();
+		
 	}
 
+	
+	/* Ritorna tutti i corsi disponibili per l'utente */
+	public void getCorsiStudente() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getCorsoStudente(Account.email,new AsyncCallback<ArrayList<Integer>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Integer> corsi) {
+					
+					for(int i=0;i<corsi.size();i++) {
+						corsiStudenti.add(corsi.get(i));
+					}
+				}
+			});
+		}catch(Error e){
+			};
+	}
+	
+	public void addOptionMenuEsami() {
+		
+		
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getEsami(new AsyncCallback<ArrayList<Esame>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Esame> esami) {
+					
+					for(int i=0;i<esami.size();i++) {
+						esamiStudenti.add(esami.get(i));
+						for(int a=0; a<corsiStudenti.size(); a++) {
+							if(esami.get(i).getIdCorso() == corsiStudenti.get(a)) {
+								menuCorsi.addItem(esami.get(i).getNomeEsame());
+							}
+						}
+					}
+				}
+			});
+		}catch(Error e){
+			};
+	}
 	
 	@UiHandler("btnHome")
 	   void doClickSubmit(ClickEvent event) {
@@ -54,9 +118,9 @@ public class RegistrazioneEsame extends Composite {
 	   }
 	
 	@UiHandler("btnIscrizione")
-	void doClickDip(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageCorsiDisponibili());
+	void doClickIscrizioneEsame(ClickEvent event) {
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new PageCorsiDisponibili());
 			
 	}
 	
@@ -80,53 +144,67 @@ public class RegistrazioneEsame extends Composite {
 	
 	@UiHandler("btnEsame")
 	void doClickEsame(ClickEvent event) {
-			RootPanel.get("container").clear();
-			Window.alert("Iscrizione avvenuta");
-	}
-	
-	void addOptionCorsi() {
-		/**
-		 * 		menuCorsi.addItem("Ingeneria del software", new Command() {
-	         @Override
-	         public void execute() {
-	            showSelectedMenuItem("Ingeneria del software");
-	         }
-	      });
-		
-		
-		
-		menuCorsi.addItem("Ingeneria del software", new Command() {
-	         @Override
-	         public void execute() {
-	            showSelectedMenuItem("Ingeneria del software");
-	         }
-	      });
+		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+		Integer id = 0;
+		String nomeCorso = menuCorsi.getSelectedValue();
+		for(int i=0;i<esamiStudenti.size();i++) {
+			if(esamiStudenti.get(i).getNomeEsame().equals(nomeCorso)) {
+				id = esamiStudenti.get(i).getIdEsame();
+			}
+		}
+		/*Alert nice = new Alert("Id:" + id + txtNomeCorso.getSelectedValue());
+		System.out.println(nice);*/
+		greetingService.iscrizioneEsame(Account.email, id , new AsyncCallback<String>() {
+			public void onFailure(Throwable caught) {
 
-		 */
+			}
+			@Override
+			public void onSuccess(String result) {
+				if(result=="Successo") {
+					Alert nice = new Alert("Successo!");
+					System.out.println(nice);
+				}else if(result=="Errore") {
+					Alert e = new Alert("Sei gia iscritto a questo esame!");
+					System.out.println(e);
+				}
+			}
+	
+		});
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new RegistrazioneEsame());
+	}
+	
+	@UiHandler("menuCorsi")
+	void doClickCorsi(ClickEvent event) {
+		final String voce=menuCorsi.getSelectedValue();
 		
-		menuCorsi.addItem("Ingegneria del Software");
-		menuCorsi.addItem("Basi di Dati");
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
-		
+			greetingService.getEsami(new AsyncCallback<ArrayList<Esame>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Esame> esami) {
+					
+					for(int i=0;i<esami.size();i++) {
+						for(int a=0; a<corsiStudenti.size(); a++) {
+							if(esami.get(i).getIdCorso() == corsiStudenti.get(a)) {
+								if(esami.get(i).getNomeEsame().equals(voce)) {
+									dataAppello.setText(esami.get(i).getData());
+								}
+							}
+						}
+					}
+				}
+			});
+		}catch(Error e){
+			};
 	}
 	
-	void addOptionAppelli() {
-		/**
-		menuAppelli.addItem("Appello del "+"21/03/2022", new Command() {
-	         @Override
-	         public void execute() {
-	            showSelectedMenuItem("Appello del "+"21/03/2022");
-	         }
-	      });
-		 * 
-		 */
-		
-		menuAppelli.addItem("Appello del 21/03/2022");
-	}
 	
-	void showSelectedMenuItem(String menuItemName){
-	      Window.alert("Menu item: " + menuItemName + " selected");
-	}
 	
 	@UiField
 	Button btnIscrizione;
@@ -150,7 +228,7 @@ public class RegistrazioneEsame extends Composite {
 	ListBox menuCorsi;
 	
 	@UiField
-	ListBox menuAppelli;
+	Label dataAppello;
 	
 	
 	

@@ -60,23 +60,7 @@ public class dbEsame {
 						
 		}
 	
-	public static String iscrizioneEsame(String email, int idCorso) { 
-		DB db = getDB();
-		BTreeMap<Integer, Esame> esami = db.getTreeMap("EsamiMap");
-		
-		Esame esame = esami.get(idCorso);
-		boolean found = false;
-		
-		for(int i = 0; i < esame.getListaUtenti().size(); i++) {	
-			if(esame.getListaUtenti().get(i).equals(email)) {
-				found = true;
-			}
-		}
-		if(!found) {
-			esame.getListaUtenti().add(email);  // Aggiunta mail studente al relativo esame
-			return "Successo";
-		}else return "Errore";
-	}
+	
 	
 	public static String modificaEsame(ArrayList<String> dati, int idCorso) {
 		DB db = getDB();
@@ -128,21 +112,7 @@ public class dbEsame {
 		
 	}
 	
-	public static ArrayList<String> getEsameStudente(String email){
-		
-		DB db = getDB();
-		BTreeMap<Integer, Esame> esami = db.getTreeMap("EsamiMap");
-		ArrayList<String> esamiOutput = new ArrayList<String>();
-		
-		for(Entry<Integer, Esame> test : esami.entrySet()) {
-			for(int i=0;i<test.getValue().getListaUtenti().size();i++) {
-				if(email==test.getValue().getListaUtenti().get(i)) {
-					esamiOutput.add(test.getValue().getNomeEsame());
-				}
-			}
-		}
-		return esamiOutput;
-	}
+	
 	
 	public static ArrayList<Esame> getAllEsame(String email)
 	{
@@ -156,6 +126,17 @@ public class dbEsame {
 			}
 		}
 		return esamiOutput;
+	}
+	
+	public static ArrayList<Esame> getEsami(){
+		DB db = getDB();
+		BTreeMap<Integer, Esame> esami = db.getTreeMap("EsamiMap");
+		ArrayList<Esame> esamiAll = new ArrayList<Esame>();
+		for(Entry<Integer, Esame> test : esami.entrySet()) {
+			esamiAll.add(test.getValue());
+		}
+		
+		return esamiAll;
 	}
 	
 	

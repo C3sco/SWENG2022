@@ -199,7 +199,7 @@ public class PageCorsiDisponibili extends Composite{
 					Alert nice = new Alert("Successo!");
 					System.out.println(nice);
 				}else if(result=="Errore") {
-					Alert e = new Alert("Sei gia iscritto a questo esame!");
+					Alert e = new Alert("Sei gia iscritto a questo corso!");
 					System.out.println(e);
 				}
 			}
