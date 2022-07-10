@@ -14,6 +14,7 @@ import org.mapdb.DBMaker;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Map.Entry;
 
 
@@ -38,7 +39,7 @@ public class dbUtenti {
 	
 	public static String registrazioneStudente(ArrayList<String> dati) {
 		DB db = getDB();
-		BTreeMap<String,Utente> Users;
+		BTreeMap<String,Studente> Users;
 		
 		if(!checkMail(dati.get(0))) {
 			Users = db.getTreeMap("UtentiMap");
@@ -174,27 +175,47 @@ public class dbUtenti {
 	
 	public static ArrayList<Studente> getStudenti(){
 		DB db = getDB();
-		BTreeMap<String, Utente> Users = db.getTreeMap("UtentiiMap");
+		Map<String, Utente> Users = db.getTreeMap("UtentiMap");
 		ArrayList<Studente> output = new ArrayList<Studente>();
 		for(Entry<String,Utente> test : Users.entrySet()) {
-			//if(test.getValue() instanceof Studente) {
+			if(test.getValue() instanceof Studente) {
 				output.add((Studente) test.getValue());
-			//}
+			}
 		}
 		return output;
 	}
 	
-	public static ArrayList<Utente> getDocenti(){
+	public static ArrayList<Docente> getDocenti(){
 		DB db = getDB();
-		BTreeMap<String, Utente> Users = db.getTreeMap("UtentiiMap");
-		ArrayList<Utente> output = new ArrayList<Utente>();
+		
+		BTreeMap<String, Utente> Users = db.getTreeMap("UtentiMap");
+		ArrayList<Docente> output = new ArrayList<Docente>();
 		for(Entry<String,Utente> test : Users.entrySet()) {
-			//if(test.getValue() instanceof Docente) {
-				output.add(test.getValue());
-			//}
+			if(test.getValue() instanceof Docente) {
+				output.add((Docente) test.getValue());
+			}
 		}
 		return output;
+	}
+	
+	public static ArrayList<Utente> getUtentiAll(){
+		DB db = getDB();
+		BTreeMap<String, Utente> Users = db.getTreeMap("UtentiMap");
+		ArrayList<Utente> output = new ArrayList<Utente>();
+		for(Entry<String,Utente> test : Users.entrySet()) {
+				output.add(test.getValue());
+			}
+		return output;
+	}
+	
+	public static String getDatabase() {
+		DB db = getDB();
+		String s = "";
+		for(Entry<String,Object> test : db.getAll().entrySet()) {
+			 s += test.getValue().toString() + " | ";
+		}
 		
+		return s;
 	}
 
 }

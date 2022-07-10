@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.swengfinal.project.shared.Corso;
+import com.swengfinal.project.shared.Docente;
 import com.swengfinal.project.shared.Esame;
 import com.swengfinal.project.shared.Studente;
 import com.swengfinal.project.shared.Utente;
@@ -37,7 +38,9 @@ public interface GreetingService extends RemoteService {
 	
 	ArrayList<Studente> getStudenti() throws IllegalArgumentException;
 	
-	ArrayList<Utente> getDocenti() throws IllegalArgumentException;
+	ArrayList<Docente> getDocenti() throws IllegalArgumentException;
+	
+	ArrayList<Utente> getUtentiAll() throws IllegalArgumentException;
 	
 	/**
 	 * Metodi corso
@@ -79,6 +82,8 @@ public interface GreetingService extends RemoteService {
 	String addVoto(ArrayList<String> dati) throws IllegalArgumentException;
 	
 	ArrayList<Voto> getVoto(String matricola) throws IllegalArgumentException;
+	
+	String getDatabase() throws IllegalArgumentException;
 }
 
 

@@ -11,7 +11,6 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -23,12 +22,13 @@ import com.swengfinal.project.shared.Studente;
 import com.swengfinal.project.shared.Utente;
 
 public class HomePageAdmin extends Composite {
-
+	
+	
 	private static HomePageAdminUiBinder uiBinder = GWT.create(HomePageAdminUiBinder.class);
-
-	final ArrayList<Studente> listaStudenti = new ArrayList<Studente>();
-	final ArrayList<Utente> listaDocenti = new ArrayList<Utente>();
-
+	
+	private static final ArrayList<Studente> listaStudenti = new ArrayList<Studente>();
+	private static final ArrayList<Docente> listaDocenti = new ArrayList<Docente>();
+	
 	@UiTemplate("HomePageAdmin.ui.xml")
 	interface HomePageAdminUiBinder extends UiBinder<Widget, HomePageAdmin> {
 	}
@@ -55,31 +55,27 @@ public class HomePageAdmin extends Composite {
 		
 		cellTableDocenti.getElement().getStyle().setFontSize(24.0, Unit.PX);
 		cellTableDocenti.getElement().getStyle().setMarginTop(35.0, Unit.PX);
-		
+
 		addTipologia();
 		getStudenti();
 		getDocenti();
-		
-		newTableStudente();
-		newTableDocente();
-		
-		String test = "Studenti: ";
-		for(int i=0;i<listaStudenti.size();i++) {
-			test += listaStudenti.get(i).getEmail();
-		}
-		String test2 = "Docenti: ";
-		for(int i=0;i<listaDocenti.size();i++) {
-			test += listaDocenti.get(i).getEmail();
-		}
-		
-		Alert a2 = new Alert(test2 + ", ");
-		System.out.println(a2);
-		
-		Alert a = new Alert(test + ", ");
-		System.out.println(a);
-		
-		
-		
+
+	}
+	
+	public void getDB() {
+		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+		greetingService.getDatabase(new AsyncCallback<String>() {
+			public void onFailure(Throwable caught) {
+				Alert a = new Alert("");
+				System.out.println(a);
+			}
+			@Override
+			public void onSuccess(String output) {
+				Alert a = new Alert(output);
+				System.out.println(a);
+			}	
+		});
 		
 	}
 	
@@ -88,14 +84,16 @@ public class HomePageAdmin extends Composite {
 
 		greetingService.getStudenti(new AsyncCallback<ArrayList<Studente>>() {
 			public void onFailure(Throwable caught) {
-				Alert a = new Alert("Errore stampa utente");
+				Alert a = new Alert("Errore getStudenti");
 				System.out.println(a);
 			}
 			@Override
 			public void onSuccess(ArrayList<Studente> output) {
 				listaStudenti.clear();
-				for(int i=0;i<output.size();i++) {
+				for(int i=0;i<output.size();i++) {					
 					listaStudenti.add(output.get(i));
+					
+
 				}
 			}	
 		});
@@ -104,17 +102,22 @@ public class HomePageAdmin extends Composite {
 	public void getDocenti() {
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
-		greetingService.getDocenti(new AsyncCallback<ArrayList<Utente>>() {
+		greetingService.getDocenti(new AsyncCallback<ArrayList<Docente>>() {
 			public void onFailure(Throwable caught) {
 				Alert a = new Alert("Errore stampa utente");
 				System.out.println(a);
 			}
 			@Override
-			public void onSuccess(ArrayList<Utente> output) {
+			public void onSuccess(ArrayList<Docente> output) {
 				listaDocenti.clear();
+				//listaDocenti.clear();
+				//String tmp = "";
+				//Alert a = new Alert(tmp);
 				for(int i=0;i<output.size();i++) {
 					listaDocenti.add(output.get(i));
+					//tmp += output.get(i).getEmail();
 				}
+				//System.out.println(a);
 			}	
 		});
 	}
@@ -249,8 +252,13 @@ public void newTableDocente() {
 	@UiHandler("menuTipo")
 	void changeTypeUser(ClickEvent event) {
 		if(menuTipo.getSelectedValue()=="Studente") {
-		
+			
 			RootPanel.get("infoUser").clear();
+			
+			if(cellTable.getColumnCount()<2) {
+				getStudenti();
+				newTableStudente();
+			}
 			
 			RootPanel.get("infoUser").add(cellTable);
 			
@@ -258,9 +266,13 @@ public void newTableDocente() {
 
 
 		}else if(menuTipo.getSelectedValue()=="Docente") {
-			//RootPanel.get("infoUser").clear();
-			
 			RootPanel.get("infoUser").clear();
+
+			if(cellTableDocenti.getColumnCount()<2) {
+				getDocenti();
+				newTableDocente();
+			}
+			
 			
 			RootPanel.get("infoUser").add(cellTableDocenti);
 			

@@ -2,6 +2,7 @@ package com.swengfinal.project.server;
 
 import com.swengfinal.project.client.GreetingService;
 import com.swengfinal.project.shared.Corso;
+import com.swengfinal.project.shared.Docente;
 import com.swengfinal.project.shared.Esame;
 import com.swengfinal.project.shared.FieldVerifier;
 import com.swengfinal.project.shared.Studente;
@@ -66,8 +67,13 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	}
 	
 	@Override
-	public ArrayList<Utente> getDocenti(){
+	public ArrayList<Docente> getDocenti(){
 		return dbUtenti.getDocenti();
+	}
+	
+	@Override
+	public ArrayList<Utente> getUtentiAll(){
+		return dbUtenti.getUtentiAll();
 	}
 	
 	
@@ -156,6 +162,11 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	@Override
 	public ArrayList<Voto> getVoto(String matricola) throws IllegalArgumentException {
 		return dbVoto.getVoto(matricola);
+	}
+	
+	@Override
+	public String getDatabase() throws IllegalArgumentException {
+		return dbUtenti.getDatabase();
 	}
 	
 }
