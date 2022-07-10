@@ -148,4 +148,9 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		return dbVoto.addVoto(dati);
 	}
 	
+	@Override
+	public ArrayList<Voto> getVoto(String matricola) throws IllegalArgumentException {
+		return dbVoto.getVoto(matricola);
+	}
+	
 }

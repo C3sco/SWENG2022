@@ -49,10 +49,19 @@ public class dbVoto {
 				db.close();
 				return "Successo";
 			}else return "Errore";
-			
-			
-			
-						
 		}
+	
+	public static ArrayList<Voto> getVoto(String matricola){
+		DB db = getDB();
+		BTreeMap<Integer, Voto> voti = db.getTreeMap("VotiMap");
+		ArrayList<Voto> votiOutput = new ArrayList<Voto>();
+		for(Entry<Integer, Voto> test : voti.entrySet()) {
+			if(matricola.equals(test.getValue().getMatricola())) {
+					votiOutput.add(test.getValue());
+			}
+		}
+		
+		return votiOutput;
+	}
 
 }

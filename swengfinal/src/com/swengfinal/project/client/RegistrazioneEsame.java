@@ -37,8 +37,8 @@ public class RegistrazioneEsame extends Composite {
 	public RegistrazioneEsame() {
 		initWidget(uiBinder.createAndBindUi(this));
 		
-		menuCorsi.clear();
 		
+
 		getCorsiStudente();
 		addOptionMenuEsami();
 		
@@ -96,14 +96,11 @@ public class RegistrazioneEsame extends Composite {
 				}
 				@Override
 				public void onSuccess(ArrayList<Esame> esami) {
-					
+					menuCorsi.clear();
 					for(int i=0;i<esami.size();i++) {
 						esamiStudenti.add(esami.get(i));
-						for(int a=0; a<corsiStudenti.size(); a++) {
-							if(esami.get(i).getIdCorso() == corsiStudenti.get(a)) {
-								menuCorsi.addItem(esami.get(i).getNomeEsame());
-							}
-						}
+						menuCorsi.addItem(esami.get(i).getNomeEsame());
+						
 					}
 				}
 			});

@@ -1,5 +1,6 @@
 package com.swengfinal.project.client;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.google.gwt.core.client.GWT;
@@ -11,23 +12,34 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.swengfinal.project.client.PageCorsiDisponibili;
+import com.swengfinal.project.shared.Corso;
+import com.swengfinal.project.shared.Voto;
+import com.swengfinal.project.shared.Studente;
+import com.swengfinal.project.shared.Utente;
+
 
 public class PageVoti extends Composite {
 
 	private static PageVotiUiBinder uiBinder = GWT.create(PageVotiUiBinder.class);
-
+	private static final ArrayList<Voto> votiFinal = new ArrayList<Voto>();
+	public static Studente studente = new Studente();
 	
 	@UiTemplate("PageVoti.ui.xml")
 	interface PageVotiUiBinder extends UiBinder<Widget, PageVoti> {
 	}
 
 	public PageVoti() {
+		
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		getUtente();
 		
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -47,9 +59,48 @@ public class PageVoti extends Composite {
 		cellTable.getElement().getStyle().setMarginTop(35.0, Unit.PX);
 		cellTable.getElement().getStyle().setMarginLeft(450.0, Unit.PX);
 		
+		
 		addTable();
 	}
 	
+	public void getVoti() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getVoto(studente.getMatricola(), new AsyncCallback<ArrayList<Voto>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Voto> output) {
+					
+					for(int i=0;i<output.size();i++) {
+						votiFinal.add(output.get(i));
+					}
+				}
+			});
+		}catch(Error e){
+			};
+	}
+	
+	public void getUtente() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getUtente(Account.email, new AsyncCallback<Utente>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+				}
+				@Override
+				public void onSuccess(Utente user) {
+					studente = (Studente) user;
+				}		
+			});
+		}catch(Error e){
+			};
+	}
+	/*
 	private static class Voto{
 		private final String nomeEsame;
 		private final String voto;
@@ -66,13 +117,13 @@ public class PageVoti extends Composite {
 	private static final java.util.List<Voto> voti=Arrays.asList(
 				new Voto("Ingegneria del software","30", "6" )
 			);
-	
+	*/
 public void addTable() {
 		
 		TextColumn<Voto> esameColumn=new TextColumn<Voto>() {
 			@Override
 			public String getValue(Voto obj) {
-				return obj.nomeEsame;
+				return obj.getNomeEsame();
 			}
 		};
 		cellTable.addColumn(esameColumn, "Esame");
@@ -80,7 +131,7 @@ public void addTable() {
 		TextColumn<Voto> votoColumn=new TextColumn<Voto>() {
 			@Override
 			public String getValue(Voto obj) {
-				return obj.voto;
+				return obj.getVoto();
 			}
 		};
 		cellTable.addColumn(votoColumn, "Voto");
@@ -88,7 +139,7 @@ public void addTable() {
 		TextColumn<Voto> cfuColumn=new TextColumn<Voto>() {
 			
 			public String getValue(Voto obj) {
-				return obj.cfu;
+				return obj.getVoto();
 			}
 			
 		  
@@ -97,9 +148,9 @@ public void addTable() {
 		cellTable.addColumn(cfuColumn, "Cfu");
 		//cellTable.
 		
-		 cellTable.setRowCount(voti.size(), true);
+		 cellTable.setRowCount(votiFinal.size(), true);
 		 
-		 cellTable.setRowData(0, voti);
+		 cellTable.setRowData(0, votiFinal);
 	     
 		 
 	}
@@ -151,6 +202,6 @@ public void addTable() {
 	Button btnLogout;
 	
 	@UiField
-	CellTable cellTable;
+	CellTable<Voto> cellTable;
 
 }

@@ -73,4 +73,5 @@ public interface GreetingServiceAsync {
 	 */
 	void addVoto(ArrayList<String> dati, AsyncCallback<String>callback) throws IllegalArgumentException;
 	
+	void getVoto(String matricola, AsyncCallback<ArrayList<Voto>> callback) throws IllegalArgumentException;
 }
