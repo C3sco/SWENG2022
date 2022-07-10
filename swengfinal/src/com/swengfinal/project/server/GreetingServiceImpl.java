@@ -61,7 +61,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	}
 	
 	@Override
-	public ArrayList<Utente> getStudenti(){
+	public ArrayList<Studente> getStudenti(){
 		return dbUtenti.getStudenti();
 	}
 	

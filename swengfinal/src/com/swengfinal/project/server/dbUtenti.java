@@ -172,14 +172,14 @@ public class dbUtenti {
 
 	}
 	
-	public static ArrayList<Utente> getStudenti(){
+	public static ArrayList<Studente> getStudenti(){
 		DB db = getDB();
 		BTreeMap<String, Utente> Users = db.getTreeMap("UtentiiMap");
-		ArrayList<Utente> output = new ArrayList<Utente>();
+		ArrayList<Studente> output = new ArrayList<Studente>();
 		for(Entry<String,Utente> test : Users.entrySet()) {
-			if(test.getValue() instanceof Studente) {
-				output.add(test.getValue());
-			}
+			//if(test.getValue() instanceof Studente) {
+				output.add((Studente) test.getValue());
+			//}
 		}
 		return output;
 	}
@@ -189,9 +189,9 @@ public class dbUtenti {
 		BTreeMap<String, Utente> Users = db.getTreeMap("UtentiiMap");
 		ArrayList<Utente> output = new ArrayList<Utente>();
 		for(Entry<String,Utente> test : Users.entrySet()) {
-			if(test.getValue() instanceof Docente) {
+			//if(test.getValue() instanceof Docente) {
 				output.add(test.getValue());
-			}
+			//}
 		}
 		return output;
 		

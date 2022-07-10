@@ -19,13 +19,14 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.swengfinal.project.shared.Docente;
+import com.swengfinal.project.shared.Studente;
 import com.swengfinal.project.shared.Utente;
 
 public class HomePageAdmin extends Composite {
 
 	private static HomePageAdminUiBinder uiBinder = GWT.create(HomePageAdminUiBinder.class);
 
-	final ArrayList<Utente> listaStudenti = new ArrayList<Utente>();
+	final ArrayList<Studente> listaStudenti = new ArrayList<Studente>();
 	final ArrayList<Utente> listaDocenti = new ArrayList<Utente>();
 
 	@UiTemplate("HomePageAdmin.ui.xml")
@@ -58,15 +59,24 @@ public class HomePageAdmin extends Composite {
 		addTipologia();
 		getStudenti();
 		getDocenti();
-		String test = "";
-		for(int i=0;i<listaStudenti.size();i++) {
-			test += listaStudenti.get(i).getEmail();
-		}
+		
 		newTableStudente();
 		newTableDocente();
 		
-		//Alert a = new Alert(test);
-		//System.out.println(a);
+		String test = "Studenti: ";
+		for(int i=0;i<listaStudenti.size();i++) {
+			test += listaStudenti.get(i).getEmail();
+		}
+		String test2 = "Docenti: ";
+		for(int i=0;i<listaDocenti.size();i++) {
+			test += listaDocenti.get(i).getEmail();
+		}
+		
+		Alert a2 = new Alert(test2 + ", ");
+		System.out.println(a2);
+		
+		Alert a = new Alert(test + ", ");
+		System.out.println(a);
 		
 		
 		
@@ -76,13 +86,13 @@ public class HomePageAdmin extends Composite {
 	public void getStudenti() {
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
-		greetingService.getStudenti(new AsyncCallback<ArrayList<Utente>>() {
+		greetingService.getStudenti(new AsyncCallback<ArrayList<Studente>>() {
 			public void onFailure(Throwable caught) {
 				Alert a = new Alert("Errore stampa utente");
 				System.out.println(a);
 			}
 			@Override
-			public void onSuccess(ArrayList<Utente> output) {
+			public void onSuccess(ArrayList<Studente> output) {
 				listaStudenti.clear();
 				for(int i=0;i<output.size();i++) {
 					listaStudenti.add(output.get(i));
@@ -94,7 +104,7 @@ public class HomePageAdmin extends Composite {
 	public void getDocenti() {
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
-		greetingService.getStudenti(new AsyncCallback<ArrayList<Utente>>() {
+		greetingService.getDocenti(new AsyncCallback<ArrayList<Utente>>() {
 			public void onFailure(Throwable caught) {
 				Alert a = new Alert("Errore stampa utente");
 				System.out.println(a);
@@ -115,9 +125,9 @@ public class HomePageAdmin extends Composite {
 	public void newTableStudente() {
 		
 
-		TextColumn<Utente> emailColumn=new TextColumn<Utente>() {
+		TextColumn<Studente> emailColumn=new TextColumn<Studente>() {
 			@Override
-			public String getValue(Utente obj) {
+			public String getValue(Studente obj) {
 				return obj.getEmail();
 			}
 		};
@@ -132,33 +142,33 @@ public class HomePageAdmin extends Composite {
 		
 		cellTable.addColumn(matricolaColumn, "Matricola");*/
 		
-		TextColumn<Utente> nomeColumn=new TextColumn<Utente>() {
+		TextColumn<Studente> nomeColumn=new TextColumn<Studente>() {
 			@Override
-			public String getValue(Utente obj) {
+			public String getValue(Studente obj) {
 				return obj.getCognome();
 			}
 		};
 		cellTable.addColumn(nomeColumn, "Nome");
 		
-		TextColumn<Utente> cognomeColumn=new TextColumn<Utente>() {
+		TextColumn<Studente> cognomeColumn=new TextColumn<Studente>() {
 			@Override
-			public String getValue(Utente obj) {
+			public String getValue(Studente obj) {
 				return obj.getNome();
 			}
 		};
 		cellTable.addColumn(cognomeColumn, "Cognome");
 		
-		TextColumn<Utente> luogoColumn=new TextColumn<Utente>() {
+		TextColumn<Studente> luogoColumn=new TextColumn<Studente>() {
 			@Override
-			public String getValue(Utente obj) {
+			public String getValue(Studente obj) {
 				return obj.getNome();
 			}
 		};
 		cellTable.addColumn(luogoColumn, "Luogo di Nascita");
 		
-		TextColumn<Utente> dataColumn=new TextColumn<Utente>() {
+		TextColumn<Studente> dataColumn=new TextColumn<Studente>() {
 			@Override
-			public String getValue(Utente obj) {
+			public String getValue(Studente obj) {
 				return obj.getCognome();
 			}
 		};
@@ -295,7 +305,7 @@ public void newTableDocente() {
 	CellTable<Utente> cellTableDocenti;
 	
 	@UiField
-	CellTable<Utente> cellTable;
+	CellTable<Studente> cellTable;
 
 	
 	@UiField

@@ -32,7 +32,7 @@ public interface GreetingServiceAsync {
 
 	void getUtente(String email, AsyncCallback<Utente> callback)throws IllegalArgumentException;
 	
-	void getStudenti(AsyncCallback<ArrayList<Utente>> callback) throws IllegalArgumentException;
+	void getStudenti(AsyncCallback<ArrayList<Studente>> callback) throws IllegalArgumentException;
 	
 	void getDocenti(AsyncCallback<ArrayList<Utente>> callback) throws IllegalArgumentException;
 
