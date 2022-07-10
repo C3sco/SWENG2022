@@ -26,7 +26,7 @@ public class HomePageAdmin extends Composite {
 	private static HomePageAdminUiBinder uiBinder = GWT.create(HomePageAdminUiBinder.class);
 
 	final ArrayList<Utente> listaStudenti = new ArrayList<Utente>();
-	final ArrayList<Docente> listaDocenti = new ArrayList<Docente>();
+	final ArrayList<Utente> listaDocenti = new ArrayList<Utente>();
 
 	@UiTemplate("HomePageAdmin.ui.xml")
 	interface HomePageAdminUiBinder extends UiBinder<Widget, HomePageAdmin> {
@@ -51,11 +51,24 @@ public class HomePageAdmin extends Composite {
 
 		cellTable.getElement().getStyle().setFontSize(24.0, Unit.PX);
 		cellTable.getElement().getStyle().setMarginTop(35.0, Unit.PX);
-
-		getStudenti();
-
+		
+		cellTableDocenti.getElement().getStyle().setFontSize(24.0, Unit.PX);
+		cellTableDocenti.getElement().getStyle().setMarginTop(35.0, Unit.PX);
 		
 		addTipologia();
+		getStudenti();
+		getDocenti();
+		String test = "";
+		for(int i=0;i<listaStudenti.size();i++) {
+			test += listaStudenti.get(i).getEmail();
+		}
+		newTableStudente();
+		newTableDocente();
+		
+		//Alert a = new Alert(test);
+		//System.out.println(a);
+		
+		
 		
 		
 	}
@@ -70,6 +83,7 @@ public class HomePageAdmin extends Composite {
 			}
 			@Override
 			public void onSuccess(ArrayList<Utente> output) {
+				listaStudenti.clear();
 				for(int i=0;i<output.size();i++) {
 					listaStudenti.add(output.get(i));
 				}
@@ -77,23 +91,37 @@ public class HomePageAdmin extends Composite {
 		});
 	}
 	
+	public void getDocenti() {
+		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+		greetingService.getStudenti(new AsyncCallback<ArrayList<Utente>>() {
+			public void onFailure(Throwable caught) {
+				Alert a = new Alert("Errore stampa utente");
+				System.out.println(a);
+			}
+			@Override
+			public void onSuccess(ArrayList<Utente> output) {
+				listaDocenti.clear();
+				for(int i=0;i<output.size();i++) {
+					listaDocenti.add(output.get(i));
+				}
+			}	
+		});
+	}
+
 	
 
 	
 	public void newTableStudente() {
-
-		cellTable.setRowCount(listaStudenti.size(), true);
-		 
-		cellTable.setRowData(0, listaStudenti);
-
 		
+
 		TextColumn<Utente> emailColumn=new TextColumn<Utente>() {
 			@Override
 			public String getValue(Utente obj) {
 				return obj.getEmail();
 			}
 		};
-		cellTable.addColumn(emailColumn, "Email");
+		cellTable.addColumn(emailColumn, "Email Studente");
 		/*
 		TextColumn<Utente> matricolaColumn=new TextColumn<Utente>() {
 			
@@ -135,26 +163,32 @@ public class HomePageAdmin extends Composite {
 			}
 		};
 		cellTable.addColumn(dataColumn, "Data di Nascita");
+
+		cellTable.setRowCount(listaStudenti.size(), true);
+		 
+		cellTable.setRowData(0, listaStudenti);
+	
 	}
+	
 	
 	
 public void newTableDocente() {
 		
 		
-		TextColumn<Docente> emailColumn=new TextColumn<Docente>() {
+		TextColumn<Utente> emailColumn=new TextColumn<Utente>() {
 			
-			public String getValue(Docente obj) {
+			public String getValue(Utente obj) {
 				return obj.getEmail();
 			}
 			
 		  
 		};
-		cellTableDocenti.addColumn(emailColumn, "Email");
+		cellTableDocenti.addColumn(emailColumn, "Email Docente");
 		
 		
-		TextColumn<Docente> nomeColumn=new TextColumn<Docente>() {
+		TextColumn<Utente> nomeColumn=new TextColumn<Utente>() {
 			
-			public String getValue(Docente obj) {
+			public String getValue(Utente obj) {
 				return obj.getNome();
 			}
 			
@@ -162,9 +196,9 @@ public void newTableDocente() {
 		};
 		cellTableDocenti.addColumn(nomeColumn, "Nome");
 		
-		TextColumn<Docente> cognomeColumn=new TextColumn<Docente>() {
+		TextColumn<Utente> cognomeColumn=new TextColumn<Utente>() {
 			
-			public String getValue(Docente obj) {
+			public String getValue(Utente obj) {
 				return obj.getCognome();
 			}
 			
@@ -172,9 +206,9 @@ public void newTableDocente() {
 		};
 		cellTableDocenti.addColumn(cognomeColumn, "Cognome");
 		
-		TextColumn<Docente> luogoColumn=new TextColumn<Docente>() {
+		TextColumn<Utente> luogoColumn=new TextColumn<Utente>() {
 			
-			public String getValue(Docente obj) {
+			public String getValue(Utente obj) {
 				return obj.getLuogoNascita();
 			}
 			
@@ -182,9 +216,9 @@ public void newTableDocente() {
 		};
 		cellTableDocenti.addColumn(luogoColumn, "Luogo Nascita");
 		
-		TextColumn<Docente> dataColumn=new TextColumn<Docente>() {
+		TextColumn<Utente> dataColumn=new TextColumn<Utente>() {
 			
-			public String getValue(Docente obj) {
+			public String getValue(Utente obj) {
 				return obj.getDataNascita();
 			}
 			
@@ -205,20 +239,24 @@ public void newTableDocente() {
 	@UiHandler("menuTipo")
 	void changeTypeUser(ClickEvent event) {
 		if(menuTipo.getSelectedValue()=="Studente") {
+		
 			RootPanel.get("infoUser").clear();
+			
+			RootPanel.get("infoUser").add(cellTable);
+			
+			//RootPanel.get("infoUser").add(cellTable);
 
-			RootPanel.get("infoUser").add(new TabellaUtenti());
-
-			newTableStudente();
-			
-			//RootPanel.get("infoUser").add(new TabellaUtenti());
-			
-			
-			
 
 		}else if(menuTipo.getSelectedValue()=="Docente") {
+			//RootPanel.get("infoUser").clear();
+			
 			RootPanel.get("infoUser").clear();
-			RootPanel.get("infoUser").add(new TabellaDocenti());
+			
+			RootPanel.get("infoUser").add(cellTableDocenti);
+			
+			//RootPanel.get("infoUser").add(cellTableDocenti);
+			
+		
 		}
 	}
 	
@@ -254,7 +292,7 @@ public void newTableDocente() {
 	}
 
 	@UiField
-	CellTable<Docente> cellTableDocenti;
+	CellTable<Utente> cellTableDocenti;
 	
 	@UiField
 	CellTable<Utente> cellTable;

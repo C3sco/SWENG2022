@@ -38,6 +38,7 @@
 	    </ul>
 	    <label>Seleziona una tipologia di utenti</label>
 	    <gwt:ListBox ui:field="menuTipo"></gwt:ListBox>
+	    
 	    <div id="infoUser">
 	    <c:CellTable ui:field='cellTable'>
 		</c:CellTable>

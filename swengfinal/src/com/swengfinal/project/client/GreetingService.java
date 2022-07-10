@@ -37,6 +37,8 @@ public interface GreetingService extends RemoteService {
 	
 	ArrayList<Utente> getStudenti() throws IllegalArgumentException;
 	
+	ArrayList<Utente> getDocenti() throws IllegalArgumentException;
+	
 	/**
 	 * Metodi corso
 	 */
