@@ -42,6 +42,10 @@ public interface GreetingService extends RemoteService {
 	
 	ArrayList<Utente> getUtentiAll() throws IllegalArgumentException;
 	
+	String deleteUtente(String email) throws IllegalArgumentException;
+	
+	String updateUtente(ArrayList<String> utenteUpdate, String email) throws IllegalArgumentException;
+	
 	/**
 	 * Metodi corso
 	 */

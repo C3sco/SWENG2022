@@ -3,6 +3,7 @@ package com.swengfinal.project.server;
 
 import com.swengfinal.project.client.Alert;
 import com.swengfinal.project.shared.Amministratore;
+import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.Docente;
 import com.swengfinal.project.shared.Segreteria;
 import com.swengfinal.project.shared.Studente;
@@ -37,11 +38,29 @@ public class dbUtenti {
 		} return find;
 	}
 	
+	private static boolean checkMatricola(String matricola) {
+		boolean find = false;
+		DB db = getDB();
+		BTreeMap<String,Utente> Users = db.getTreeMap("UtentiMap");
+		ArrayList<Studente> studenti = new ArrayList<Studente>();
+		for(Entry<String,Utente> test : Users.entrySet()) {
+			if(test.getValue() instanceof Studente) {
+				studenti.add((Studente) test.getValue());
+			}
+		}
+		for(int i=0; i<studenti.size(); i++) {
+			if(studenti.get(i).equals(matricola)) {
+				find = true;
+			}
+		}
+		return find;
+	}
+	
 	public static String registrazioneStudente(ArrayList<String> dati) {
 		DB db = getDB();
 		BTreeMap<String,Studente> Users;
 		
-		if(!checkMail(dati.get(0))) {
+		if(!checkMail(dati.get(0)) ) {
 			Users = db.getTreeMap("UtentiMap");
 			
 			Studente user = new Studente(dati.get(0),dati.get(1),dati.get(2),dati.get(3),
@@ -130,26 +149,19 @@ public class dbUtenti {
 			}else return null;
 		}else return null;
 	}
+	
 			
-			//Alert a = new Alert("Test");
-			//System.out.println(a + user.getTipologia());
-				
-				/*
-				if(user.getTipologia().equals("Utente")) {
-					return 1;
-				}else if(user.getTipologia()=="Segreteria") {
-					return 3;
-				}else if(user.getTipologia()=="Docente") {
-					return 4;
-				}else if(user.getTipologia()=="Amministratore") {
-					return 2;
-				}else {
-					return -2;
-				}
-				//if((user.getClass()==Utente.class)) return 1;
-				//if((user.getClass()==Amminsitratore.class)) return 2;
-			}else return 5;
-		}else return 6;*/
+	public static String deleteUtente(String email) {
+		DB db = getDB();
+		BTreeMap<Integer, Utente> utenti = db.getTreeMap("UtentiMap");
+		
+		
+		utenti.remove(email);
+		db.commit();
+		db.close();
+		
+		return "Successo";
+	}
 	
 	
 	public static String getInfoUtente(String email) {
@@ -216,6 +228,43 @@ public class dbUtenti {
 		}
 		
 		return s;
+	}
+	
+	public static String modificaUtente(ArrayList<String> dati, String email) {
+		DB db = getDB();
+		BTreeMap<String, Utente> utenti = db.getTreeMap("UtentiMap");
+		
+		
+		Utente utente = utenti.get(email);
+		utenti.remove(email);
+		if(dati.get(0).length()>=1)
+		{
+			utente.setPassword(dati.get(0));
+		}
+		if(dati.get(1).length()>=1)
+		{
+			utente.setCognome(dati.get(1));
+			
+		}
+		if(dati.get(2).length()>=1)
+		{
+			utente.setNome(dati.get(2));
+		}
+		if(dati.get(3).length()>=1)
+		{
+			utente.setDataNascita(dati.get(3));
+		}
+		if(dati.get(4).length()>=1)
+		{
+			utente.setLuogoNascita(dati.get(4));
+		}
+		
+		utenti.put(email, utente);
+		db.commit();
+		db.close();
+		
+		return "Successo";
+		
 	}
 
 }

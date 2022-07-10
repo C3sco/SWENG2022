@@ -68,16 +68,18 @@
 	    </ul>
 	    <div id="creazioneAccount">
 	      <div class="form-group" id="group">
-		     <label for="exampleInputPassword1">Email</label>
+	       <label for="exampleInputPassword1"  >Tipologia</label>
+		    <gwt:ListBox ui:field="menuTipo"></gwt:ListBox>
+		     <label for="exampleInputPassword1" id="tipo">Email</label>
 		    <gwt:TextBox ui:field="txtEmail"></gwt:TextBox>
-		    <label for="exampleInputPassword1" id="password">Password</label>
-		    <gwt:TextBox ui:field="txtPassword"></gwt:TextBox>
+		   
 		  </div>
 		  <div class="form-group" id="group">
-		    <label for="exampleInputPassword1">Matricola</label>
+		   <label for="exampleInputPassword1" >Password</label>
+		    <gwt:TextBox ui:field="txtPassword"></gwt:TextBox>
+		    <gwt:Label ui:field="lblMatricola" >Matricola</gwt:Label>
 		    <gwt:TextBox ui:field="txtMatricola"></gwt:TextBox>
-		    <label for="exampleInputPassword1" id="tipo" >Tipologia</label>
-		    <gwt:ListBox ui:field="menuTipo"></gwt:ListBox>
+		   
 		  </div>
 		  <div class="form-group" id="group">
 		    <label for="exampleInputPassword1">Cognome</label>

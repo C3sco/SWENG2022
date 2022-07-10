@@ -38,6 +38,10 @@ public interface GreetingServiceAsync {
 	void getDocenti(AsyncCallback<ArrayList<Docente>> callback) throws IllegalArgumentException;
 	
 	void getUtentiAll(AsyncCallback<ArrayList<Utente>> callback)throws IllegalArgumentException;
+	
+	void deleteUtente(String email, AsyncCallback<String> callback) throws IllegalArgumentException;
+	
+	void updateUtente(ArrayList<String> datiUtente,String email, AsyncCallback<String> callback)throws IllegalArgumentException;
 
 	/**
 	 * Metodi del corso

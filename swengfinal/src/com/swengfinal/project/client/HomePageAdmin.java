@@ -135,20 +135,20 @@ public class HomePageAdmin extends Composite {
 			}
 		};
 		cellTable.addColumn(emailColumn, "Email Studente");
-		/*
-		TextColumn<Utente> matricolaColumn=new TextColumn<Utente>() {
+		
+		TextColumn<Studente> matricolaColumn=new TextColumn<Studente>() {
 			
-			public String getValue(Utente obj) {
+			public String getValue(Studente obj) {
 				return obj.getMatricola();
 			}
 		};
 		
-		cellTable.addColumn(matricolaColumn, "Matricola");*/
+		cellTable.addColumn(matricolaColumn, "Matricola");
 		
 		TextColumn<Studente> nomeColumn=new TextColumn<Studente>() {
 			@Override
 			public String getValue(Studente obj) {
-				return obj.getCognome();
+				return obj.getNome();
 			}
 		};
 		cellTable.addColumn(nomeColumn, "Nome");
@@ -156,7 +156,7 @@ public class HomePageAdmin extends Composite {
 		TextColumn<Studente> cognomeColumn=new TextColumn<Studente>() {
 			@Override
 			public String getValue(Studente obj) {
-				return obj.getNome();
+				return obj.getCognome();
 			}
 		};
 		cellTable.addColumn(cognomeColumn, "Cognome");
@@ -164,7 +164,7 @@ public class HomePageAdmin extends Composite {
 		TextColumn<Studente> luogoColumn=new TextColumn<Studente>() {
 			@Override
 			public String getValue(Studente obj) {
-				return obj.getNome();
+				return obj.getLuogoNascita();
 			}
 		};
 		cellTable.addColumn(luogoColumn, "Luogo di Nascita");
@@ -172,7 +172,7 @@ public class HomePageAdmin extends Composite {
 		TextColumn<Studente> dataColumn=new TextColumn<Studente>() {
 			@Override
 			public String getValue(Studente obj) {
-				return obj.getCognome();
+				return obj.getDataNascita();
 			}
 		};
 		cellTable.addColumn(dataColumn, "Data di Nascita");

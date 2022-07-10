@@ -53,6 +53,30 @@ public abstract class Utente implements Serializable {
 		return this.dataNascita;		
 	}
 	
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+	
+	public void setDataNascita(String dataNascita) {
+		this.dataNascita = dataNascita;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public void setLuogoNascita(String luogoNascita) {
+		this.luogoNascita = luogoNascita;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 	
 
 }

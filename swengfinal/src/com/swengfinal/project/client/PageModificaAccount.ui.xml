@@ -83,7 +83,7 @@
 	    <div id="modificaAccount">
 	      <div class="form-group" id="group">
 		   <label for="exampleInputPassword1">Email</label>
-		    <gwt:TextBox ui:field="txtEmail"></gwt:TextBox>
+		    <gwt:ListBox ui:field="listUtenti"></gwt:ListBox>
 		    <label for="exampleInputPassword1" id="password">Password</label>
 		    <gwt:TextBox ui:field="txtPassword"></gwt:TextBox>
 		  </div>

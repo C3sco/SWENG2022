@@ -76,6 +76,16 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		return dbUtenti.getUtentiAll();
 	}
 	
+	@Override
+	public String deleteUtente(String email){
+		return dbUtenti.deleteUtente(email);
+	}
+	
+	@Override
+	public String updateUtente(ArrayList<String> utenteUpdate, String email) throws IllegalArgumentException {
+		return dbUtenti.modificaUtente(utenteUpdate, email);
+	}
+	
 	
 	// metodi corso
 	
