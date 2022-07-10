@@ -162,6 +162,11 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		return dbEsame.getEsami();
 	}
 	
+	@Override
+	public  ArrayList<String> getIscrizioniEsame(Integer idEsame) throws IllegalArgumentException{
+		return dbIscrizioneEsame.getIscrizioniEsame(idEsame);
+	}
+	
 	//metodo invio voto
 	
 	@Override

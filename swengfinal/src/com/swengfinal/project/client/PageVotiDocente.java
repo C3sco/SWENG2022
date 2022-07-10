@@ -22,6 +22,7 @@ import com.swengfinal.project.shared.Esame;
 public class PageVotiDocente extends Composite {
 
 	private static PageVotiDocenteUiBinder uiBinder = GWT.create(PageVotiDocenteUiBinder.class);
+	private static final ArrayList<String> iscrizioni = new ArrayList<String>();
 
 	@UiTemplate("PageVotiDocente.ui.xml")
 	interface PageVotiDocenteUiBinder extends UiBinder<Widget, PageVotiDocente> {
@@ -52,8 +53,7 @@ public class PageVotiDocente extends Composite {
 		fillistbox();
 	}
 	
-	void fillistbox()
-	{
+	void fillistbox() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
@@ -61,25 +61,42 @@ public class PageVotiDocente extends Composite {
 				public void onFailure(Throwable caught) {
 					Alert a = new Alert("Errore prendere corso");
 					System.out.println(a);
-
-
-				}
+				}	
 				
 				@Override
 				public void onSuccess(ArrayList<Esame> esami) {
 					for(int i=0;i<esami.size();i++)
 					{
 						menuEsame.addItem(esami.get(i).getNomeEsame());
-					}
-					
-
-				}
-
-					
+					}					
+				}					
 			});
 		}catch(Error e){
 			};
 	}
+	/*
+	 * BISOGNA PRENDERE L'ID DELL'ESAME DA METTERE IN INPUT
+	 * 
+	void getMailIscrittiEsame() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getIscrizioniEsame(id, new AsyncCallback<ArrayList<String>>() {
+				public void onFailure(Throwable caught) {
+					Alert a = new Alert("Errore prendere iscrizioni");
+					System.out.println(a);
+				}
+				
+				@Override
+				public void onSuccess(ArrayList<String> iscritti) {
+					for(int i=0;i<iscritti.size();i++) {
+						iscrizioni.add(iscritti.get(i));
+					}
+				}
+			});
+		}catch(Error e){
+			};
+	}*/
 	
 	@UiHandler("btnHome")
 	   void doClickSubmit(ClickEvent event) {

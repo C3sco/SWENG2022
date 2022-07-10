@@ -22,8 +22,10 @@ import com.swengfinal.project.shared.Utente;
 public class PageModificaAccount extends Composite {
 
 	private static PageModificaAccountUiBinder uiBinder = GWT.create(PageModificaAccountUiBinder.class);
-
+	private static Utente utente;
 	interface PageModificaAccountUiBinder extends UiBinder<Widget, PageModificaAccount> {
+	
+	
 	}
 
 	public PageModificaAccount() {
@@ -41,14 +43,7 @@ public class PageModificaAccount extends Composite {
 		btnLogout.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnLogout.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnLogout.getElement().getStyle().setMarginLeft(870.0, Unit.PX);
-		txtPassword.getElement().getStyle().setMarginLeft(27.0, Unit.PX);
-		listUtenti.getElement().getStyle().setMarginLeft(80.0, Unit.PX);
-		txtNome.getElement().getStyle().setMarginLeft(15.0, Unit.PX);
-		txtCognome.getElement().getStyle().setMarginLeft(58.0, Unit.PX);
-		txtLuogo.getElement().getStyle().setMarginLeft(15.0, Unit.PX);
-		txtData.getElement().getStyle().setMarginLeft(40.0, Unit.PX);
-		btnModificaAccount.getElement().getStyle().setMargin(10.0, Unit.PX);
-		btnEliminaAccount.getElement().getStyle().setMargin(10.0, Unit.PX);
+		
 		
 		addUtenti();
 		
@@ -83,17 +78,56 @@ public class PageModificaAccount extends Composite {
 	@UiHandler("btnModificaAccount")
 	void doClickCreaAccount(ClickEvent event) {
 		ArrayList<String>dati = new ArrayList<String>();
+		String email=menuUtenti.getSelectedValue();
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getUtente(Account.email, new AsyncCallback<Utente>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+				}
+				@Override
+				public void onSuccess(Utente user) {
+					utente = user;	 
+				}				
+			});
+		
+		if(txtPassword.getText()!="") {
+			dati.add(0, txtPassword.getText());
+		}else {
+			dati.add(0, utente.getPw());
+		}
+		if(txtCognome.getText()!="") {
+			dati.add(1, txtCognome.getText());
+		}else {
+			dati.add(0, utente.getCognome());
+		}
+		if(txtNome.getText()!="") {
+			dati.add(2, txtNome.getText());
+		}else {
+			dati.add(0, utente.getNome());
+		}
+		if(txtData.getText()!="") {
+			dati.add(3, txtData.getText());
+		}else {
+			dati.add(0, utente.getDataNascita());
+		}
+		if(txtLuogo.getText()!="") {
+			dati.add(4, txtLuogo.getText());
+		}else {
+			dati.add(0, utente.getLuogoNascita());
+		}
+		
 		dati.add(0,txtPassword.getText());
 		dati.add(1, txtCognome.getText());
 		dati.add(2, txtNome.getText());
 		dati.add(3, txtData.getText());
 		dati.add(4, txtLuogo.getText());
 		//Window.alert("Corso modificato");
-		String email=menuUtenti.getSelectedValue();
 		
-		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 		
-		greetingService.updateUtente(dati, email, new AsyncCallback<String>() {
+		final GreetingServiceAsync greetingService2 = GWT.create(GreetingService.class);
+		
+		greetingService2.updateUtente(dati, email, new AsyncCallback<String>() {
 			
 			public void onFailure(Throwable c) {
 				Alert a = new Alert("Errore:" + c);

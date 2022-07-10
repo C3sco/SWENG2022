@@ -19,46 +19,64 @@
 		
 		#modificaAccount{
 			
-			width: 50vw;
-			margin-top: 10vh;
-			margin-bottom: 5vh;
-			margin-left: 10vw;
-			border: 1px solid black;
+			display: grid;
+			background-color: lightblue;
+    		padding: 10px;
+    		row-gap: 20px;
+    		
+
+    		border-top-left-radius:     20px;
+			border-top-right-radius:    20px;
+			border-bottom-right-radius: 20px;
+			border-bottom-left-radius:  20px;
 	
+		}
+		#a1{
+			grid-row: 1;
+			grid-column: 1;
+		}
+		#a2{
+			grid-row: 1;
+			grid-column: 2;
+		}
+
+		#a3{
+			grid-row: 1;
+			grid-column: 3;
+		}
+		#a4{
+			grid-row: 2;
+			grid-column: 1;
+		}
+
+		#a5{
+			grid-row: 2;
+			grid-column: 2;
+		}
+		#a6{
+			grid-row: 2;
+			grid-column: 3;
+		}
+		#button1{
+			grid-row:3;
+			grid-column:2;
 		}
 		
 		#cancellazioneAccount{
-			width: 25vw;
-			height: 30vh;
-			margin-top: 10vh;
-			margin-bottom: 5vh;
-			margin-left: 5vw;
-			border: 1px solid black;
-			position: absolute;
-			left: 60vw;
-			top:30vh;
+			display: grid;
+			background-color: lightblue;
+    		padding: 10px;
+    		row-gap: 20px;
+    		text-align:center;
+    		
+
+    		border-top-left-radius:     20px;
+			border-top-right-radius:    20px;
+			border-bottom-right-radius: 20px;
+			border-bottom-left-radius:  20px;
 	
 		}
 		
-		#group{
-			margin:10px;
-		}
-		
-		#password{
-			margin-left:3vw;
-		}
-		
-		#tipo{
-			margin-left:3vw;
-		}
-		
-		#nome{
-			margin-left:6vw;
-		}
-		
-		#luogo{
-			margin-left:2vw;
-		}
 		
 	</ui:style>
 	<g:HTMLPanel>
@@ -80,35 +98,59 @@
                    />
 	       </li>
 	    </ul>
+	    
+	    <h1>Modifica Account</h1>
 	    <div id="modificaAccount">
-	      <div class="form-group" id="group">
+	    
+	      <div id="a1">
 		   <label for="exampleInputPassword1">Email</label>
 		    <gwt:ListBox ui:field="listUtenti"></gwt:ListBox>
+		    </div>
+		    
+		    <div id="a2">
 		    <label for="exampleInputPassword1" id="password">Password</label>
 		    <gwt:TextBox ui:field="txtPassword"></gwt:TextBox>
 		  </div>
-		  <div class="form-group" id="group">
+		  
+		  <div id="a3">
 		 <label for="exampleInputPassword1">Cognome</label>
 		    <gwt:TextBox ui:field="txtCognome"></gwt:TextBox>
+		    </div>
+		    
+		    <div id="a4">
 		    <label for="exampleInputPassword1" id="nome">Nome</label>
 		    <gwt:TextBox ui:field="txtNome"></gwt:TextBox>
 		  </div>
-		  <div class="form-group" id="group">
+		  
+		  <div id="a5">
 		    <label for="exampleInputPassword1">Data Nascita</label>
 		  <gwt:TextBox ui:field="txtData"></gwt:TextBox>
+		  </div>
+		  
+		  <div id="a6">
 		    <label for="exampleInputPassword1" id="luogo">Luogo Nascita</label>
 		    <gwt:TextBox ui:field="txtLuogo"></gwt:TextBox>
 		  </div>
-		 
+		  
+		 <div id="button1">
 		  <gwt:Button ui:field="btnModificaAccount" text="Modifca Account"></gwt:Button>
+		</div>
 		
 	    </div>
+	    <br></br>
+	    <br></br>
+	    <h1>Elimina Account</h1>
+	    
 	    <div id="cancellazioneAccount">
-	      <div class="form-group" id="group">
+	    
+	      <div id="a1">
 		    <label for="exampleInputPassword1" id="tipo" >Seleziona l'utente da eliminare</label><br></br>
 		    <gwt:ListBox ui:field="menuUtenti"></gwt:ListBox>
 		  </div>
+		  
+		  <div id="a2">
 		  <gwt:Button ui:field="btnEliminaAccount" text="Elimina Account"></gwt:Button>
+		  </div>
 	    </div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

@@ -80,6 +80,8 @@ public interface GreetingService extends RemoteService {
 	
 	ArrayList<Corso> getCorsi() throws IllegalArgumentException;
 	
+	ArrayList<String> getIscrizioniEsame(Integer idEsame) throws IllegalArgumentException;
+	
 	/**
 	 * Metodi voto
 	 */

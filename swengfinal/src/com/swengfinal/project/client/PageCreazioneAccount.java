@@ -48,16 +48,7 @@ public class PageCreazioneAccount extends Composite {
 		btnLogout.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnLogout.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnLogout.getElement().getStyle().setMarginLeft(870.0, Unit.PX);
-		menuTipo.getElement().getStyle().setMargin(20.0, Unit.PX);
-		lblMatricola.getElement().getStyle().setMarginLeft(27.0, Unit.PX);
-		txtPassword.getElement().getStyle().setMarginLeft(27.0, Unit.PX);
-		txtEmail.getElement().getStyle().setMarginLeft(80.0, Unit.PX);
-		txtMatricola.getElement().getStyle().setMarginLeft(60.0, Unit.PX);
-		txtNome.getElement().getStyle().setMarginLeft(15.0, Unit.PX);
-		txtCognome.getElement().getStyle().setMarginLeft(58.0, Unit.PX);
-		txtLuogo.getElement().getStyle().setMarginLeft(15.0, Unit.PX);
-		txtData.getElement().getStyle().setMarginLeft(40.0, Unit.PX);
-		btnCreazioneAccount.getElement().getStyle().setMargin(10.0, Unit.PX);
+		
 		addTipologia();
 	}
 	

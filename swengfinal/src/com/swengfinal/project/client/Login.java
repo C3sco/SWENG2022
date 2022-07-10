@@ -17,6 +17,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.swengfinal.project.shared.Amministratore;
 import com.swengfinal.project.shared.Docente;
+import com.swengfinal.project.shared.Segreteria;
 import com.swengfinal.project.shared.Studente;
 import com.swengfinal.project.shared.Utente;
 
@@ -115,6 +116,8 @@ public class Login extends Composite {
 				RootPanel.get("container").add(new HomePageDocente());
 			}else if(user instanceof Amministratore) {
 				RootPanel.get("container").add(new HomePageAdmin());
+			}else if(user instanceof Segreteria) {
+				RootPanel.get("container").add(new HomePageSegreteria());
 			}
 			
 			else {

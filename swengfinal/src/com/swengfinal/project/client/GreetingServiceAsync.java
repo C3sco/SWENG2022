@@ -77,6 +77,8 @@ public interface GreetingServiceAsync {
 	
 	void  getEsami(AsyncCallback<ArrayList<Esame>> callback) throws IllegalArgumentException;
 	
+	void getIscrizioniEsame(Integer idEsame,AsyncCallback<ArrayList<String>> callback) throws IllegalArgumentException; 
+	
 	/**
 	 * Metodi esame
 	 */

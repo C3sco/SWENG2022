@@ -244,7 +244,6 @@ public class dbUtenti {
 		if(dati.get(1).length()>=1)
 		{
 			utente.setCognome(dati.get(1));
-			
 		}
 		if(dati.get(2).length()>=1)
 		{

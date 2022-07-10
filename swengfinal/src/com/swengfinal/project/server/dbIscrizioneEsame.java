@@ -69,6 +69,22 @@ public class dbIscrizioneEsame {
 	}
 	
 	
+	/* Metodo che mi restituisce le mail degli studenti dato un esame, lo utilizziamo
+	 * nella pagina PageVotiDocenti
+	 */
+	public static ArrayList<String> getIscrizioniEsame(Integer idEsame){
+		DB db = getDB();
+		BTreeMap<Integer, IscrizioneEsame> iscrizioni = db.getTreeMap("IscrizioniEsame");
+		ArrayList<String> mailIscritti = new ArrayList<String>();
+		for(Entry<Integer,IscrizioneEsame> test : iscrizioni.entrySet()) {
+			if(test.getValue().getIdEsame()==idEsame) {
+				mailIscritti.add(test.getValue().getMailStudente());
+			}
+		}
+		return mailIscritti;
+	}
+	
+	
 	
 	
 	
