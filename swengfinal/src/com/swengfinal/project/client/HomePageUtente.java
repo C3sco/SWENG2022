@@ -82,7 +82,7 @@ public class HomePageUtente extends Composite {
 				}
 				@Override
 				public void onSuccess(ArrayList<Voto> output) {
-					
+					votiFinal.clear();
 					for(int i=0;i<output.size();i++) {
 						votiFinal.add(output.get(i));
 					}

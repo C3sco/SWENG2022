@@ -40,6 +40,8 @@ public class PageVoti extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 		
 		getUtente();
+		votiFinal=list;
+		addTable();
 		
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -58,10 +60,7 @@ public class PageVoti extends Composite {
 		cellTable.getElement().getStyle().setFontSize(24.0, Unit.PX);
 		cellTable.getElement().getStyle().setMarginTop(35.0, Unit.PX);
 		cellTable.getElement().getStyle().setMarginLeft(450.0, Unit.PX);
-		
-		votiFinal=list;
-		
-		addTable();
+
 	}
 	
 	
@@ -83,24 +82,27 @@ public class PageVoti extends Composite {
 			};
 	}
 	/*
-	private static class Voto{
-		private final String nomeEsame;
-		private final String voto;
-		private final String cfu;
-		
-		public Voto(String nomeEsame, String voto, String cfu) {
-			this.nomeEsame=nomeEsame;
-			this.voto=voto;
-			this.cfu=cfu;
-		}
-	}
-	
-	
-	private static final java.util.List<Voto> voti=Arrays.asList(
-				new Voto("Ingegneria del software","30", "6" )
-			);
-	*/
-public void addTable() {
+	public void getVoti() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getVoto(Account.matricola, new AsyncCallback<ArrayList<Voto>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+				}
+				@Override
+				public void onSuccess(ArrayList<Voto> votiOutput) {
+					votiFinal.clear();
+					for(int i=0;i<votiOutput.size();i++) {
+						votiFinal.add(votiOutput.get(i));
+					}
+				}		
+			});
+		}catch(Error e){
+			};
+	}*/
+
+	public void addTable() {
 		
 		TextColumn<Voto> esameColumn=new TextColumn<Voto>() {
 			@Override

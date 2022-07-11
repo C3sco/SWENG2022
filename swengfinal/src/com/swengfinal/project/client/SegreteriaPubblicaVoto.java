@@ -51,6 +51,7 @@ public class SegreteriaPubblicaVoto extends Composite {
 		
 		getStudenti();
 		newTableVoti();
+		getVoti();
 		
 	}
 	
@@ -134,40 +135,49 @@ public class SegreteriaPubblicaVoto extends Composite {
 		
 
 		ArrayList<String>dati = new ArrayList<String>();
-		dati.add(0,txtMatricola.getText());
-		dati.add(1, txtNomeEsame.getText());
-		dati.add(2, txtVoto.getText());
+		dati.clear();
 		
-		//Window.alert("Corso modificato");
-		
-		
-		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-		
-		greetingService.votoPubblicato(dati, new AsyncCallback<String>() {
-			
-			public void onFailure(Throwable c) {
-				Alert a = new Alert("Errore:" + c);
-				System.out.println(a);
-				RootPanel.get("container").clear();
-				RootPanel.get("container").add(new SegreteriaPubblicaVoto(listaVoti));
+		/* Controllo se il voto da pubblicare esiste già nel database dei voti inviati dal docente */
+		for(int i=0;i<listaVoti.size();i++) {
+			if(txtMatricola.getText()==listaVoti.get(i).getMatricola() && txtNomeEsame.getText()==listaVoti.get(i).getNomeEsame() && txtVoto.getText()==listaVoti.get(i).getVoto()) {
+				dati.add(0,txtMatricola.getText());
+				dati.add(1, txtNomeEsame.getText());
+				dati.add(2, txtVoto.getText());
 			}
+		}
+		
+		if(!dati.isEmpty()) {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 			
-			@Override
-			public void onSuccess(String result) {
-				if(result.equals("Successo")) {
-					getVoti();
+			greetingService.votoPubblicato(dati, new AsyncCallback<String>() {
+				
+				public void onFailure(Throwable c) {
+					Alert a = new Alert("Errore:" + c);
+					System.out.println(a);
 					RootPanel.get("container").clear();
-					Alert a = new Alert("Voto pubblicato con successo!");
-					System.out.println(a);
-				
 					RootPanel.get("container").add(new SegreteriaPubblicaVoto(listaVoti));
-				}else {
-					Alert a = new Alert("Errore!");
-					System.out.println(a);
-				} 	
+				}
 				
-			}
-		}); 
+				@Override
+				public void onSuccess(String result) {
+					if(result.equals("Successo")) {
+						
+						RootPanel.get("container").clear();
+						Alert a = new Alert("Voto pubblicato con successo!");
+						System.out.println(a);
+					
+						RootPanel.get("container").add(new SegreteriaPubblicaVoto(listaVoti));
+					}else {
+						Alert a = new Alert("Errore!");
+						System.out.println(a);
+					} 	
+					
+				}
+			}); 
+		}else {
+			Alert error = new Alert("Errore! I campi inseriti non sono corretti");
+			System.out.println(error);
+		}
 		
 		
 	}
@@ -177,7 +187,7 @@ public class SegreteriaPubblicaVoto extends Composite {
 
 		greetingService.getVotoAll(new AsyncCallback<ArrayList<Voto>>() {
 			public void onFailure(Throwable caught) {
-				Alert a = new Alert("Errore getStudenti");
+				Alert a = new Alert("Errore getVoti");
 				System.out.println(a);
 			}
 			@Override
@@ -209,7 +219,8 @@ public class SegreteriaPubblicaVoto extends Composite {
 	Button btnInserisciVoto;
 	
 	@UiField
-	Button btnPubblicaVoto;	
+	Button btnPubblicaVoto;
+
 	
 	@UiField
 	Button btnPubblicaVotoStudente;	
