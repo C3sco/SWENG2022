@@ -27,26 +27,26 @@ import com.swengfinal.project.shared.Voto;
 public class HomePageUtente extends Composite {
 
 	private static HomePageUtenteUiBinder uiBinder = GWT.create(HomePageUtenteUiBinder.class);
-	private static final ArrayList<Corso> corsiNomi = new ArrayList<Corso>();
+
 	private static final ArrayList<Esame> esamiStudenti = new ArrayList<Esame>();
 	private static  ArrayList<Voto> votiFinal = new ArrayList<Voto>();
+	private static final ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
 	
 
 	@UiTemplate("HomePageUtente.ui.xml")
 	interface HomePageUtenteUiBinder extends UiBinder<Widget, HomePageUtente> {
 	}
 
-	private static final ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
+	
 	
 	public HomePageUtente() {
 		initWidget(uiBinder.createAndBindUi(this));
 		getUtente();
-		getCorsi();
 		getEsami();
+		getCorsiDisponibili();
+		getVoti();
 		getCorsoStudente();
 		getEsamiStudente();
-		getVoti();
-		getCorsiDisponibili();
 		
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -62,17 +62,13 @@ public class HomePageUtente extends Composite {
 		btnLogout.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnLogout.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnLogout.getElement().getStyle().setMarginLeft(820.0, Unit.PX);
-
 		
 		
 		//getCorsiStudente();
 		
-
-			
-			
-			
 	}
 	
+	/* Prende tutti i corsi disponibili per lo studente */
 	public void getCorsiDisponibili() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -96,6 +92,7 @@ public class HomePageUtente extends Composite {
 			};
 	}
 	
+	/* Prende i voti associati ad uno studente */
 	public void getVoti() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -117,28 +114,8 @@ public class HomePageUtente extends Composite {
 			};
 	}
 	
-	public void getCorsi() {
-		try {
-			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
-			greetingService.getCorsi(new AsyncCallback<ArrayList<Corso>>() {
-				public void onFailure(Throwable caught) {
-					Window.alert("ERRORE! ");
-
-				}
-				@Override
-				public void onSuccess(ArrayList<Corso> corsi) {
-					corsiNomi.clear();
-					for(int i=0;i<corsi.size();i++) {
-						corsiNomi.add(corsi.get(i));
-
-					}
-				}
-			});
-		}catch(Error e){
-			};
-	}
-	
+	/* Prende una lista di esami */
 	public void getEsami() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -161,6 +138,8 @@ public class HomePageUtente extends Composite {
 			};
 	}
 	
+	
+	/* Prende i dati dell'utente e mostra nella homepage Nome,Cognome e Mail*/
 	public void getUtente() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -184,6 +163,7 @@ public class HomePageUtente extends Composite {
 			};
 	}
 	
+	/* Prende i corsi a cui l'utente è iscritto */
 	public void getCorsoStudente() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -196,25 +176,13 @@ public class HomePageUtente extends Composite {
 				@Override
 				public void onSuccess(ArrayList<Integer> idCorsi) {
 					String test = "";
-					for(int i=0;i<corsiNomi.size();i++) {
+					for(int i=0;i<corsiFinal.size();i++) {
 						for(int j=0;j<idCorsi.size();j++) {
-							if(idCorsi.get(j)==corsiNomi.get(i).getIdCorso()) {
-								test += corsiNomi.get(i).getNomeCorso() + " | ";
+							if(idCorsi.get(j)==corsiFinal.get(i).getIdCorso()) {
+								test += corsiFinal.get(i).getNomeCorso() + " | ";
 							}
 						}
 					}
-
-						
-						
-						/*
-						for(int j=0;j<corsiNomi.size();j++) {
-							if(corsiNomi.get(i).getIdCorso()==idCorsi.get(i)) {
-								test+= corsiNomi.get(i).getNomeCorso() + ",";
-							}
-						}*/
-						
-						
-					
 					lblCorsi.setText(test);
 
 				}

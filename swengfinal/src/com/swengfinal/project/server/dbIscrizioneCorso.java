@@ -12,7 +12,7 @@ import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.IscrizioneCorso;
 
 public class dbIscrizioneCorso {
-	
+	private static Integer tmp = 0;
 	private static DB getDB() {
 		DB db = DBMaker.newFileDB(new File("dbIscrizioneCorso1")).make();
 		return db;
@@ -32,14 +32,13 @@ public class dbIscrizioneCorso {
 			}
 		}
 		if(!found) {
-			iscrizioni.put(idCorso, iscrizione); // Aggiunta mail studente al relativo corso
+			tmp++;
+			iscrizioni.put(tmp, iscrizione); // Aggiunta mail studente al relativo corso
 			db.commit();
-			db.close();
 			return "Successo";
 			
 		}else {
 			db.commit();
-			db.close();
 			return "Errore";
 		}
 		
