@@ -38,7 +38,7 @@ import javax.swing.text.TableView.TableCell;
 
 
 public class PageCorsiDisponibili extends Composite{
-	private static final ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
+	private static ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
 	private static PageCorsiDisponibiliUiBinder uiBinder = GWT.create(PageCorsiDisponibiliUiBinder.class);
 	private static int tmp = 0;
 	private static final ArrayList<Voto> votiFinal = new ArrayList<Voto>();
@@ -47,13 +47,16 @@ public class PageCorsiDisponibili extends Composite{
 		
 	}
 
-	public PageCorsiDisponibili() {
+	public PageCorsiDisponibili(ArrayList<Corso> list) {
 		
 		initWidget(uiBinder.createAndBindUi(this));
-
-		getCorsi();
+		corsiFinal=list;
+		
 		newTable();
 		getVoti();
+		getCorsi();
+		
+		
 
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -78,7 +81,7 @@ public class PageCorsiDisponibili extends Composite{
 
 		
 
-		corsiFinal.clear();
+		
 	}
 	
 	/* Ritorna tutti i corsi disponibili per l'utente */
@@ -95,7 +98,7 @@ public class PageCorsiDisponibili extends Composite{
 				public void onSuccess(ArrayList<Corso> corsi) {
 					
 					for(int i=0;i<corsi.size();i++) {
-						corsiFinal.add(corsi.get(i));
+						//corsiFinal.add(corsi.get(i));
 						txtNomeCorso.addItem(corsi.get(i).getNomeCorso());
 					}
 				}
@@ -229,7 +232,7 @@ public class PageCorsiDisponibili extends Composite{
 	
 		});
 		RootPanel.get("container").clear();
-		RootPanel.get("container").add(new PageCorsiDisponibili());
+		RootPanel.get("container").add(new PageCorsiDisponibili(corsiFinal));
 	}
 	
 	@UiField

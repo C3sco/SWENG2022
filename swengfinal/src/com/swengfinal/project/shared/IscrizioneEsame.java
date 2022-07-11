@@ -9,10 +9,12 @@ public class IscrizioneEsame implements Serializable {
 	
 	private int idEsame;
 	private String mailStudente;
+	private int idIscrizione;
 	
-	public IscrizioneEsame(int idEsame, String mailStudente) {
+	public IscrizioneEsame(int idIscrizione, int idEsame, String mailStudente) {
 		this.idEsame=idEsame;
 		this.mailStudente=mailStudente;
+		this.idIscrizione=idIscrizione;
 	}
 	
 	public int getIdEsame() {
@@ -29,6 +31,18 @@ public class IscrizioneEsame implements Serializable {
 	
 	public void setMailStudente(String mailStudente) {
 		this.mailStudente = mailStudente;
+	}
+	
+	public int getIdIscrizione() {
+		return idIscrizione;
+	}
+	
+	public void setIdEsame(int idEsame) {
+		this.idEsame = idEsame;
+	}
+	
+	public void setIdIscrizione(int idIscrizione) {
+		this.idIscrizione = idIscrizione;
 	}
 
 }

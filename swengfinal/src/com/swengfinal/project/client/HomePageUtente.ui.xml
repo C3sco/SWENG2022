@@ -68,23 +68,23 @@
 	    <div id="infoUtente">
 	    	<p>
 	    		<label><b>Nome: </b></label>
-	    		<gwt:Label ui:field="lblNome" text="Martin"></gwt:Label>
+	    		<gwt:Label ui:field="lblNome" ></gwt:Label>
 	    	</p>
 	    	<p>
 	    		<label><b>Cognome: </b></label>
-	    		<gwt:Label ui:field="lblCognome" text="Martin"></gwt:Label>
+	    		<gwt:Label ui:field="lblCognome" ></gwt:Label>
 	    	</p>
 	    	<p>
 	    		<label><b>Mail: </b></label>
-	    		<gwt:Label ui:field="lblMail" text="Martin"></gwt:Label>
+	    		<gwt:Label ui:field="lblMail" ></gwt:Label>
 	    	</p>
 	    	<p>
 	    		<label><b>Corsi iscritti: </b></label>
-	    		<gwt:Label ui:field="lblCorsi" text="Martin"></gwt:Label>
+	    		<gwt:Label ui:field="lblCorsi" ></gwt:Label>
 	    	</p>
 	    	<p>
 	    		<label><b>Esami iscritti: </b></label>
-	    		<gwt:Label ui:field="lblEsami" text="Martin"></gwt:Label>
+	    		<gwt:Label ui:field="lblEsami" ></gwt:Label>
 	    	</p>
 	    </div>
 	</g:HTMLPanel>

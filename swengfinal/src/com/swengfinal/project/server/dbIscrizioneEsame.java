@@ -14,14 +14,14 @@ import com.swengfinal.project.shared.IscrizioneEsame;
 public class dbIscrizioneEsame {
 	
 	private static DB getDB() {
-		DB db = DBMaker.newFileDB(new File("dbIscrizioneEsame5")).make();
+		DB db = DBMaker.newFileDB(new File("dbIscrizioneEsame6")).make();
 		return db;
 	}
 	public static String iscrizioneEsame(Integer idEsame, String email) { 
 		DB db = getDB();
 		BTreeMap<Integer, IscrizioneEsame> iscrizioniEsami = db.getTreeMap("IscrizioniEsame");
 		
-		IscrizioneEsame iscrizione = new IscrizioneEsame(idEsame, email);
+		IscrizioneEsame iscrizione = new IscrizioneEsame(iscrizioniEsami.size(),idEsame, email);
 		boolean found = false;
 		
 		
@@ -38,6 +38,7 @@ public class dbIscrizioneEsame {
 			
 		}else 
 		db.commit();
+		db.close();
 		return "Errore";
 	}
 	

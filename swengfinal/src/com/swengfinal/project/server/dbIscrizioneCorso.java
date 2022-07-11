@@ -34,11 +34,15 @@ public class dbIscrizioneCorso {
 		if(!found) {
 			iscrizioni.put(idCorso, iscrizione); // Aggiunta mail studente al relativo corso
 			db.commit();
+			db.close();
 			return "Successo";
 			
-		}else 
-		db.commit();
-		return "Errore";
+		}else {
+			db.commit();
+			db.close();
+			return "Errore";
+		}
+		
 	}
 	
 	public static ArrayList<Integer> getCorsoStudente(String email){

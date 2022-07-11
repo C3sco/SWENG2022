@@ -30,6 +30,7 @@ public class PageVoti extends Composite {
 	private static PageVotiUiBinder uiBinder = GWT.create(PageVotiUiBinder.class);
 	private static  ArrayList<Voto> votiFinal = new ArrayList<Voto>();
 	public static Studente studente = new Studente();
+	private static ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
 	
 	@UiTemplate("PageVoti.ui.xml")
 	interface PageVotiUiBinder extends UiBinder<Widget, PageVoti> {
@@ -38,6 +39,8 @@ public class PageVoti extends Composite {
 	public PageVoti(ArrayList<Voto> list) {
 		
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		corsiFinal.clear();
 		
 		getUtente();
 		votiFinal=list;
@@ -60,6 +63,8 @@ public class PageVoti extends Composite {
 		cellTable.getElement().getStyle().setFontSize(24.0, Unit.PX);
 		cellTable.getElement().getStyle().setMarginTop(35.0, Unit.PX);
 		cellTable.getElement().getStyle().setMarginLeft(450.0, Unit.PX);
+		
+		getCorsiDisponibili();
 
 	}
 	
@@ -130,6 +135,28 @@ public class PageVoti extends Composite {
 		 
 	}
 	
+	public void getCorsiDisponibili() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getCorsi(new AsyncCallback<ArrayList<Corso>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Corso> corsi) {
+					
+					for(int i=0;i<corsi.size();i++) {
+						corsiFinal.add(corsi.get(i));
+						//txtNomeCorso.addItem(corsi.get(i).getNomeCorso());
+					}
+				}
+			});
+		}catch(Error e){
+			};
+	}
+	
 	@UiHandler("btnHome")
 	   void doClickSubmit(ClickEvent event) {
 			RootPanel.get("container").clear();
@@ -139,7 +166,7 @@ public class PageVoti extends Composite {
 	@UiHandler("btnIscrizione")
 	void doClickDip(ClickEvent event) {
 			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageCorsiDisponibili());
+			RootPanel.get("container").add(new PageCorsiDisponibili(corsiFinal));
 			
 	}
 	

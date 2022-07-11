@@ -26,6 +26,8 @@ import com.swengfinal.project.shared.Voto;
 public class RegistrazioneEsame extends Composite {
 
 	private static RegistrazioneEsameUiBinder uiBinder = GWT.create(RegistrazioneEsameUiBinder.class);
+	
+	private static ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
 
 	@UiTemplate("RegistrazioneEsame.ui.xml")
 	interface RegistrazioneEsameUiBinder extends UiBinder<Widget, RegistrazioneEsame> {
@@ -45,6 +47,8 @@ public class RegistrazioneEsame extends Composite {
 		getCorsiStudente();
 		addOptionMenuEsami();
 		
+		corsiFinal.clear();
+		
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnHome.getElement().getStyle().setWidth(70.0, Unit.PX);
@@ -59,8 +63,32 @@ public class RegistrazioneEsame extends Composite {
 		btnLogout.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnLogout.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnLogout.getElement().getStyle().setMarginLeft(820.0, Unit.PX);
+		
+		getCorsiDisponibili();
 			
 		
+	}
+	
+	public void getCorsiDisponibili() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getCorsi(new AsyncCallback<ArrayList<Corso>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Corso> corsi) {
+					
+					for(int i=0;i<corsi.size();i++) {
+						corsiFinal.add(corsi.get(i));
+						//txtNomeCorso.addItem(corsi.get(i).getNomeCorso());
+					}
+				}
+			});
+		}catch(Error e){
+			};
 	}
 
 	
@@ -141,7 +169,7 @@ public class RegistrazioneEsame extends Composite {
 	@UiHandler("btnIscrizione")
 	void doClickIscrizioneEsame(ClickEvent event) {
 		RootPanel.get("container").clear();
-		RootPanel.get("container").add(new PageCorsiDisponibili());
+		RootPanel.get("container").add(new PageCorsiDisponibili(corsiFinal));
 			
 	}
 	
