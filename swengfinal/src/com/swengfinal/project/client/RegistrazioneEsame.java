@@ -38,6 +38,8 @@ public class RegistrazioneEsame extends Composite {
 	private static final ArrayList<Integer> corsiStudenti = new ArrayList<Integer>();
 	
 	private static final ArrayList<Esame> esamiStudenti = new ArrayList<Esame>();
+	
+	private static final ArrayList<Integer> idCorsiDisponibileEsame = new ArrayList<Integer>();
 
 	public RegistrazioneEsame() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -45,9 +47,12 @@ public class RegistrazioneEsame extends Composite {
 		
 		getVoti();
 		getCorsiStudente();
-		addOptionMenuEsami();
+		getCorsiDisponibili();
+		getEsami();
+		getEsamiDisponibili();
+		//addOptionMenuEsami();
 		
-		corsiFinal.clear();
+		//corsiFinal.clear();
 		
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -64,11 +69,11 @@ public class RegistrazioneEsame extends Composite {
 		btnLogout.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnLogout.getElement().getStyle().setMarginLeft(820.0, Unit.PX);
 		
-		getCorsiDisponibili();
+		
 			
 		
 	}
-	
+	/* Ritorna tutti i corsi disponibili */
 	public void getCorsiDisponibili() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -80,7 +85,7 @@ public class RegistrazioneEsame extends Composite {
 				}
 				@Override
 				public void onSuccess(ArrayList<Corso> corsi) {
-					
+					corsiFinal.clear();
 					for(int i=0;i<corsi.size();i++) {
 						corsiFinal.add(corsi.get(i));
 						//txtNomeCorso.addItem(corsi.get(i).getNomeCorso());
@@ -92,7 +97,7 @@ public class RegistrazioneEsame extends Composite {
 	}
 
 	
-	/* Ritorna tutti i corsi disponibili per l'utente */
+	/* Ritorna tutti i corsi a cui l'utente è iscritto */
 	public void getCorsiStudente() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -104,7 +109,7 @@ public class RegistrazioneEsame extends Composite {
 				}
 				@Override
 				public void onSuccess(ArrayList<Integer> corsi) {
-					
+					corsiStudenti.clear();
 					for(int i=0;i<corsi.size();i++) {
 						corsiStudenti.add(corsi.get(i));
 					}
@@ -114,9 +119,8 @@ public class RegistrazioneEsame extends Composite {
 			};
 	}
 	
-	public void addOptionMenuEsami() {
-		
-		
+	/* Metodo per prendere una lista con tutti gli esami disponibili */
+	public void getEsami() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
@@ -130,13 +134,29 @@ public class RegistrazioneEsame extends Composite {
 					menuCorsi.clear();
 					for(int i=0;i<esami.size();i++) {
 						esamiStudenti.add(esami.get(i));
-						menuCorsi.addItem(esami.get(i).getNomeEsame());
-						
+						//menuCorsi.addItem(esami.get(i).getNomeEsame());	
 					}
 				}
 			});
 		}catch(Error e){
 			};
+	}
+	
+	public void getEsamiDisponibili() {
+		for(int i=0;i<corsiStudenti.size();i++) {
+			for(int j=0;j<esamiStudenti.size();j++) {
+				if(corsiStudenti.get(i)==esamiStudenti.get(j).getIdCorso()) {
+					idCorsiDisponibileEsame.add(corsiStudenti.get(i));
+				}
+			}
+		}
+		for(int i=0;i<idCorsiDisponibileEsame.size();i++) {
+			for(int j=0;j<corsiFinal.size();j++) {
+				if(idCorsiDisponibileEsame.get(i)==corsiFinal.get(i).getIdCorso()) {
+					menuCorsi.addItem(corsiFinal.get(i).getNomeCorso());
+				}
+			}
+		}
 	}
 	
 	public void getVoti() {
