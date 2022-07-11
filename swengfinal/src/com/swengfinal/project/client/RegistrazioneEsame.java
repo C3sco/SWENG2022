@@ -39,12 +39,12 @@ public class RegistrazioneEsame extends Composite {
 	
 	private static final ArrayList<Esame> esamiStudenti = new ArrayList<Esame>();
 	
-	private static final ArrayList<Integer> idCorsiDisponibileEsame = new ArrayList<Integer>();
+	//private static final ArrayList<Integer> idCorsiDisponibileEsame = new ArrayList<Integer>();
 
 	public RegistrazioneEsame() {
 		initWidget(uiBinder.createAndBindUi(this));
 		
-		
+		menuCorsi.clear();
 		getVoti();
 		getCorsiStudente();
 		getCorsiDisponibili();
@@ -131,7 +131,7 @@ public class RegistrazioneEsame extends Composite {
 				}
 				@Override
 				public void onSuccess(ArrayList<Esame> esami) {
-					menuCorsi.clear();
+					esamiStudenti.clear();
 					for(int i=0;i<esami.size();i++) {
 						esamiStudenti.add(esami.get(i));
 						//menuCorsi.addItem(esami.get(i).getNomeEsame());	
@@ -143,17 +143,12 @@ public class RegistrazioneEsame extends Composite {
 	}
 	
 	public void getEsamiDisponibili() {
-		for(int i=0;i<corsiStudenti.size();i++) {
-			for(int j=0;j<esamiStudenti.size();j++) {
+		menuCorsi.clear();
+		for(int i=0;i<corsiStudenti.size();i++) { // Integer
+			for(int j=0;j<esamiStudenti.size();j++) { // Esame
 				if(corsiStudenti.get(i)==esamiStudenti.get(j).getIdCorso()) {
-					idCorsiDisponibileEsame.add(corsiStudenti.get(i));
-				}
-			}
-		}
-		for(int i=0;i<idCorsiDisponibileEsame.size();i++) {
-			for(int j=0;j<corsiFinal.size();j++) {
-				if(idCorsiDisponibileEsame.get(i)==corsiFinal.get(i).getIdCorso()) {
-					menuCorsi.addItem(corsiFinal.get(i).getNomeCorso());
+					menuCorsi.addItem(esamiStudenti.get(j).getNomeEsame());
+
 				}
 			}
 		}
