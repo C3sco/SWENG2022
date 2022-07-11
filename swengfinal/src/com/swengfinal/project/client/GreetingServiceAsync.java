@@ -80,12 +80,16 @@ public interface GreetingServiceAsync {
 	void getIscrizioniEsame(Integer idEsame,AsyncCallback<ArrayList<String>> callback) throws IllegalArgumentException; 
 	
 	/**
-	 * Metodi esame
+	 * Metodi voti
 	 */
 	void addVoto(ArrayList<String> dati, AsyncCallback<String>callback) throws IllegalArgumentException;
 	
 	void getVoto(String matricola, AsyncCallback<ArrayList<Voto>> callback) throws IllegalArgumentException;
+	
+	void getVotoAll(AsyncCallback<ArrayList<Voto>> callback) throws IllegalArgumentException;
 
 	void getDatabase(AsyncCallback<String> callback) throws IllegalArgumentException;
+	
+	void votoPubblicato(ArrayList<String> dati, AsyncCallback<String>callback) throws IllegalArgumentException;
 
 }

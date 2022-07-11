@@ -22,12 +22,14 @@ import com.google.gwt.user.client.ui.Widget;
 import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.Esame;
 import com.swengfinal.project.shared.Utente;
+import com.swengfinal.project.shared.Voto;
 
 public class HomePageUtente extends Composite {
 
 	private static HomePageUtenteUiBinder uiBinder = GWT.create(HomePageUtenteUiBinder.class);
 	private static final ArrayList<Corso> corsiNomi = new ArrayList<Corso>();
 	private static final ArrayList<Esame> esamiStudenti = new ArrayList<Esame>();
+	private static  ArrayList<Voto> votiFinal = new ArrayList<Voto>();
 
 	@UiTemplate("HomePageUtente.ui.xml")
 	interface HomePageUtenteUiBinder extends UiBinder<Widget, HomePageUtente> {
@@ -42,7 +44,7 @@ public class HomePageUtente extends Composite {
 		getEsami();
 		getCorsoStudente();
 		getEsamiStudente();
-		
+		getVoti();
 		
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -67,6 +69,27 @@ public class HomePageUtente extends Composite {
 			
 			
 			
+	}
+	
+	public void getVoti() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getVoto(Account.matricola, new AsyncCallback<ArrayList<Voto>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Voto> output) {
+					
+					for(int i=0;i<output.size();i++) {
+						votiFinal.add(output.get(i));
+					}
+				}
+			});
+		}catch(Error e){
+			};
 	}
 	
 	public void getCorsi() {
@@ -248,7 +271,7 @@ public class HomePageUtente extends Composite {
 	@UiHandler("btnVoti")
 	void doClickHome(ClickEvent event) {
 			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageVoti());
+			RootPanel.get("container").add(new PageVoti(votiFinal));
 	}
 	
 	@UiHandler("btnLogout")

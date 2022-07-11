@@ -16,17 +16,22 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.swengfinal.project.shared.Studente;
+import com.swengfinal.project.shared.Voto;
 
 public class HomePageSegreteria extends Composite {
 
 	private static HomePageSegreteriaUiBinder uiBinder = GWT.create(HomePageSegreteriaUiBinder.class);
-	private static final ArrayList<Studente> listaStudenti = new ArrayList<Studente>();
+	private static ArrayList<Studente> listaStudenti = new ArrayList<Studente>();
+	
+	private static ArrayList<Voto> listaVoti = new ArrayList<Voto>();
 
 	interface HomePageSegreteriaUiBinder extends UiBinder<Widget, HomePageSegreteria> {
 	}
 
-	public HomePageSegreteria() {
+	public HomePageSegreteria(ArrayList<Studente> list) {
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		getVoti();
 		
 		btnHomeSegreteria.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHomeSegreteria.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -45,32 +50,35 @@ public class HomePageSegreteria extends Composite {
 		cellTable.getElement().getStyle().setFontSize(24.0, Unit.PX);
 		cellTable.getElement().getStyle().setMarginTop(35.0, Unit.PX);
 		
+		listaStudenti=list;
 
-
-		getStudenti();
+		//getStudenti();
 		newTableStudente();
 
 
 	}
-	public void getStudenti() {
+	
+	
+	public void getVoti() {
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
-		greetingService.getStudenti(new AsyncCallback<ArrayList<Studente>>() {
+		greetingService.getVotoAll(new AsyncCallback<ArrayList<Voto>>() {
 			public void onFailure(Throwable caught) {
 				Alert a = new Alert("Errore getStudenti");
 				System.out.println(a);
 			}
 			@Override
-			public void onSuccess(ArrayList<Studente> output) {
-				listaStudenti.clear();
+			public void onSuccess(ArrayList<Voto> output) {
+				listaVoti.clear();
 				for(int i=0;i<output.size();i++) {					
-					listaStudenti.add(output.get(i));
+					listaVoti.add(output.get(i));
 					
 
 				}
 			}	
 		});
 	}
+	
 	public void newTableStudente() {
 		
 
@@ -130,7 +138,7 @@ public class HomePageSegreteria extends Composite {
 	@UiHandler("btnHomeSegreteria")
 	void doClickHome(ClickEvent event) {
 		RootPanel.get("container").clear();
-		RootPanel.get("container").add(new HomePageSegreteria());
+		RootPanel.get("container").add(new HomePageSegreteria(listaStudenti));
 	}
 		
 	@UiHandler("btnInserisciVoto")
@@ -142,7 +150,7 @@ public class HomePageSegreteria extends Composite {
 	@UiHandler("btnPubblicaVoto")
 	void doClickPubblicVoto(ClickEvent event) {
 		RootPanel.get("container").clear();
-		RootPanel.get("container").add(new SegreteriaPubblicaVoto());
+		RootPanel.get("container").add(new SegreteriaPubblicaVoto(listaVoti));
 	}
 
 	@UiHandler("btnLogout")

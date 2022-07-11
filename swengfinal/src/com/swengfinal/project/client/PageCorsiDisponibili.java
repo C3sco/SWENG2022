@@ -27,6 +27,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.swengfinal.project.shared.Corso;
+import com.swengfinal.project.shared.Voto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,6 +41,7 @@ public class PageCorsiDisponibili extends Composite{
 	private static final ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
 	private static PageCorsiDisponibiliUiBinder uiBinder = GWT.create(PageCorsiDisponibiliUiBinder.class);
 	private static int tmp = 0;
+	private static final ArrayList<Voto> votiFinal = new ArrayList<Voto>();
 	@UiTemplate("PageCorsiDisponibili.ui.xml")
 	interface PageCorsiDisponibiliUiBinder extends UiBinder<Widget, PageCorsiDisponibili> {
 		
@@ -51,7 +53,7 @@ public class PageCorsiDisponibili extends Composite{
 
 		getCorsi();
 		newTable();
-		
+		getVoti();
 
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -95,6 +97,27 @@ public class PageCorsiDisponibili extends Composite{
 					for(int i=0;i<corsi.size();i++) {
 						corsiFinal.add(corsi.get(i));
 						txtNomeCorso.addItem(corsi.get(i).getNomeCorso());
+					}
+				}
+			});
+		}catch(Error e){
+			};
+	}
+	
+	public void getVoti() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getVoto(Account.matricola, new AsyncCallback<ArrayList<Voto>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Voto> output) {
+					
+					for(int i=0;i<output.size();i++) {
+						votiFinal.add(output.get(i));
 					}
 				}
 			});
@@ -168,7 +191,7 @@ public class PageCorsiDisponibili extends Composite{
 	@UiHandler("btnVoti")
 	void doClickHome(ClickEvent event) {
 			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageVoti());
+			RootPanel.get("container").add(new PageVoti(votiFinal));
 	}
 	
 	@UiHandler("btnLogout")

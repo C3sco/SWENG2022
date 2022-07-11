@@ -1,6 +1,8 @@
 package com.swengfinal.project.client;
 
 
+import java.util.ArrayList;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -23,6 +25,8 @@ import com.swengfinal.project.shared.Utente;
 
 public class Login extends Composite {
 	private static LoginUiBinder uiBinder = GWT.create(LoginUiBinder.class);
+	
+	private static final ArrayList<Studente> listaStudenti = new ArrayList<Studente>();
 
 	@UiTemplate("Login.ui.xml")
 	interface LoginUiBinder extends UiBinder<Widget, Login> {
@@ -32,6 +36,8 @@ public class Login extends Composite {
 
 	public Login() {
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		getStudenti();
 		
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -84,6 +90,26 @@ public class Login extends Composite {
 			RootPanel.get("container").add(new Registrazione());
 	   }
 	
+	public void getStudenti() {
+		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+		greetingService.getStudenti(new AsyncCallback<ArrayList<Studente>>() {
+			public void onFailure(Throwable caught) {
+				Alert a = new Alert("Errore getStudenti");
+				System.out.println(a);
+			}
+			@Override
+			public void onSuccess(ArrayList<Studente> output) {
+				listaStudenti.clear();
+				for(int i=0;i<output.size();i++) {					
+					listaStudenti.add(output.get(i));
+					
+
+				}
+			}	
+		});
+	}
+	
 	@UiHandler("btnSubmit")
 	void doClickLogin(ClickEvent event) {
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -117,7 +143,7 @@ public class Login extends Composite {
 			}else if(user instanceof Amministratore) {
 				RootPanel.get("container").add(new HomePageAdmin());
 			}else if(user instanceof Segreteria) {
-				RootPanel.get("container").add(new HomePageSegreteria());
+				RootPanel.get("container").add(new HomePageSegreteria(listaStudenti));
 			}
 			
 			else {

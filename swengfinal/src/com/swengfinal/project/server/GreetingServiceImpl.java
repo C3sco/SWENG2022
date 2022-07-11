@@ -180,8 +180,18 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	}
 	
 	@Override
+	public ArrayList<Voto> getVotoAll() throws IllegalArgumentException {
+		return dbVoto.getVotiAll();
+	}
+	
+	@Override
 	public String getDatabase() throws IllegalArgumentException {
 		return dbUtenti.getDatabase();
+	}
+	
+	@Override
+	public String votoPubblicato(ArrayList<String> dati) throws IllegalArgumentException {
+		return dbVoto.votoPubblicato(dati);
 	}
 	
 }

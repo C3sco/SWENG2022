@@ -28,14 +28,14 @@ import com.swengfinal.project.shared.Utente;
 public class PageVoti extends Composite {
 
 	private static PageVotiUiBinder uiBinder = GWT.create(PageVotiUiBinder.class);
-	private static final ArrayList<Voto> votiFinal = new ArrayList<Voto>();
+	private static  ArrayList<Voto> votiFinal = new ArrayList<Voto>();
 	public static Studente studente = new Studente();
 	
 	@UiTemplate("PageVoti.ui.xml")
 	interface PageVotiUiBinder extends UiBinder<Widget, PageVoti> {
 	}
 
-	public PageVoti() {
+	public PageVoti(ArrayList<Voto> list) {
 		
 		initWidget(uiBinder.createAndBindUi(this));
 		
@@ -59,30 +59,12 @@ public class PageVoti extends Composite {
 		cellTable.getElement().getStyle().setMarginTop(35.0, Unit.PX);
 		cellTable.getElement().getStyle().setMarginLeft(450.0, Unit.PX);
 		
+		votiFinal=list;
 		
 		addTable();
 	}
 	
-	public void getVoti() {
-		try {
-			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-
-			greetingService.getVoto(studente.getMatricola(), new AsyncCallback<ArrayList<Voto>>() {
-				public void onFailure(Throwable caught) {
-					Window.alert("ERRORE!");
-
-				}
-				@Override
-				public void onSuccess(ArrayList<Voto> output) {
-					
-					for(int i=0;i<output.size();i++) {
-						votiFinal.add(output.get(i));
-					}
-				}
-			});
-		}catch(Error e){
-			};
-	}
+	
 	
 	public void getUtente() {
 		try {
@@ -136,16 +118,7 @@ public void addTable() {
 		};
 		cellTable.addColumn(votoColumn, "Voto");
 		
-		TextColumn<Voto> cfuColumn=new TextColumn<Voto>() {
-			
-			public String getValue(Voto obj) {
-				return obj.getVoto();
-			}
-			
-		  
-		};
 		
-		cellTable.addColumn(cfuColumn, "Cfu");
 		//cellTable.
 		
 		 cellTable.setRowCount(votiFinal.size(), true);
@@ -177,7 +150,7 @@ public void addTable() {
 	@UiHandler("btnVoti")
 	void doClickHome(ClickEvent event) {
 			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageVoti());
+			RootPanel.get("container").add(new PageVoti(votiFinal));
 	}
 	
 	@UiHandler("btnLogout")

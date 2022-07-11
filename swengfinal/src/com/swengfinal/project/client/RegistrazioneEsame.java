@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.Esame;
+import com.swengfinal.project.shared.Voto;
 
 public class RegistrazioneEsame extends Composite {
 
@@ -30,6 +31,8 @@ public class RegistrazioneEsame extends Composite {
 	interface RegistrazioneEsameUiBinder extends UiBinder<Widget, RegistrazioneEsame> {
 	}
 	
+	private static  ArrayList<Voto> votiFinal = new ArrayList<Voto>();
+	
 	private static final ArrayList<Integer> corsiStudenti = new ArrayList<Integer>();
 	
 	private static final ArrayList<Esame> esamiStudenti = new ArrayList<Esame>();
@@ -38,7 +41,7 @@ public class RegistrazioneEsame extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 		
 		
-
+		getVoti();
 		getCorsiStudente();
 		addOptionMenuEsami();
 		
@@ -108,6 +111,27 @@ public class RegistrazioneEsame extends Composite {
 			};
 	}
 	
+	public void getVoti() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getVoto(Account.matricola, new AsyncCallback<ArrayList<Voto>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Voto> output) {
+					
+					for(int i=0;i<output.size();i++) {
+						votiFinal.add(output.get(i));
+					}
+				}
+			});
+		}catch(Error e){
+			};
+	}
+	
 	@UiHandler("btnHome")
 	   void doClickSubmit(ClickEvent event) {
 			RootPanel.get("container").clear();
@@ -130,7 +154,7 @@ public class RegistrazioneEsame extends Composite {
 	@UiHandler("btnVoti")
 	void doClickHome(ClickEvent event) {
 			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageVoti());
+			RootPanel.get("container").add(new PageVoti(votiFinal));
 	}
 	
 	@UiHandler("btnLogout")

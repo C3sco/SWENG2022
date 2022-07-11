@@ -10,6 +10,7 @@ import org.mapdb.DBMaker;
 
 import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.Esame;
+import com.swengfinal.project.shared.Utente;
 import com.swengfinal.project.shared.Voto;
 
 public class dbVoto {
@@ -57,11 +58,60 @@ public class dbVoto {
 		ArrayList<Voto> votiOutput = new ArrayList<Voto>();
 		for(Entry<Integer, Voto> test : voti.entrySet()) {
 			if(matricola.equals(test.getValue().getMatricola())) {
+				if(test.getValue().getPubblicato()) {
 					votiOutput.add(test.getValue());
+				}
+					
 			}
 		}
 		
 		return votiOutput;
 	}
+	
+	public static ArrayList<Voto> getVotiAll(){
+		DB db = getDB();
+		BTreeMap<Integer, Voto> voti = db.getTreeMap("VotiMap");
+		ArrayList<Voto> output = new ArrayList<Voto>();
+		for(Entry<Integer,Voto> test : voti.entrySet()) {
+				if(!test.getValue().getPubblicato()) {
+					output.add(test.getValue());
+				}
+				
+			}
+		return output;
+	}
+	
+	public static String votoPubblicato(ArrayList<String> dati) {
+		DB db = getDB();
+		BTreeMap<Integer, Voto> voti = db.getTreeMap("VotiMap");
+		
+		Voto voto=new Voto();
+		int id=0;
+		for(Entry<Integer,Voto> test : voti.entrySet()) {
+				if(dati.get(0).equals(test.getValue().getMatricola()) && dati.get(1).equals(test.getValue().getNomeEsame())) {
+					voto=test.getValue();
+					voto.setPubblicato(true);
+					id=test.getValue().getIdVoto();
+					voti.remove(id);
+				}
+				
+			}
+		
+		
+		voti.put(id, voto);
+		
+		
+		db.commit();
+		db.close();
+		
+		return "Successo";
+		
+		
+		
+		
+		
+	}
+	
+	
 
 }
