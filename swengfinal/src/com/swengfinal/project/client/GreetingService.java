@@ -94,6 +94,8 @@ public interface GreetingService extends RemoteService {
 	String votoPubblicato(ArrayList<String> dati) throws IllegalArgumentException;
 	
 	String getDatabase() throws IllegalArgumentException;
+	
+	String eliminaVoto(Voto voto)  throws IllegalArgumentException;
 }
 
 

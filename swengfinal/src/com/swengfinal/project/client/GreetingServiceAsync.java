@@ -92,4 +92,5 @@ public interface GreetingServiceAsync {
 	
 	void votoPubblicato(ArrayList<String> dati, AsyncCallback<String>callback) throws IllegalArgumentException;
 
+	void eliminaVoto(Voto voto, AsyncCallback<String> callback)  throws IllegalArgumentException;
 }

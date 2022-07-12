@@ -138,6 +138,13 @@ public class dbEsame {
 		
 		return esamiAll;
 	}
+	public static void clearDBEsami() {
+		DB db = getDB();
+		BTreeMap<Integer, Esame> esami = db.getTreeMap("EsamiMap");
+		esami.clear();
+		db.commit();
+		db.close();
+	}
 	
 	
 }

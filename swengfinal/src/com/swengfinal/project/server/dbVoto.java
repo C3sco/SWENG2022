@@ -15,7 +15,7 @@ import com.swengfinal.project.shared.Voto;
 
 public class dbVoto {
 	
-	private static DB getDB() {
+	public static DB getDB() {
 		DB db = DBMaker.newFileDB(new File("dbVoto")).make();
 		return db;
 	}
@@ -96,20 +96,32 @@ public class dbVoto {
 				}
 				
 			}
-		
-		
+
 		voti.put(id, voto);
-		
-		
 		db.commit();
 		db.close();
 		
 		return "Successo";
-		
-		
-		
-		
-		
+
+	}
+	
+	public static String eliminaVoto(Voto voto) {
+		DB db = getDB();
+		BTreeMap<Integer, Voto> voti = db.getTreeMap("VotiMap");
+		for(Entry<Integer,Voto> test : voti.entrySet()) {
+			if(voto==test.getValue()) {
+				voti.remove(test.getKey());
+				
+				}
+			}return("Successo");
+		}
+	
+	public static void clearDBVoti() {
+		DB db = getDB();
+		BTreeMap<Integer, Voto> voti = db.getTreeMap("VotiMap");
+		voti.clear();
+		db.commit();
+		db.close();
 	}
 	
 	

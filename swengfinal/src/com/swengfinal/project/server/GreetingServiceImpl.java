@@ -194,6 +194,10 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		return dbVoto.votoPubblicato(dati);
 	}
 	
+	public String eliminaVoto(Voto voto) throws IllegalArgumentException {
+		return dbVoto.eliminaVoto(voto);
+	}
+	
 	//testing junit
 	
 	private GreetingService mock = null;
@@ -208,6 +212,14 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	
 	public void tryUser() {
 		dbUtenti.tryUser();
+	}
+	
+	public void clearDBVoti() {
+		dbVoto.clearDBVoti();
+	}
+	
+	public void clearDBEsami() {
+		dbEsame.clearDBEsami();
 	}
 	
 }
