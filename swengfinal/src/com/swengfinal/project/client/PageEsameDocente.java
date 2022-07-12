@@ -18,11 +18,16 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.swengfinal.project.shared.Corso;
+import com.swengfinal.project.shared.Esame;
 
 public class PageEsameDocente extends Composite {
 
 	private static PageEsameDocenteUiBinder uiBinder = GWT.create(PageEsameDocenteUiBinder.class);
 	private static final ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
+	
+	private static final ArrayList<Esame> esamiFinal = new ArrayList<Esame>();
+	
+	private Esame esame;
 
 	@UiTemplate("PageEsameDocente.ui.xml")
 	interface PageEsameDocenteUiBinder extends UiBinder<Widget, PageEsameDocente> {
@@ -107,6 +112,28 @@ public class PageEsameDocente extends Composite {
 					
 					for(int i=0;i<corsi.size();i++) {
 						corsiFinal.add(corsi.get(i));	
+					}
+				}
+		
+			});
+		}catch(Error e){
+			};
+	}
+	
+	public void getEsami() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getEsami(new AsyncCallback<ArrayList<Esame>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Esame> esami) {
+					
+					for(int i=0;i<esami.size();i++) {
+						esamiFinal.add(esami.get(i));	
 					}
 				}
 		
@@ -237,12 +264,38 @@ public class PageEsameDocente extends Composite {
 	@UiHandler("btnUpdate")
 	void doClickUpdate(ClickEvent event) {
 		ArrayList<String>dati = new ArrayList<String>();
-		dati.add(0,txtUpdateData.getText());
-		dati.add(1, txtUpdateOra.getText());
-		dati.add(2, txtUpdateCfu.getText());
-		dati.add(3, txtUpdateAula.getText());
 		
-		String nomeCorso=menuUpdateCorsi.getSelectedValue();
+		String nomeEsame=menuUpdateCorsi.getSelectedValue();
+		
+		
+		
+		for(int i=0; i<esamiFinal.size(); i++) {
+			if(esamiFinal.get(i).getNomeEsame().equals(nomeEsame)){
+				esame=esamiFinal.get(i);
+			}
+		}
+		
+		
+		if(txtUpdateData.getText()!="") {
+			dati.add(0, txtUpdateData.getText());
+		}else {
+			dati.add(0, esame.getData());
+		}
+		if(txtUpdateOra.getText()!="") {
+			dati.add(1, txtUpdateOra.getText());
+		}else {
+			dati.add(1, esame.getOra());
+		}
+		if(txtUpdateCfu.getText()!="") {
+			dati.add(2, txtUpdateCfu.getText());
+		}else {
+			dati.add(2, esame.getCfu());
+		}
+		if(txtUpdateAula.getText()!="") {
+			dati.add(3, txtUpdateAula.getText());
+		}else {
+			dati.add(3, esame.getAula());
+		}
 		
 		int id=0;
 		for(int i=0;i<corsiFinal.size();i++) {

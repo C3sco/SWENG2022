@@ -154,10 +154,10 @@ public class PageVotiDocente extends Composite {
 				@Override
 				public void onSuccess(String result) {
 					if(result.equals("Successo")) {
-						
+						RootPanel.get("container").clear();
 						Alert a = new Alert("Voto inviato alla segreteria!");
 					 	System.out.println(a);
-					 	RootPanel.get("container").clear();
+					 	
 						RootPanel.get("container").add(new PageVotiDocente());
 					}else if(result.equals("Errore")){
 						RootPanel.get("container").clear();

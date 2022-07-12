@@ -26,6 +26,10 @@ public class PageCorsoDocente extends Composite {
 	static int idCorso = 100;
 
 	private static PageCorsoDocenteUiBinder uiBinder = GWT.create(PageCorsoDocenteUiBinder.class);
+	
+	private Corso corso;
+	
+	private static ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
 
 	@UiTemplate("PageCorsoDocente.ui.xml")
 	interface PageCorsoDocenteUiBinder extends UiBinder<Widget, PageCorsoDocente> {
@@ -33,6 +37,8 @@ public class PageCorsoDocente extends Composite {
 
 	public PageCorsoDocente() {
 		initWidget(uiBinder.createAndBindUi(this));
+		
+		getCorsi();
 		
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -65,6 +71,29 @@ public class PageCorsoDocente extends Composite {
 		fillistbox();
 		
 		
+	}
+	
+	/* Ritorna tutti i corsi disponibili per l'utente */
+	public void getCorsi() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getCorsi(new AsyncCallback<ArrayList<Corso>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Corso> corsi) {
+					
+					for(int i=0;i<corsi.size();i++) {
+						corsiFinal.add(corsi.get(i));
+						
+					}
+				}
+			});
+		}catch(Error e){
+			};
 	}
 	
 	
@@ -213,12 +242,41 @@ public class PageCorsoDocente extends Composite {
 	void doClickUpdate(ClickEvent event) {
 		
 			ArrayList<String>dati = new ArrayList<String>();
-			dati.add(0,txtUpdateDescrizione.getText());
-			dati.add(1, txtUpdateDataInizio.getText());
-			dati.add(2, txtUpdateDataFine.getText());
-			dati.add(3, txtUpdateCoDocente.getText());
-			//Window.alert("Corso modificato");
+			
 			String nomeCorso=menuCorsi.getSelectedValue();
+			
+			for(int i=0; i<corsiFinal.size(); i++) {
+				if(corsiFinal.get(i).getNomeCorso().equals(nomeCorso)){
+					corso=corsiFinal.get(i);
+				}
+			}
+			
+			
+			if(txtUpdateDescrizione.getText()!="") {
+				dati.add(0, txtUpdateDescrizione.getText());
+			}else {
+				dati.add(0, corso.getDescrizione());
+			}
+			if(txtUpdateDataInizio.getText()!="") {
+				dati.add(1, txtUpdateDataInizio.getText());
+			}else {
+				dati.add(1, corso.getDataInizio());
+			}
+			if(txtUpdateDataFine.getText()!="") {
+				dati.add(2, txtUpdateDataFine.getText());
+			}else {
+				dati.add(2, corso.getDataFine());
+			}
+			if(txtUpdateCoDocente.getText()!="") {
+				dati.add(3, txtUpdateCoDocente.getText());
+			}else {
+				dati.add(3, corso.getCoDocente());
+			}
+			
+			
+			
+			//Window.alert("Corso modificato");
+			
 			
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 			

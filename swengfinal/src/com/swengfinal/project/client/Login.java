@@ -14,6 +14,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
@@ -177,7 +178,7 @@ public class Login extends Composite {
 	TextBox txtMail;
 	
 	@UiField
-	TextBox txtPassword;
+	PasswordTextBox txtPassword;
 	
 	@UiField
 	Button btnSubmit;

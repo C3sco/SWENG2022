@@ -16,7 +16,7 @@ import com.swengfinal.project.shared.Voto;
 public class dbVoto {
 	
 	private static DB getDB() {
-		DB db = DBMaker.newFileDB(new File("dbVoti7")).make();
+		DB db = DBMaker.newFileDB(new File("dbVoto")).make();
 		return db;
 	}
 	

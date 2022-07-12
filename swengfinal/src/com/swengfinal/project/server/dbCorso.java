@@ -15,7 +15,7 @@ import java.util.Map.Entry;
 public class dbCorso {
 
 	private static DB getDB() {
-		DB db = DBMaker.newFileDB(new File("dbCorsi2")).make();
+		DB db = DBMaker.newFileDB(new File("dbCorso")).make();
 		return db;
 	}
 	
