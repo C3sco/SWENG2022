@@ -23,7 +23,7 @@ import java.util.Map.Entry;
 
 public class dbUtenti {
 	private static DB getDB() {
-		DB db = DBMaker.newFileDB(new File("dbUsers")).make();
+		DB db = DBMaker.newFileDB(new File("dbUsersTest")).make();
 		return db;
 	}
 	

@@ -208,7 +208,6 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 	
 	public void tryUser() {
 		dbUtenti.tryUser();
-		
 	}
 	
 }
