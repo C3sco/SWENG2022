@@ -265,5 +265,17 @@ public class dbUtenti {
 		return "Successo";
 		
 	}
+	// TESTING JUNIT
+	
+	public static void tryUser() {
+		DB db = getDB();
+		BTreeMap<String, Utente> utenti = db.getTreeMap("UtentiMap");
+		
+		Amministratore admin = new Amministratore("admi","admi","admi","admi","admi","admi");
+		utenti.put(admin.getEmail(), admin);
+		db.commit();
+		db.close();
+		
+	}
 
 }

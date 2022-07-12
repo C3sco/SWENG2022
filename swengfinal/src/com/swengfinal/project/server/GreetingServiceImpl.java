@@ -194,4 +194,21 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 		return dbVoto.votoPubblicato(dati);
 	}
 	
+	//testing junit
+	
+	private GreetingService mock = null;
+	
+	public GreetingService getMock() {
+		return mock;
+	}
+	
+	public void setMock(GreetingService mock) {
+		this.mock = mock;
+	}
+	
+	public void tryUser() {
+		dbUtenti.tryUser();
+		
+	}
+	
 }
