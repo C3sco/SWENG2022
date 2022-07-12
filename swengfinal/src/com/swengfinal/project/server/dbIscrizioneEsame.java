@@ -8,13 +8,14 @@ import org.mapdb.DB;
 import org.mapdb.DBMaker;
 
 import com.swengfinal.project.shared.Esame;
+import com.swengfinal.project.shared.IscrizioneCorso;
 import com.swengfinal.project.shared.IscrizioneEsame;
 
 
 public class dbIscrizioneEsame {
 	private static Integer tmp = 0;
 	private static DB getDB() {
-		DB db = DBMaker.newFileDB(new File("dbIscrizioneEsame6")).make();
+		DB db = DBMaker.newFileDB(new File("dbIscrizioneEsame")).make();
 		return db;
 	}
 	public static String iscrizioneEsame(Integer idEsame, String email) { 
@@ -24,12 +25,12 @@ public class dbIscrizioneEsame {
 		IscrizioneEsame iscrizione = new IscrizioneEsame(iscrizioniEsami.size(),idEsame, email);
 		boolean found = false;
 		
-		
-		for(int i = 0; i <iscrizioniEsami.size(); i++) {	
-			if((iscrizioniEsami.get(i).getIdEsame()==idEsame) && (iscrizioniEsami.get(i).getMailStudente().equals(email))) {
+		for(Entry<Integer, IscrizioneEsame> test : iscrizioniEsami.entrySet()) {
+			if(idEsame == test.getValue().getIdEsame() && email.equals(test.getValue().getMailStudente())) {
 				found = true;
 			}
 		}
+		
 		if(!found) {
 			tmp++;
 			iscrizioniEsami.put(tmp, iscrizione); // Aggiunta mail studente al relativo corso

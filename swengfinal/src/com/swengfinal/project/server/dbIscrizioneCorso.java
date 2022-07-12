@@ -14,7 +14,7 @@ import com.swengfinal.project.shared.IscrizioneCorso;
 public class dbIscrizioneCorso {
 	private static Integer tmp = 0;
 	private static DB getDB() {
-		DB db = DBMaker.newFileDB(new File("dbIscrizioneCorso1")).make();
+		DB db = DBMaker.newFileDB(new File("dbIscrizioneCorso")).make();
 		return db;
 	}
 	
@@ -25,27 +25,29 @@ public class dbIscrizioneCorso {
 		IscrizioneCorso iscrizione = new IscrizioneCorso(idCorso, email);
 		boolean found = false;
 		
-		
-		for(int i = 0; i <iscrizioni.size(); i++) {	
-			if((iscrizioni.get(i).getIdCorso()==idCorso) && (iscrizioni.get(i).getMailStudente().equals(email))) {
+		for(Entry<Integer, IscrizioneCorso> test : iscrizioni.entrySet()) {
+			if(idCorso == test.getValue().getIdCorso() && email.equals(test.getValue().getMailStudente())) {
 				found = true;
 			}
 		}
+		
 		if(!found) {
 			tmp++;
 			iscrizioni.put(tmp, iscrizione); // Aggiunta mail studente al relativo corso
 			db.commit();
+			db.close();
 			return "Successo";
 			
-		}else {
+		} else {
 			db.commit();
+			db.close();
 			return "Errore";
 		}
+		
 		
 	}
 	
 	public static ArrayList<Integer> getCorsoStudente(String email){
-		
 		DB db = getDB();
 		BTreeMap<Integer, IscrizioneCorso> iscrizioni = db.getTreeMap("IscrizioniCorso");
 		ArrayList<Integer> corsiOutput = new ArrayList<Integer>();
@@ -57,5 +59,4 @@ public class dbIscrizioneCorso {
 		}
 		return corsiOutput;
 	}
-
 }
