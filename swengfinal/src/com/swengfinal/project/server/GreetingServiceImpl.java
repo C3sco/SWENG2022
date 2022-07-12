@@ -4,11 +4,11 @@ import com.swengfinal.project.client.GreetingService;
 import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.Docente;
 import com.swengfinal.project.shared.Esame;
-import com.swengfinal.project.shared.FieldVerifier;
+
 import com.swengfinal.project.shared.Studente;
 import com.swengfinal.project.shared.Utente;
 import com.swengfinal.project.shared.Voto;
-import com.google.gwt.user.client.Window;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import org.mapdb.DB;

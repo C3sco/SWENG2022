@@ -1,6 +1,6 @@
 package com.swengfinal.project.client;
 
-import com.swengfinal.project.shared.FieldVerifier;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

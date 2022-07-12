@@ -24,10 +24,7 @@ public class dbEsame {
 		//System.out.println(a);
 		DB db = getDB();
 		BTreeMap<Integer, Esame> esami = db.getTreeMap("EsamiMap");
-		
 		boolean found = false;
-		
-		
 
 		//if(!checkCorso(Integer.parseInt(dati.get(0)))) {
 			Esame esame = new Esame(
@@ -43,51 +40,51 @@ public class dbEsame {
 			
 			//Alert ab = new Alert("2!");
 			//System.out.println(ab);
-			for(int i = 0; i < esami.size(); i++) {	
-				if(esami.get(i).getIdCorso()==(idCorso)) {
-					found = true;
-				}
+
+			for(Entry<Integer, Esame> test : esami.entrySet()) {
+	            if(test.getValue().getIdCorso() == idCorso) {
+	            	found=true;
+	            }
 			}
+	            
 			if(!found) {
 				esami.put(esame.getIdEsame(), esame);
 				db.commit();
 				db.close();
 				return "Successo";
 			}else return "Errore";
-			
-			
-			
-						
+				
 		}
-	
-	
-	
+
 	public static String modificaEsame(ArrayList<String> dati, int idCorso) {
 		DB db = getDB();
+		Esame esame = new Esame();
 		BTreeMap<Integer, Esame> esami = db.getTreeMap("EsamiMap");
-		
-		
-		Esame esame = esami.get(idCorso);
-		esami.remove(idCorso);
-		if(dati.get(0)!="")
+		for(Entry<Integer, Esame> test : esami.entrySet()) {
+            if(test.getValue().getIdCorso() == idCorso) {
+                esame = test.getValue() ;
+                esami.remove(test.getKey());
+            }
+        }
+		if(dati.get(0).length()>=1)
 		{
 			esame.setData(dati.get(0));
 		}
-		if(dati.get(1)!="")
+		if(dati.get(1).length()>=1)
 		{
 			esame.setCfu(dati.get(1));
 			
 		}
-		if(dati.get(2)!="")
+		if(dati.get(2).length()>=1)
 		{
 			esame.setAula(dati.get(2));
 		}
-		if(dati.get(3)!="")
+		if(dati.get(3).length()>=1)
 		{
 			esame.setOra(dati.get(3));
 		}
 		
-		esami.put(idCorso, esame);
+		esami.put(esame.getIdEsame(), esame);
 		db.commit();
 		db.close();
 		
@@ -97,13 +94,21 @@ public class dbEsame {
 	
 	public static String deleteEsame(int idCorso) {
 		DB db = getDB();
-		BTreeMap<Integer, Corso> esami = db.getTreeMap("EsamiMap");
+
+		BTreeMap<Integer, Esame> esami = db.getTreeMap("EsamiMap");
+		Esame esame = null;
+		for(Entry<Integer, Esame> test : esami.entrySet()) {
+            if(test.getValue().getIdCorso() == idCorso) {
+                esame = test.getValue() ;
+                esami.remove(test.getKey());
+            }
+        }
 		
 		if(esami.size()==0) {
 			return "Errore";
 		}
 		else {
-			esami.remove(idCorso);
+			esami.remove(esame.getIdEsame());
 			db.commit();
 			db.close();
 			

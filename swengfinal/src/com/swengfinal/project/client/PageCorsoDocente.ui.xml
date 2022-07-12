@@ -158,32 +158,40 @@
 
 	    <h1>Modifica/Cancellazione Corso</h1>
 	    <div id="modificaCorso">
+	    
 	      <div id="a1">
 		    <label for="exampleInputEmail1">Corso</label>
 		    <gwt:ListBox ui:field="menuCorsi"></gwt:ListBox>
 		    </div>
+		    
 		    <div id="a2">
 		    <label for="exampleInputPassword1">Data inizio</label>
 		    <gwt:TextBox ui:field="txtUpdateDataInizio"></gwt:TextBox>
 		  	</div>
+		  	
 		  <div id="a3">
 		    <label for="exampleInputPassword1">Data fine</label>
 		    <gwt:TextBox ui:field="txtUpdateDataFine"></gwt:TextBox>
 		    </div>
+		    
 		    <div id="a4">
 		    <label for="exampleInputPassword1">Descrizione</label>
 		    <gwt:TextBox ui:field="txtUpdateDescrizione"></gwt:TextBox>
 		  </div>
+		  
 		  <div class="form-group" id="a5">
 		    <label for="exampleInputPassword1">Co-Docente</label>
 		    <gwt:TextBox ui:field="txtUpdateCoDocente"></gwt:TextBox>
 		  </div>
+		  
 		  <div id="button1">
 		  	<gwt:Button ui:field="btnUpdate" text="Modifica Corso"></gwt:Button>
 		  </div>
+		  
 		  <div id="button2">
 		   <gwt:Button ui:field="btnCancellazione" text="Cancella Corso"></gwt:Button>
 		   </div>
+		   
 	    </div>
 	    </div>
 	</g:HTMLPanel>

@@ -216,8 +216,7 @@ public class PageEsameDocente extends Composite {
 					}else {
 						Alert a = new Alert("Esame gia esistente");
 						System.out.println(a);
-					} 	
-					 
+					}
 				}
 			}); 
 	}
@@ -266,37 +265,22 @@ public class PageEsameDocente extends Composite {
 		ArrayList<String>dati = new ArrayList<String>();
 		
 		String nomeEsame=menuUpdateCorsi.getSelectedValue();
-		
-		
-		
+
 		for(int i=0; i<esamiFinal.size(); i++) {
-			if(esamiFinal.get(i).getNomeEsame().equals(nomeEsame)){
+			if(esamiFinal.get(i).getNomeEsame()==nomeEsame){
 				esame=esamiFinal.get(i);
 			}
 		}
 		
 		
-		if(txtUpdateData.getText()!="") {
-			dati.add(0, txtUpdateData.getText());
-		}else {
-			dati.add(0, esame.getData());
-		}
-		if(txtUpdateOra.getText()!="") {
-			dati.add(1, txtUpdateOra.getText());
-		}else {
-			dati.add(1, esame.getOra());
-		}
-		if(txtUpdateCfu.getText()!="") {
-			dati.add(2, txtUpdateCfu.getText());
-		}else {
-			dati.add(2, esame.getCfu());
-		}
-		if(txtUpdateAula.getText()!="") {
-			dati.add(3, txtUpdateAula.getText());
-		}else {
-			dati.add(3, esame.getAula());
-		}
-		
+		dati.add(0, txtUpdateData.getText());
+		dati.add(1, txtUpdateOra.getText());
+		dati.add(2, txtUpdateCfu.getText());
+		dati.add(3, txtUpdateAula.getText());
+
+
+
+
 		int id=0;
 		for(int i=0;i<corsiFinal.size();i++) {
 			if(corsiFinal.get(i).getNomeCorso()==menuCorsi.getSelectedValue()) {
