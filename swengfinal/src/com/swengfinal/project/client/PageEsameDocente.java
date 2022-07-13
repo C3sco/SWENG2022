@@ -223,13 +223,12 @@ public class PageEsameDocente extends Composite {
 	
 	@UiHandler("btnCancellazione")
 	void doClickDelete(ClickEvent event) {
-		String nomeCorso=menuUpdateCorsi.getSelectedValue();
 		
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 		
 		int id=0;
 		for(int i=0;i<corsiFinal.size();i++) {
-			if(corsiFinal.get(i).getNomeCorso()==menuCorsi.getSelectedValue()) {
+			if(corsiFinal.get(i).getNomeCorso()==menuUpdateCorsi.getSelectedValue()) {
 				id = corsiFinal.get(i).getIdCorso();
 			}
 		}
