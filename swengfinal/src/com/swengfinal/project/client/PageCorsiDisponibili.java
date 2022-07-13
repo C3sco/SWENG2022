@@ -27,6 +27,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.swengfinal.project.shared.Corso;
+import com.swengfinal.project.shared.Esame;
 import com.swengfinal.project.shared.Voto;
 
 import java.util.ArrayList;
@@ -42,6 +43,11 @@ public class PageCorsiDisponibili extends Composite{
 	private static PageCorsiDisponibiliUiBinder uiBinder = GWT.create(PageCorsiDisponibiliUiBinder.class);
 	private static int tmp = 0;
 	private static final ArrayList<Voto> votiFinal = new ArrayList<Voto>();
+	
+	private static ArrayList<Integer> corsiStudenti = new ArrayList<Integer>();
+	
+	private static ArrayList<Esame> esamiStudenti = new ArrayList<Esame>();
+	
 	@UiTemplate("PageCorsiDisponibili.ui.xml")
 	interface PageCorsiDisponibiliUiBinder extends UiBinder<Widget, PageCorsiDisponibili> {
 		
@@ -56,7 +62,8 @@ public class PageCorsiDisponibili extends Composite{
 		getVoti();
 		getCorsi();
 		
-		
+		getCorsiStudente();
+		getEsami();
 
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -128,6 +135,51 @@ public class PageCorsiDisponibili extends Composite{
 			};
 	}
 	
+	/* Ritorna tutti i corsi a cui l'utente è iscritto */
+	public void getCorsiStudente() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getCorsoStudente(Account.email,new AsyncCallback<ArrayList<Integer>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE!");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Integer> corsi) {
+					corsiStudenti.clear();
+					for(int i=0;i<corsi.size();i++) {
+						corsiStudenti.add(corsi.get(i));
+					}
+				}
+			});
+		}catch(Error e){
+			};
+	}
+	
+	/* Prende una lista di esami */
+	public void getEsami() {
+		try {
+			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+			greetingService.getEsami(new AsyncCallback<ArrayList<Esame>>() {
+				public void onFailure(Throwable caught) {
+					Window.alert("ERRORE! ");
+
+				}
+				@Override
+				public void onSuccess(ArrayList<Esame> esami) {
+					esamiStudenti.clear();
+					for(int i=0;i<esami.size();i++) {
+						esamiStudenti.add(esami.get(i));
+
+					}
+				}
+			});
+		}catch(Error e){
+			};
+	}
+	
 	public void newTable() {
 		
 		TextColumn<Corso> nameColumn=new TextColumn<Corso>() {
@@ -188,7 +240,7 @@ public class PageCorsiDisponibili extends Composite{
 	@UiHandler("btnRegistrazione")
 	void doClickContatti(ClickEvent event) {
 			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new RegistrazioneEsame());
+			RootPanel.get("container").add(new RegistrazioneEsame(corsiStudenti, esamiStudenti));
 	}
 	
 	@UiHandler("btnVoti")
