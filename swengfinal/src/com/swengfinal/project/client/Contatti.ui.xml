@@ -14,6 +14,21 @@
 		li {
 		  float: left;
 		}
+		table{
+			text-align:center;
+			border-left: blue 2px solid;
+			border-right: lightblue 1px dotted;
+			border-top: lightblue 1px dotted;
+			border-bottom: lightblue 1px dotted;
+		}
+		th{
+			padding:10px;
+		}
+		
+		#mappa{
+			border: 2px black solid;
+
+		}
 		  
 	
 	</ui:style>
@@ -44,12 +59,11 @@
 
     <p>
        <h4>Dove siamo</h4> 
-    <a href="https://www.google.it/maps/place/Bologna+BO/"><img src="bolo.png" width="15%"></img></a>
+    <a href="https://www.google.it/maps/place/Bologna+BO/"><img id="mappa" src="bolo.png" width="20%"></img></a>
 
     </p>
     
     
-    <br></br>
     <br></br>
 
 
@@ -57,11 +71,10 @@
         <thead>
             <tr>
                 <th><img src="mail.png" width="30px"> </img></th>
-                <th colspan="4">Contattaci per mail all'indirizzo <u>unibo@unibo.it</u></th>
+                <th colspan="4">Contattaci per mail all'indirizzo <a href="mailto:scriviunibo@pec.unibo.it">unibo@unibo.it</a></th>
             </tr>
             <tr>
-                <th></th>
-                <th><br></br></th>
+                
                 
             </tr>
             <tr>
@@ -69,16 +82,16 @@
             </tr>
             <tr>
                 <th><img src="fb.png" width="25px"></img></th>
-                <th>Facebook</th>
+                <th><a href="https://www.facebook.com/unibo.it">Facebook</a></th>
                 
                 <th><img src="yt.png" width="25px"></img></th>
-                <th>Youtube</th>
+                <th><a href="https://www.youtube.com/user/UniBologna">Youtube</a> </th>
             </tr>
             <tr>
                 <th><img src="ig.png" width="25px"></img></th>
-                <th>Instagram</th>
+                <th><a href="https://www.instagram.com/unibo">Instagram</a></th>
                 <th><img src="tw.png" width="25px"></img></th>
-                <th>Twitter</th>
+                <th><a href="https://twitter.com/Unibo">Twitter</a></th>
             </tr>
         </thead>
     </table>
