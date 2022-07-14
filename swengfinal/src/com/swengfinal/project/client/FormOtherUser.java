@@ -21,12 +21,12 @@ public class FormOtherUser extends Composite {
 
 	interface FormOtherUserUiBinder extends UiBinder<Widget, FormOtherUser> {
 	}
-	
+
 	private String tipo;
 
 	public FormOtherUser(String tipo) {
 		initWidget(uiBinder.createAndBindUi(this));
-		
+
 		txtMail.getElement().getStyle().setMarginLeft(10.0, Unit.PX);
 		txtPassword.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
 		txtNome.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
@@ -35,14 +35,14 @@ public class FormOtherUser extends Composite {
 		txtDataNascita.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
 		btnSubmit.getElement().getStyle().setHeight(40.0, Unit.PX);
 		btnSubmit.getElement().getStyle().setWidth(70.0, Unit.PX);
-		
+
 		this.tipo=tipo;
 	}
-	
+
 	@UiHandler("btnSubmit")
 	void doClickSubmit2(ClickEvent event) {
-		
-		
+
+
 		ArrayList<String> datiUtenti = new ArrayList<String>();
 		datiUtenti.add(txtMail.getText());
 		datiUtenti.add(txtPassword.getText());
@@ -50,109 +50,109 @@ public class FormOtherUser extends Composite {
 		datiUtenti.add(txtCognome.getText());
 		datiUtenti.add(txtLuogoNascita.getText());
 		datiUtenti.add(txtDataNascita.getText());
-		
-		
-		
+
+
+
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-		
-		
+
+
 		switch(tipo) {
-			case "Docente":
-				greetingService.registrazioneDocente(datiUtenti, new AsyncCallback<String>() {
-					
-					public void onFailure(Throwable c) {
-						Alert a = new Alert("Errore!");
+		case "Docente":
+			greetingService.registrazioneDocente(datiUtenti, new AsyncCallback<String>() {
+
+				public void onFailure(Throwable c) {
+					Alert a = new Alert("Errore!");
+					System.out.println(a);
+				}
+
+				@Override
+				public void onSuccess(String result) {
+					if(result.equals("Registrazione completata")) {
+						RootPanel.get("container").clear();
+						//Account.email = txtMail.getText();
+						//Account.tipoAccount = 1;
+
+						RootPanel.get("container").add(new Login());
+					}else {
+						Alert a = new Alert("Errore! Registrazione");
 						System.out.println(a);
-					}
-					
-					@Override
-					public void onSuccess(String result) {
-						if(result.equals("Registrazione completata")) {
-							RootPanel.get("container").clear();
-							//Account.email = txtMail.getText();
-							//Account.tipoAccount = 1;
-						
-							RootPanel.get("container").add(new Login());
-						}else {
-							Alert a = new Alert("Errore! Registrazione");
-							System.out.println(a);
-						} 	
-						
-					}
-				});
-				break;
-			case "Segreteria":
-				greetingService.registrazioneSegreteria(datiUtenti, new AsyncCallback<String>() {
-					
-					public void onFailure(Throwable c) {
-						Alert a = new Alert("Errore!");
+					} 	
+
+				}
+			});
+			break;
+		case "Segreteria":
+			greetingService.registrazioneSegreteria(datiUtenti, new AsyncCallback<String>() {
+
+				public void onFailure(Throwable c) {
+					Alert a = new Alert("Errore!");
+					System.out.println(a);
+				}
+
+				@Override
+				public void onSuccess(String result) {
+					if(result.equals("Registrazione completata")) {
+						RootPanel.get("container").clear();
+						//Account.email = txtMail.getText();
+						//Account.tipoAccount = 1;
+
+						RootPanel.get("container").add(new Login());
+					}else {
+						Alert a = new Alert("Errore! Registrazione");
 						System.out.println(a);
-					}
-					
-					@Override
-					public void onSuccess(String result) {
-						if(result.equals("Registrazione completata")) {
-							RootPanel.get("container").clear();
-							//Account.email = txtMail.getText();
-							//Account.tipoAccount = 1;
-						
-							RootPanel.get("container").add(new Login());
-						}else {
-							Alert a = new Alert("Errore! Registrazione");
-							System.out.println(a);
-						} 	
-						
-					}
-				});
-				break;
-			case "Amministratore":
-				greetingService.registrazioneAdmin(datiUtenti, new AsyncCallback<String>() {
-					
-					public void onFailure(Throwable c) {
-						Alert a = new Alert("Errore!");
+					} 	
+
+				}
+			});
+			break;
+		case "Amministratore":
+			greetingService.registrazioneAdmin(datiUtenti, new AsyncCallback<String>() {
+
+				public void onFailure(Throwable c) {
+					Alert a = new Alert("Errore!");
+					System.out.println(a);
+				}
+
+				@Override
+				public void onSuccess(String result) {
+					if(result.equals("Registrazione completata")) {
+						RootPanel.get("container").clear();
+						//Account.email = txtMail.getText();
+						//Account.tipoAccount = 1;
+
+						RootPanel.get("container").add(new Login());
+					}else {
+						Alert a = new Alert("Errore! Registrazione");
 						System.out.println(a);
-					}
-					
-					@Override
-					public void onSuccess(String result) {
-						if(result.equals("Registrazione completata")) {
-							RootPanel.get("container").clear();
-							//Account.email = txtMail.getText();
-							//Account.tipoAccount = 1;
-						
-							RootPanel.get("container").add(new Login());
-						}else {
-							Alert a = new Alert("Errore! Registrazione");
-							System.out.println(a);
-						} 	
-						
-					}
-				});
-				break;
+					} 	
+
+				}
+			});
+			break;
 		}
-			
+
 	}
-	
+
 	@UiField
 	TextBox txtMail;
-	
+
 	@UiField
 	TextBox txtPassword;
-	
-	
+
+
 	@UiField
 	TextBox txtNome;
-	
+
 	@UiField
 	TextBox txtCognome;
-	
+
 	@UiField
 	TextBox txtLuogoNascita;
-	
+
 	@UiField
 	TextBox txtDataNascita;
-	
-	
+
+
 	@UiField
 	Button btnSubmit;
 

@@ -10,11 +10,7 @@ import com.swengfinal.project.shared.Studente;
 import com.swengfinal.project.shared.Utente;
 import com.swengfinal.project.shared.Voto;
 
-/**
- * The async counterpart of <code>GreetingService</code>.
- */
 public interface GreetingServiceAsync {
-	
 	
 	/**
 	 * Metodi dell'utente 

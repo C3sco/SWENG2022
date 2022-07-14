@@ -25,20 +25,20 @@ import com.swengfinal.project.shared.Utente;
 
 public class Login extends Composite {
 	private static LoginUiBinder uiBinder = GWT.create(LoginUiBinder.class);
-	
+
 	private static final ArrayList<Studente> listaStudenti = new ArrayList<Studente>();
 
 	@UiTemplate("Login.ui.xml")
 	interface LoginUiBinder extends UiBinder<Widget, Login> {
-		
-		
+
+
 	}
 
 	public Login() {
 		initWidget(uiBinder.createAndBindUi(this));
-		
+
 		getStudenti();
-		
+
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnHome.getElement().getStyle().setWidth(70.0, Unit.PX);
@@ -58,38 +58,38 @@ public class Login extends Composite {
 		btnRegistrazione.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnRegistrazione.getElement().getStyle().setMarginLeft(10.0, Unit.PX);
 	}
-		
+
 	//final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-		
+
 	@UiHandler("btnLogin")
-	   void doClickSubmit(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new Login());
-	   }
-	
+	void doClickSubmit(ClickEvent event) {
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new Login());
+	}
+
 	@UiHandler("btnDip")
 	void doClickDip(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new Dipartimenti());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new Dipartimenti());
 	}
-	
+
 	@UiHandler("btnContatti")
 	void doClickContatti(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new Contatti());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new Contatti());
 	}
-	
+
 	@UiHandler("btnHome")
 	void doClickHome(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePage());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePage());
 	}
 	@UiHandler("btnRegistrazione")
-	   void doClickRegistrazione(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new Registrazione());
-	   }
-	
+	void doClickRegistrazione(ClickEvent event) {
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new Registrazione());
+	}
+
 	public void getStudenti() {
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
@@ -103,82 +103,82 @@ public class Login extends Composite {
 				listaStudenti.clear();
 				for(int i=0;i<output.size();i++) {					
 					listaStudenti.add(output.get(i));
-					
+
 
 				}
 			}	
 		});
 	}
-	
+
 	@UiHandler("btnSubmit")
 	void doClickLogin(ClickEvent event) {
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 		//Window.alert(txtPassword.getText() + " " + txtMail.getText());
 		greetingService.login(txtMail.getText(), txtPassword.getText(), new AsyncCallback<Utente>() {
-			
-			
-			
+
+
+
 			public void onFailure(Throwable c) {
 
 				RootPanel.get("container").clear();
 				RootPanel.get("container").add(new HomePage());
 			}
-			
+
 			@Override
 			public void onSuccess(Utente user) {
-			Account.email = txtMail.getText();
-			
-			//Account.tipoAccount = user.getTipologia();
-			
-		
-			
-			
-			RootPanel.get("container").clear();
-			if(user instanceof Studente) {
-				Account.matricola=((Studente) user).getMatricola();
-				RootPanel.get("container").add(new HomePageUtente());
-				
-			}else if(user instanceof Docente) {
-				RootPanel.get("container").add(new HomePageDocente());
-			}else if(user instanceof Amministratore) {
-				RootPanel.get("container").add(new HomePageAdmin());
-			}else if(user instanceof Segreteria) {
-				RootPanel.get("container").add(new HomePageSegreteria(listaStudenti));
-			}
-			
-			else {
-				RootPanel.get("container").add(new HomePage());
-			}
+				Account.email = txtMail.getText();
 
-			
+				//Account.tipoAccount = user.getTipologia();
+
+
+
+
+				RootPanel.get("container").clear();
+				if(user instanceof Studente) {
+					Account.matricola=((Studente) user).getMatricola();
+					RootPanel.get("container").add(new HomePageUtente());
+
+				}else if(user instanceof Docente) {
+					RootPanel.get("container").add(new HomePageDocente());
+				}else if(user instanceof Amministratore) {
+					RootPanel.get("container").add(new HomePageAdmin());
+				}else if(user instanceof Segreteria) {
+					RootPanel.get("container").add(new HomePageSegreteria(listaStudenti));
+				}
+
+				else {
+					RootPanel.get("container").add(new HomePage());
+				}
+
+
 			}
 		});
-		
-	
-		
+
+
+
 	}
-	
+
 	@UiField
 	Button btnLogin;
-	
+
 	@UiField
 	Button btnHome;
-	
+
 	@UiField
 	Button btnDip;
-	
+
 	@UiField
 	Button btnContatti;
-	
+
 	@UiField
 	Button btnRegistrazione;
-	
+
 	@UiField
 	TextBox txtMail;
-	
+
 	@UiField
 	PasswordTextBox txtPassword;
-	
+
 	@UiField
 	Button btnSubmit;
 }

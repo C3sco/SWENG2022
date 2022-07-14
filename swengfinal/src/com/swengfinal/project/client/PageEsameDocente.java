@@ -24,9 +24,9 @@ public class PageEsameDocente extends Composite {
 
 	private static PageEsameDocenteUiBinder uiBinder = GWT.create(PageEsameDocenteUiBinder.class);
 	private static final ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
-	
+
 	private static final ArrayList<Esame> esamiFinal = new ArrayList<Esame>();
-	
+
 	private Esame esame;
 
 	@UiTemplate("PageEsameDocente.ui.xml")
@@ -35,7 +35,7 @@ public class PageEsameDocente extends Composite {
 
 	public PageEsameDocente() {
 		initWidget(uiBinder.createAndBindUi(this));
-		
+
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnHome.getElement().getStyle().setWidth(70.0, Unit.PX);
@@ -63,13 +63,13 @@ public class PageEsameDocente extends Composite {
 		btnUpdate.getElement().getStyle().setMargin(10, Unit.PX);
 		btnCancellazione.getElement().getStyle().setMarginLeft(350, Unit.PX);
 		menuCorsi.getElement().getStyle().setMarginLeft(28.0, Unit.PX);
-		
+
 		getCorsi();
 		fillistbox();
-		
-		
+
+
 	}
-	
+
 	void fillistbox()
 	{
 		try {
@@ -80,7 +80,7 @@ public class PageEsameDocente extends Composite {
 					Window.alert("ERRORE!");
 
 				}
-				
+
 				@Override
 				public void onSuccess(ArrayList<Corso> corsi) {
 					for(int i=0;i<corsi.size();i++)
@@ -88,16 +88,16 @@ public class PageEsameDocente extends Composite {
 						menuCorsi.addItem(corsi.get(i).getNomeCorso());
 						menuUpdateCorsi.addItem(corsi.get(i).getNomeCorso());
 					}
-					
+
 
 				}
 
-					
+
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
+
 	public void getCorsi() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -109,17 +109,17 @@ public class PageEsameDocente extends Composite {
 				}
 				@Override
 				public void onSuccess(ArrayList<Corso> corsi) {
-					
+
 					for(int i=0;i<corsi.size();i++) {
 						corsiFinal.add(corsi.get(i));	
 					}
 				}
-		
+
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
+
 	public void getEsami() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -131,49 +131,49 @@ public class PageEsameDocente extends Composite {
 				}
 				@Override
 				public void onSuccess(ArrayList<Esame> esami) {
-					
+
 					for(int i=0;i<esami.size();i++) {
 						esamiFinal.add(esami.get(i));	
 					}
 				}
-		
+
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
+
 	@UiHandler("btnHome")
-	   void doClickSubmit(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePageDocente());
-	   }
-	
+	void doClickSubmit(ClickEvent event) {
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePageDocente());
+	}
+
 	@UiHandler("btnCorso")
 	void doClickDip(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageCorsoDocente());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new PageCorsoDocente());
 	}
-	
+
 	@UiHandler("btnEsame")
 	void doClickContatti(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageEsameDocente());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new PageEsameDocente());
 	}
-	
+
 	@UiHandler("btnVoti")
 	void doClickHome(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageVotiDocente());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new PageVotiDocente());
 	}
-	
+
 	@UiHandler("btnLogout")
 	void doClickLogout(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePage());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePage());
 	}
-	
-	
-	
+
+
+
 	@UiHandler("btnCreazione")
 	void doClickCreazioneEsame(ClickEvent event) {
 		ArrayList<String>dati = new ArrayList<String>();
@@ -185,84 +185,84 @@ public class PageEsameDocente extends Composite {
 		dati.add(5, txtCfu.getText());
 		dati.add(6,  menuCorsi.getSelectedValue());
 		dati.add(7, Account.email);
-		
-		
+
+
 		int id=0;
 		for(int i=0;i<corsiFinal.size();i++) {
 			if(corsiFinal.get(i).getNomeCorso()==menuCorsi.getSelectedValue()) {
 				id = corsiFinal.get(i).getIdCorso();
 			}
 		}
-		
+
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-		
+
 		greetingService.creazioneEsame(dati, id, new AsyncCallback<String>() {
-				
-				public void onFailure(Throwable c) {
-					Alert a = new Alert("Errore:" + c);
-					System.out.println(a);
-					RootPanel.get("container").clear();
-					RootPanel.get("container").add(new HomePageDocente());
-				}
-				
-				@Override
-				public void onSuccess(String result) {
-					if(result.equals("Successo")) {
-						RootPanel.get("container").clear();
-						Alert a = new Alert("Esame creato con successo!");
-						System.out.println(a);
-					
-						RootPanel.get("container").add(new HomePageDocente());
-					}else {
-						Alert a = new Alert("Esame gia esistente");
-						System.out.println(a);
-					}
-				}
-			}); 
-	}
-	
-	@UiHandler("btnCancellazione")
-	void doClickDelete(ClickEvent event) {
-		
-		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-		
-		int id=0;
-		for(int i=0;i<corsiFinal.size();i++) {
-			if(corsiFinal.get(i).getNomeCorso()==menuUpdateCorsi.getSelectedValue()) {
-				id = corsiFinal.get(i).getIdCorso();
-			}
-		}
-		
-		greetingService.deleteEsame(id, new AsyncCallback<String>() {
-			
+
 			public void onFailure(Throwable c) {
 				Alert a = new Alert("Errore:" + c);
 				System.out.println(a);
 				RootPanel.get("container").clear();
 				RootPanel.get("container").add(new HomePageDocente());
 			}
-			
+
+			@Override
+			public void onSuccess(String result) {
+				if(result.equals("Successo")) {
+					RootPanel.get("container").clear();
+					Alert a = new Alert("Esame creato con successo!");
+					System.out.println(a);
+
+					RootPanel.get("container").add(new HomePageDocente());
+				}else {
+					Alert a = new Alert("Esame gia esistente");
+					System.out.println(a);
+				}
+			}
+		}); 
+	}
+
+	@UiHandler("btnCancellazione")
+	void doClickDelete(ClickEvent event) {
+
+		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+		int id=0;
+		for(int i=0;i<corsiFinal.size();i++) {
+			if(corsiFinal.get(i).getNomeCorso()==menuUpdateCorsi.getSelectedValue()) {
+				id = corsiFinal.get(i).getIdCorso();
+			}
+		}
+
+		greetingService.deleteEsame(id, new AsyncCallback<String>() {
+
+			public void onFailure(Throwable c) {
+				Alert a = new Alert("Errore:" + c);
+				System.out.println(a);
+				RootPanel.get("container").clear();
+				RootPanel.get("container").add(new HomePageDocente());
+			}
+
 			@Override
 			public void onSuccess(String result) {
 				if(result.equals("Successo")) {
 					RootPanel.get("container").clear();
 					Alert a = new Alert("Esame eliminato con successo!");
 					System.out.println(a);
-				
+
 					RootPanel.get("container").add(new HomePageDocente());
 				}else if(result.equals("Errore")){
 					Alert a = new Alert("Non puoi eliminare un esame che non esiste");
 					System.out.println(a);
 				} 	
-				
+
 			}
 		});
 	}
-	
+
 	@UiHandler("btnUpdate")
 	void doClickUpdate(ClickEvent event) {
 		ArrayList<String>dati = new ArrayList<String>();
-		
+
 		String nomeEsame=menuUpdateCorsi.getSelectedValue();
 
 		for(int i=0; i<esamiFinal.size(); i++) {
@@ -270,8 +270,8 @@ public class PageEsameDocente extends Composite {
 				esame=esamiFinal.get(i);
 			}
 		}
-		
-		
+
+
 		dati.add(0, txtUpdateData.getText());
 		dati.add(1, txtUpdateOra.getText());
 		dati.add(2, txtUpdateCfu.getText());
@@ -286,89 +286,89 @@ public class PageEsameDocente extends Composite {
 				id = corsiFinal.get(i).getIdCorso();
 			}
 		}
-		
+
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-		
+
 		greetingService.updateEsame(dati, id, new AsyncCallback<String>() {
-			
+
 			public void onFailure(Throwable c) {
 				Alert a = new Alert("Errore:" + c);
 				System.out.println(a);
 				RootPanel.get("container").clear();
 				RootPanel.get("container").add(new HomePageDocente());
 			}
-			
+
 			@Override
 			public void onSuccess(String result) {
 				if(result.equals("Successo")) {
 					RootPanel.get("container").clear();
 					Alert a = new Alert("Esame modificato con successo!");
 					System.out.println(a);
-				
+
 					RootPanel.get("container").add(new HomePageDocente());
 				}else {
 					Alert a = new Alert("Errore!");
 					System.out.println(a);
 				} 	
-				
+
 			}
 		});
 	}
-	
-	
+
+
 	@UiField
 	Button btnCorso;
-	
+
 	@UiField
 	Button btnHome;
-	
+
 	@UiField
 	Button btnEsame;
-	
+
 	@UiField
 	Button btnVoti;
-	
+
 	@UiField
 	Button btnLogout;
-	
+
 	@UiField
 	TextBox txtData;
-	
+
 	@UiField
 	TextBox txtCfu;
-	
+
 	@UiField
 	TextBox txtAula;
-	
+
 	@UiField
 	TextBox txtOra;
-	
+
 	@UiField
 	TextBox txtUpdateData;
-	
+
 	@UiField
 	TextBox txtUpdateCfu;
-	
+
 	@UiField
 	TextBox txtUpdateAula;
-	
+
 	@UiField
 	TextBox txtUpdateOra;
-	
+
 	@UiField
 	ListBox menuCorsi;
-	
-	
-	
+
+
+
 	@UiField
 	ListBox menuUpdateCorsi;
-	
+
 	@UiField
 	Button btnCreazione;
-	
+
 	@UiField
 	Button btnCancellazione;
-	
+
 	@UiField
 	Button btnUpdate;
 

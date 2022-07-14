@@ -22,18 +22,18 @@ public class SegreteriaInserisciVoto extends Composite {
 
 	interface SegreteriaInserisciVotoUiBinder extends UiBinder<Widget, SegreteriaInserisciVoto> {
 	}
-	
+
 	private static ArrayList<Voto> listaVoti = new ArrayList<Voto>();
-	
+
 	private static final ArrayList<Studente> listaStudenti = new ArrayList<Studente>();
 
 	public SegreteriaInserisciVoto() {
 		initWidget(uiBinder.createAndBindUi(this));
-		
+
 		getStudenti();
-		
+
 		getVoti();
-		
+
 		btnHomeSegreteria.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHomeSegreteria.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnHomeSegreteria.getElement().getStyle().setWidth(70.0, Unit.PX);
@@ -47,9 +47,9 @@ public class SegreteriaInserisciVoto extends Composite {
 		btnLogout.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnLogout.getElement().getStyle().setMarginLeft(870.0, Unit.PX);		
 	}
-	
-	
-	
+
+
+
 	public void getStudenti() {
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
@@ -63,13 +63,13 @@ public class SegreteriaInserisciVoto extends Composite {
 				listaStudenti.clear();
 				for(int i=0;i<output.size();i++) {					
 					listaStudenti.add(output.get(i));
-					
+
 
 				}
 			}	
 		});
 	}
-	
+
 	public void getVoti() {
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
@@ -83,26 +83,26 @@ public class SegreteriaInserisciVoto extends Composite {
 				listaVoti.clear();
 				for(int i=0;i<output.size();i++) {					
 					listaVoti.add(output.get(i));
-					
+
 
 				}
 			}	
 		});
 	}
 
-	
+
 	@UiHandler("btnHomeSegreteria")
 	void doClickHome(ClickEvent event) {
 		RootPanel.get("container").clear();
 		RootPanel.get("container").add(new HomePageSegreteria(listaStudenti));
 	}
-		
+
 	@UiHandler("btnInserisciVoto")
 	void doClickInserisciVoto(ClickEvent event) {
 		RootPanel.get("container").clear();
 		RootPanel.get("container").add(new SegreteriaInserisciVoto());
 	}
-		
+
 	@UiHandler("btnPubblicaVoto")
 	void doClickPubblicVoto(ClickEvent event) {
 		RootPanel.get("container").clear();
@@ -114,17 +114,17 @@ public class SegreteriaInserisciVoto extends Composite {
 		RootPanel.get("container").clear();
 		RootPanel.get("container").add(new HomePage());
 	}
-	
-	
+
+
 	@UiField
 	Button btnLogout;
-	
+
 	@UiField
 	Button btnHomeSegreteria;
-	
+
 	@UiField
 	Button btnInserisciVoto;
-	
+
 	@UiField
 	Button btnPubblicaVoto;	
 }

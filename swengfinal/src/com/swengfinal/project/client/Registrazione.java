@@ -19,21 +19,21 @@ public class Registrazione extends Composite {
 	private static RegistrazioneUiBinder uiBinder = GWT.create(RegistrazioneUiBinder.class);
 
 	@UiTemplate("Registrazione.ui.xml")
-	
+
 	interface RegistrazioneUiBinder extends UiBinder<Widget, Registrazione> {
 	} 
 
 
 	public Registrazione() {
-		
 
-		
+
+
 		initWidget(uiBinder.createAndBindUi(this));
 		menu.addItem("Studente");
 		menu.addItem("Docente");
 		menu.addItem("Segreteria");
 		menu.addItem("Amministratore");
-		
+
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnHome.getElement().getStyle().setWidth(70.0, Unit.PX);
@@ -48,11 +48,11 @@ public class Registrazione extends Composite {
 		btnRegistrazione.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnRegistrazione.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnRegistrazione.getElement().getStyle().setMarginLeft(10.0, Unit.PX);
-		
+
 	}
-	
+
 	@UiHandler("menu")
-	 void doClickType(ClickEvent event) {
+	void doClickType(ClickEvent event) {
 		if(menu.getSelectedValue().equals("Studente")) {
 			RootPanel.get("form").clear();
 			RootPanel.get("form").add(new FormStudente());
@@ -61,55 +61,55 @@ public class Registrazione extends Composite {
 			RootPanel.get("form").clear();
 			RootPanel.get("form").add(new FormOtherUser(menu.getSelectedValue()));
 		}
-		
+
 	}
-	
+
 	@UiHandler("btnLogin")
-	   void doClickSubmit(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new Login());
-	   }
-	
+	void doClickSubmit(ClickEvent event) {
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new Login());
+	}
+
 	@UiHandler("btnDip")
 	void doClickDip(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new Dipartimenti());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new Dipartimenti());
 	}
-	
+
 	@UiHandler("btnContatti")
 	void doClickContatti(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new Contatti());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new Contatti());
 	}
-	
+
 	@UiHandler("btnHome")
 	void doClickHome(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePage());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePage());
 	}
 	@UiHandler("btnRegistrazione")
-	   void doClickRegistrazione(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new Registrazione());
-	   }
-	
-	
-	
+	void doClickRegistrazione(ClickEvent event) {
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new Registrazione());
+	}
+
+
+
 	@UiField
 	Button btnLogin;
-	
+
 	@UiField
 	Button btnHome;
-	
+
 	@UiField
 	Button btnDip;
-	
+
 	@UiField
 	Button btnContatti;
-	
+
 	@UiField
 	Button btnRegistrazione;
-	
+
 	@UiField
 	ListBox menu;
 }

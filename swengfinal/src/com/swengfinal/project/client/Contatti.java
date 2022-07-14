@@ -23,11 +23,11 @@ public class Contatti extends Composite {
 	@UiTemplate("Contatti.ui.xml")
 	interface DipartimentiUiBinder extends UiBinder<Widget, Dipartimenti> {
 	}
-	
+
 
 	public Contatti() {
 		initWidget(uiBinder.createAndBindUi(this));
-		
+
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnHome.getElement().getStyle().setWidth(70.0, Unit.PX);
@@ -43,49 +43,49 @@ public class Contatti extends Composite {
 		btnRegistrazione.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnRegistrazione.getElement().getStyle().setMarginLeft(10.0, Unit.PX);
 	}
-	
+
 	@UiHandler("btnLogin")
-	   void doClickSubmit(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new Login());
-	   }
-	
+	void doClickSubmit(ClickEvent event) {
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new Login());
+	}
+
 	@UiHandler("btnDip")
-   void doClickDip(ClickEvent event) {
+	void doClickDip(ClickEvent event) {
 		RootPanel.get("container").clear();
 		RootPanel.get("container").add(new Dipartimenti());
-   }
-	
+	}
+
 	@UiHandler("btnContatti")
-   void doClickContatti(ClickEvent event) {
+	void doClickContatti(ClickEvent event) {
 		RootPanel.get("container").clear();
 		RootPanel.get("container").add(new Contatti());
-   }
-	
+	}
+
 	@UiHandler("btnHome")
-   void doClickHome(ClickEvent event) {
+	void doClickHome(ClickEvent event) {
 		RootPanel.get("container").clear();
 		RootPanel.get("container").add(new HomePage());
-   }
+	}
 	@UiHandler("btnRegistrazione")
-	   void doClickRegistrazione(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new Registrazione());
-	   }
-	
-	
+	void doClickRegistrazione(ClickEvent event) {
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new Registrazione());
+	}
+
+
 	@UiField
 	Button btnLogin;
-	
+
 	@UiField
 	Button btnHome;
-	
+
 	@UiField
 	Button btnDip;
-	
+
 	@UiField
 	Button btnContatti;
-	
+
 	@UiField
 	Button btnRegistrazione;
 

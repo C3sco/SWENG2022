@@ -29,19 +29,19 @@ public class PageCorsiDisponibili extends Composite{
 	private static final ArrayList<Voto> votiFinal = new ArrayList<Voto>();
 	@UiTemplate("PageCorsiDisponibili.ui.xml")
 	interface PageCorsiDisponibiliUiBinder extends UiBinder<Widget, PageCorsiDisponibili> {
-		
+
 	}
 
 	public PageCorsiDisponibili(ArrayList<Corso> list) {
-		
+
 		initWidget(uiBinder.createAndBindUi(this));
 		corsiFinal=list;
-		
+
 		newTable();
 		getVoti();
 		getCorsi();
-		
-		
+
+
 
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -62,13 +62,13 @@ public class PageCorsiDisponibili extends Composite{
 		//cellTable.getElement().getStyle().setMarginLeft(200.0, Unit.PX);
 		//txtIdCorso.getElement().getStyle().setMarginLeft(40.0, Unit.PX);
 		//txtNomeCorso.getElement().getStyle().setMarginLeft(17.0, Unit.PX);
-		
 
-		
 
-		
+
+
+
 	}
-	
+
 	/* Ritorna tutti i corsi disponibili per l'utente */
 	public void getCorsi() {
 		try {
@@ -81,7 +81,7 @@ public class PageCorsiDisponibili extends Composite{
 				}
 				@Override
 				public void onSuccess(ArrayList<Corso> corsi) {
-					
+
 					for(int i=0;i<corsi.size();i++) {
 						//corsiFinal.add(corsi.get(i));
 						txtNomeCorso.addItem(corsi.get(i).getNomeCorso());
@@ -89,9 +89,9 @@ public class PageCorsiDisponibili extends Composite{
 				}
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
+
 	public void getVoti() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -110,11 +110,11 @@ public class PageCorsiDisponibili extends Composite{
 				}
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
+
 	public void newTable() {
-		
+
 		TextColumn<Corso> nameColumn=new TextColumn<Corso>() {
 			@Override
 			public String getValue(Corso obj) {
@@ -122,16 +122,16 @@ public class PageCorsiDisponibili extends Composite{
 			}
 		};
 		cellTable.addColumn(nameColumn, "Nome");
-		
+
 		TextColumn<Corso> iscrizioneColumn=new TextColumn<Corso>() {
-			
+
 			public String getValue(Corso obj) {
 				return obj.getEmailDocente();
 			}
 		};
-		
+
 		cellTable.addColumn(iscrizioneColumn, "Email");
-	     
+
 		TextColumn<Corso> dataInizioColumn=new TextColumn<Corso>() {
 			@Override
 			public String getValue(Corso obj) {
@@ -139,7 +139,7 @@ public class PageCorsiDisponibili extends Composite{
 			}
 		};
 		cellTable.addColumn(dataInizioColumn, "Data Inizio");
-		
+
 		TextColumn<Corso> dataFineColumn=new TextColumn<Corso>() {
 			@Override
 			public String getValue(Corso obj) {
@@ -147,47 +147,47 @@ public class PageCorsiDisponibili extends Composite{
 			}
 		};
 		cellTable.addColumn(dataFineColumn, "Data Fine");
-		
+
 		cellTable.setRowCount(corsiFinal.size(), true);
-		 
+
 		cellTable.setRowData(0, corsiFinal);
-		
-		
-		 
+
+
+
 	}
 
 
 	@UiHandler("btnHome")
-	   void doClickSubmit(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePageUtente());
-	   }
+	void doClickSubmit(ClickEvent event) {
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePageUtente());
+	}
 
 
 	@UiHandler("btnIscrizione")
 	void doClickDip(ClickEvent event) {
-		
-			
+
+
 	}
-	
+
 	@UiHandler("btnRegistrazione")
 	void doClickContatti(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new RegistrazioneEsame());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new RegistrazioneEsame());
 	}
-	
+
 	@UiHandler("btnVoti")
 	void doClickHome(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageVoti(votiFinal));
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new PageVoti(votiFinal));
 	}
-	
+
 	@UiHandler("btnLogout")
 	void doClickLogout(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePage());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePage());
 	}
-	
+
 	@UiHandler("btnCorso")
 	void doClickIscrizione(ClickEvent event) {
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -214,36 +214,36 @@ public class PageCorsiDisponibili extends Composite{
 					System.out.println(e);
 				}
 			}
-	
+
 		});
 		RootPanel.get("container").clear();
 		RootPanel.get("container").add(new PageCorsiDisponibili(corsiFinal));
 	}
-	
+
 	@UiField
 	Button btnIscrizione;
-	
+
 	@UiField
 	Button btnHome;
-	
+
 	@UiField
 	Button btnRegistrazione;
-	
+
 	@UiField
 	Button btnVoti;
-	
+
 	@UiField
 	Button btnLogout;
-	
+
 	@UiField
 	CellTable<Corso> cellTable;
-	
-	
+
+
 	@UiField
 	ListBox txtNomeCorso;
-	
+
 	@UiField
 	Button btnCorso;
-	
+
 
 }

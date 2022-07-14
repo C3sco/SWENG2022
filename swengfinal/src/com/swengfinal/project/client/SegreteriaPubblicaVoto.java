@@ -25,9 +25,9 @@ public class SegreteriaPubblicaVoto extends Composite {
 
 	interface SegreteriaPubblicaVotoUiBinder extends UiBinder<Widget, SegreteriaPubblicaVoto> {
 	}
-	
+
 	private static final ArrayList<Studente> listaStudenti = new ArrayList<Studente>();
-	
+
 	private static ArrayList<Voto> listaVoti = new ArrayList<Voto>();
 
 	public SegreteriaPubblicaVoto(ArrayList<Voto> list) {
@@ -46,17 +46,17 @@ public class SegreteriaPubblicaVoto extends Composite {
 		btnLogout.getElement().getStyle().setMarginLeft(870.0, Unit.PX);
 		cellVotiUsers.getElement().getStyle().setFontSize(24.0, Unit.PX);
 		cellVotiUsers.getElement().getStyle().setMarginTop(35.0, Unit.PX);
-		
+
 		listaVoti=list;
-		
+
 		getStudenti();
 		newTableVoti();
 		getVoti();
-		
+
 	}
-	
-	
-	
+
+
+
 	public void getStudenti() {
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
@@ -70,73 +70,73 @@ public class SegreteriaPubblicaVoto extends Composite {
 				listaStudenti.clear();
 				for(int i=0;i<output.size();i++) {					
 					listaStudenti.add(output.get(i));
-					
+
 
 				}
 			}	
 		});
 	}
-	
+
 	public void newTableVoti() {
-        TextColumn<Voto> matricolaColumn = new TextColumn<Voto>() {
-            @Override
-            public String getValue(Voto object) {
-                return object.getMatricola();
-            }
-        };
-        cellVotiUsers.addColumn(matricolaColumn, "Matricola Studente");
+		TextColumn<Voto> matricolaColumn = new TextColumn<Voto>() {
+			@Override
+			public String getValue(Voto object) {
+				return object.getMatricola();
+			}
+		};
+		cellVotiUsers.addColumn(matricolaColumn, "Matricola Studente");
 
-        TextColumn<Voto> esameColumn = new TextColumn<Voto>() {
-            @Override
-            public String getValue(Voto object) {
-                return object.getNomeEsame();
-            }
-        };
+		TextColumn<Voto> esameColumn = new TextColumn<Voto>() {
+			@Override
+			public String getValue(Voto object) {
+				return object.getNomeEsame();
+			}
+		};
 
-        cellVotiUsers.addColumn(esameColumn, "Esame Sostenuto");
+		cellVotiUsers.addColumn(esameColumn, "Esame Sostenuto");
 
-        TextColumn<Voto> votoColumn = new TextColumn<Voto>() {
-            @Override
-            public String getValue(Voto object) {
-                return object.getVoto();
-            }
-        };
+		TextColumn<Voto> votoColumn = new TextColumn<Voto>() {
+			@Override
+			public String getValue(Voto object) {
+				return object.getVoto();
+			}
+		};
 
-        cellVotiUsers.addColumn(votoColumn, "Voto");
-        
-        cellVotiUsers.setRowCount(listaVoti.size(), true);
-		 
-        cellVotiUsers.setRowData(0, listaVoti);
-    }
+		cellVotiUsers.addColumn(votoColumn, "Voto");
+
+		cellVotiUsers.setRowCount(listaVoti.size(), true);
+
+		cellVotiUsers.setRowData(0, listaVoti);
+	}
 	@UiField
-    CellTable<Voto> cellVotiUsers;
+	CellTable<Voto> cellVotiUsers;
 
 	@UiHandler("btnHomeSegreteria")
 	void doClickHome(ClickEvent event) {
 		RootPanel.get("container").clear();
 		RootPanel.get("container").add(new HomePageSegreteria(listaStudenti));
 	}
-		
+
 	@UiHandler("btnInserisciVoto")
 	void doClickInserisciVoto(ClickEvent event) {
 		RootPanel.get("container").clear();
 		RootPanel.get("container").add(new SegreteriaInserisciVoto());
 	}
-		
+
 	@UiHandler("btnPubblicaVoto")
 	void doClickPubblicVoto(ClickEvent event) {
 		RootPanel.get("container").clear();
 		RootPanel.get("container").add(new SegreteriaPubblicaVoto(listaVoti));
-		
+
 	}
-	
+
 	@UiHandler("btnPubblicaVotoStudente")
 	void doClickPubblicVotoStudente(ClickEvent event) {
-		
+
 
 		ArrayList<String>dati = new ArrayList<String>();
 		dati.clear();
-		
+
 		/* Controllo se il voto da pubblicare esiste già nel database dei voti inviati dal docente */
 		for(int i=0;i<listaVoti.size();i++) {
 			if(txtMatricola.getText()==listaVoti.get(i).getMatricola() && txtNomeEsame.getText()==listaVoti.get(i).getNomeEsame() && txtVoto.getText()==listaVoti.get(i).getVoto()) {
@@ -145,43 +145,43 @@ public class SegreteriaPubblicaVoto extends Composite {
 				dati.add(2, txtVoto.getText());
 			}
 		}
-		
+
 		if(!dati.isEmpty()) {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-			
+
 			greetingService.votoPubblicato(dati, new AsyncCallback<String>() {
-				
+
 				public void onFailure(Throwable c) {
 					Alert a = new Alert("Errore:" + c);
 					System.out.println(a);
 					RootPanel.get("container").clear();
 					RootPanel.get("container").add(new SegreteriaPubblicaVoto(listaVoti));
 				}
-				
+
 				@Override
 				public void onSuccess(String result) {
 					if(result.equals("Successo")) {
-						
+
 						RootPanel.get("container").clear();
 						Alert a = new Alert("Voto pubblicato con successo!");
 						System.out.println(a);
-					
+
 						RootPanel.get("container").add(new SegreteriaPubblicaVoto(listaVoti));
 					}else {
 						Alert a = new Alert("Errore!");
 						System.out.println(a);
 					} 	
-					
+
 				}
 			}); 
 		}else {
 			Alert error = new Alert("Errore! I campi inseriti non sono corretti");
 			System.out.println(error);
 		}
-		
-		
+
+
 	}
-	
+
 	public void getVoti() {
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
@@ -195,7 +195,7 @@ public class SegreteriaPubblicaVoto extends Composite {
 				listaVoti.clear();
 				for(int i=0;i<output.size();i++) {					
 					listaVoti.add(output.get(i));
-					
+
 
 				}
 			}	
@@ -207,30 +207,30 @@ public class SegreteriaPubblicaVoto extends Composite {
 		RootPanel.get("container").clear();
 		RootPanel.get("container").add(new HomePage());
 	}
-	
-	
+
+
 	@UiField
 	Button btnLogout;
-	
+
 	@UiField
 	Button btnHomeSegreteria;
-	
+
 	@UiField
 	Button btnInserisciVoto;
-	
+
 	@UiField
 	Button btnPubblicaVoto;
 
-	
+
 	@UiField
 	Button btnPubblicaVotoStudente;	
-	
+
 	@UiField
 	TextBox txtMatricola;
-	
+
 	@UiField
 	TextBox txtNomeEsame;
-	
+
 	@UiField
 	TextBox txtVoto;
 }

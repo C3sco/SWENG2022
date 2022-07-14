@@ -29,7 +29,7 @@ public class PageVotiDocente extends Composite {
 
 	public PageVotiDocente() {
 		initWidget(uiBinder.createAndBindUi(this));
-		
+
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnHome.getElement().getStyle().setWidth(70.0, Unit.PX);
@@ -48,10 +48,10 @@ public class PageVotiDocente extends Composite {
 		txtVoto.getElement().getStyle().setMarginLeft(30.0, Unit.PX);
 		txtMatricola.getElement().getStyle().setMarginLeft(26.0, Unit.PX);
 		btnInvioVoto.getElement().getStyle().setMargin(10, Unit.PX);
-		
+
 		fillistbox();
 	}
-	
+
 	void fillistbox() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -61,7 +61,7 @@ public class PageVotiDocente extends Composite {
 					Alert a = new Alert("Errore prendere corso");
 					System.out.println(a);
 				}	
-				
+
 				@Override
 				public void onSuccess(ArrayList<Esame> esami) {
 					for(int i=0;i<esami.size();i++)
@@ -71,7 +71,7 @@ public class PageVotiDocente extends Composite {
 				}					
 			});
 		}catch(Error e){
-			};
+		};
 	}
 	/*
 	 * BISOGNA PRENDERE L'ID DELL'ESAME DA METTERE IN INPUT
@@ -85,7 +85,7 @@ public class PageVotiDocente extends Composite {
 					Alert a = new Alert("Errore prendere iscrizioni");
 					System.out.println(a);
 				}
-				
+
 				@Override
 				public void onSuccess(ArrayList<String> iscritti) {
 					for(int i=0;i<iscritti.size();i++) {
@@ -96,104 +96,104 @@ public class PageVotiDocente extends Composite {
 		}catch(Error e){
 			};
 	}*/
-	
+
 	@UiHandler("btnHome")
-	   void doClickSubmit(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePageDocente());
-	   }
-	
+	void doClickSubmit(ClickEvent event) {
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePageDocente());
+	}
+
 	@UiHandler("btnCorso")
 	void doClickDip(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageCorsoDocente());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new PageCorsoDocente());
 	}
-	
+
 	@UiHandler("btnEsame")
 	void doClickContatti(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageEsameDocente());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new PageEsameDocente());
 	}
-	
+
 	@UiHandler("btnVoti")
 	void doClickHome(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageVotiDocente());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new PageVotiDocente());
 	}
-	
+
 	@UiHandler("btnLogout")
 	void doClickLogout(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePage());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePage());
 	}
-	
+
 	@UiHandler("btnInvioVoto")
 	void doClickSendVoto(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePage());
-			
-			ArrayList<String>dati = new ArrayList<String>();
-			dati.add(0, "");
-			dati.add(1, menuEsame.getSelectedValue());
-			dati.add(2, txtMatricola.getText());
-			dati.add(3, txtVoto.getText());
-			
-			
-			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-			
-			greetingService.addVoto(dati, new AsyncCallback<String>() {
-				
-				public void onFailure(Throwable c) {
-					Alert a = new Alert("Errore:" + c);
-					System.out.println(a);
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePage());
+
+		ArrayList<String>dati = new ArrayList<String>();
+		dati.add(0, "");
+		dati.add(1, menuEsame.getSelectedValue());
+		dati.add(2, txtMatricola.getText());
+		dati.add(3, txtVoto.getText());
+
+
+		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+
+		greetingService.addVoto(dati, new AsyncCallback<String>() {
+
+			public void onFailure(Throwable c) {
+				Alert a = new Alert("Errore:" + c);
+				System.out.println(a);
+				RootPanel.get("container").clear();
+				RootPanel.get("container").add(new HomePageDocente());
+			}
+
+			@Override
+			public void onSuccess(String result) {
+				if(result.equals("Successo")) {
 					RootPanel.get("container").clear();
-					RootPanel.get("container").add(new HomePageDocente());
-				}
-				
-				@Override
-				public void onSuccess(String result) {
-					if(result.equals("Successo")) {
-						RootPanel.get("container").clear();
-						Alert a = new Alert("Voto inviato alla segreteria!");
-					 	System.out.println(a);
-					 	
-						RootPanel.get("container").add(new PageVotiDocente());
-					}else if(result.equals("Errore")){
-						RootPanel.get("container").clear();
-						Alert a = new Alert("Esame gia sostenuto, voto esistente");
-						System.out.println(a);
-						RootPanel.get("container").add(new PageVotiDocente());
-					}   	
-					
-				}  
-			});
-			
+					Alert a = new Alert("Voto inviato alla segreteria!");
+					System.out.println(a);
+
+					RootPanel.get("container").add(new PageVotiDocente());
+				}else if(result.equals("Errore")){
+					RootPanel.get("container").clear();
+					Alert a = new Alert("Esame gia sostenuto, voto esistente");
+					System.out.println(a);
+					RootPanel.get("container").add(new PageVotiDocente());
+				}   	
+
+			}  
+		});
+
 	}
-	
+
 	@UiField
 	Button btnCorso;
-	
+
 	@UiField
 	Button btnHome;
-	
+
 	@UiField
 	Button btnEsame;
-	
+
 	@UiField
 	Button btnVoti;
-	
+
 	@UiField
 	Button btnLogout;
-	
+
 	@UiField
 	Button btnInvioVoto;
-	
+
 	@UiField
 	ListBox menuEsame;
-	
+
 	@UiField
 	TextBox txtVoto;
-	
+
 	@UiField
 	TextBox txtMatricola;
 

@@ -28,14 +28,14 @@ public class HomePageUtente extends Composite {
 	private static final ArrayList<Esame> esamiStudenti = new ArrayList<Esame>();
 	private static  ArrayList<Voto> votiFinal = new ArrayList<Voto>();
 	private static final ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
-	
+
 
 	@UiTemplate("HomePageUtente.ui.xml")
 	interface HomePageUtenteUiBinder extends UiBinder<Widget, HomePageUtente> {
 	}
 
-	
-	
+
+
 	public HomePageUtente() {
 		initWidget(uiBinder.createAndBindUi(this));
 		getUtente();
@@ -44,7 +44,7 @@ public class HomePageUtente extends Composite {
 		getVoti();
 		getCorsoStudente();
 		getEsamiStudente();
-		
+
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnHome.getElement().getStyle().setWidth(70.0, Unit.PX);
@@ -59,12 +59,12 @@ public class HomePageUtente extends Composite {
 		btnLogout.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnLogout.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnLogout.getElement().getStyle().setMarginLeft(820.0, Unit.PX);
-		
-		
+
+
 		//getCorsiStudente();
-		
+
 	}
-	
+
 	/* Prende tutti i corsi disponibili per lo studente */
 	public void getCorsiDisponibili() {
 		try {
@@ -77,7 +77,7 @@ public class HomePageUtente extends Composite {
 				}
 				@Override
 				public void onSuccess(ArrayList<Corso> corsi) {
-					
+
 					corsiFinal.clear();
 					for(int i=0;i<corsi.size();i++) {
 						corsiFinal.add(corsi.get(i));
@@ -86,9 +86,9 @@ public class HomePageUtente extends Composite {
 				}
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
+
 	/* Prende i voti associati ad uno studente */
 	public void getVoti() {
 		try {
@@ -108,9 +108,9 @@ public class HomePageUtente extends Composite {
 				}
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
+
 
 	/* Prende una lista di esami */
 	public void getEsami() {
@@ -132,10 +132,10 @@ public class HomePageUtente extends Composite {
 				}
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
-	
+
+
 	/* Prende i dati dell'utente e mostra nella homepage Nome,Cognome e Mail*/
 	public void getUtente() {
 		try {
@@ -146,7 +146,7 @@ public class HomePageUtente extends Composite {
 					Window.alert("ERRORE! ");
 
 				}
-				
+
 				@Override
 				public void onSuccess(Utente user) {
 					lblNome.setText(user.getNome());
@@ -154,12 +154,12 @@ public class HomePageUtente extends Composite {
 					lblMail.setText(user.getEmail());
 				}
 
-					
+
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
+
 	/* Prende i corsi a cui l'utente è iscritto */
 	public void getCorsoStudente() {
 		try {
@@ -185,9 +185,9 @@ public class HomePageUtente extends Composite {
 				}
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
+
 	public void getEsamiStudente() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -202,83 +202,83 @@ public class HomePageUtente extends Composite {
 					String test = "";
 					for(int i=0;i<esamiStudenti.size();i++) {
 						for(int j=0;j<idCorsi.size();j++) {
-							
+
 							if(idCorsi.get(j)==esamiStudenti.get(i).getIdCorso()) {
 								test += esamiStudenti.get(i).getNomeEsame() + " | ";
 							}
 						}
 					}
-					
+
 					lblEsami.setText(test);
 
 				}
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
-	
+
+
 
 	@UiHandler("btnHome")
-	   void doClickSubmit(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePageUtente());
-	   }
-	
+	void doClickSubmit(ClickEvent event) {
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePageUtente());
+	}
+
 	@UiHandler("btnIscrizione")
 	void doClickDip(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageCorsiDisponibili(corsiFinal));
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new PageCorsiDisponibili(corsiFinal));
 	}
-	
+
 	@UiHandler("btnRegistrazione")
 	void doClickContatti(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new RegistrazioneEsame());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new RegistrazioneEsame());
 	}
-	
+
 	@UiHandler("btnVoti")
 	void doClickHome(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageVoti(votiFinal));
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new PageVoti(votiFinal));
 	}
-	
+
 	@UiHandler("btnLogout")
 	void doClickLogout(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePage());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePage());
 	}
-	
+
 	@UiField
 	Button btnIscrizione;
-	
+
 	@UiField
 	Button btnHome;
-	
+
 	@UiField
 	Button btnRegistrazione;
-	
+
 	@UiField
 	Button btnVoti;
-	
+
 	@UiField
 	Button btnLogout;
-	
+
 	@UiField
 	Label lblNome;
-	
+
 	@UiField
 	Label lblCognome;
-	
+
 	@UiField
 	Label lblMail;
-	
+
 	@UiField
 	Label lblCorsi;
-	
+
 	@UiField
 	Label lblEsami;
 
-	
+
 
 }

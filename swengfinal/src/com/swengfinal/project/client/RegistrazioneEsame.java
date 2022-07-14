@@ -24,24 +24,24 @@ import com.swengfinal.project.shared.Voto;
 public class RegistrazioneEsame extends Composite {
 
 	private static RegistrazioneEsameUiBinder uiBinder = GWT.create(RegistrazioneEsameUiBinder.class);
-	
+
 	private static ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
 
 	@UiTemplate("RegistrazioneEsame.ui.xml")
 	interface RegistrazioneEsameUiBinder extends UiBinder<Widget, RegistrazioneEsame> {
 	}
-	
+
 	private static  ArrayList<Voto> votiFinal = new ArrayList<Voto>();
-	
+
 	private static final ArrayList<Integer> corsiStudenti = new ArrayList<Integer>();
-	
+
 	private static final ArrayList<Esame> esamiStudenti = new ArrayList<Esame>();
-	
+
 	//private static final ArrayList<Integer> idCorsiDisponibileEsame = new ArrayList<Integer>();
 
 	public RegistrazioneEsame() {
 		initWidget(uiBinder.createAndBindUi(this));
-		
+
 		menuCorsi.clear();
 		getVoti();
 		getCorsiStudente();
@@ -49,9 +49,9 @@ public class RegistrazioneEsame extends Composite {
 		getEsami();
 		getEsamiDisponibili();
 		//addOptionMenuEsami();
-		
+
 		//corsiFinal.clear();
-		
+
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnHome.getElement().getStyle().setWidth(70.0, Unit.PX);
@@ -66,10 +66,10 @@ public class RegistrazioneEsame extends Composite {
 		btnLogout.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnLogout.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnLogout.getElement().getStyle().setMarginLeft(820.0, Unit.PX);
-		
-		
-			
-		
+
+
+
+
 	}
 	/* Ritorna tutti i corsi disponibili */
 	public void getCorsiDisponibili() {
@@ -91,10 +91,10 @@ public class RegistrazioneEsame extends Composite {
 				}
 			});
 		}catch(Error e){
-			};
+		};
 	}
 
-	
+
 	/* Ritorna tutti i corsi a cui l'utente è iscritto */
 	public void getCorsiStudente() {
 		try {
@@ -114,9 +114,9 @@ public class RegistrazioneEsame extends Composite {
 				}
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
+
 	/* Metodo per prendere una lista con tutti gli esami disponibili */
 	public void getEsami() {
 		try {
@@ -137,9 +137,9 @@ public class RegistrazioneEsame extends Composite {
 				}
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
+
 	public void getEsamiDisponibili() {
 		menuCorsi.clear();
 		for(int i=0;i<corsiStudenti.size();i++) { // Integer
@@ -151,7 +151,7 @@ public class RegistrazioneEsame extends Composite {
 			}
 		}
 	}
-	
+
 	public void getVoti() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -170,40 +170,40 @@ public class RegistrazioneEsame extends Composite {
 				}
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
+
 	@UiHandler("btnHome")
-	   void doClickSubmit(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePageUtente());
-	   }
-	
+	void doClickSubmit(ClickEvent event) {
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePageUtente());
+	}
+
 	@UiHandler("btnIscrizione")
 	void doClickIscrizioneEsame(ClickEvent event) {
 		RootPanel.get("container").clear();
 		RootPanel.get("container").add(new PageCorsiDisponibili(corsiFinal));
-			
+
 	}
-	
+
 	@UiHandler("btnRegistrazione")
 	void doClickContatti(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new RegistrazioneEsame());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new RegistrazioneEsame());
 	}
-	
+
 	@UiHandler("btnVoti")
 	void doClickHome(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageVoti(votiFinal));
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new PageVoti(votiFinal));
 	}
-	
+
 	@UiHandler("btnLogout")
 	void doClickLogout(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePage());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePage());
 	}
-	
+
 	@UiHandler("btnEsame")
 	void doClickEsame(ClickEvent event) {
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -230,16 +230,16 @@ public class RegistrazioneEsame extends Composite {
 					System.out.println(e);
 				}
 			}
-	
+
 		});
 		RootPanel.get("container").clear();
 		RootPanel.get("container").add(new RegistrazioneEsame());
 	}
-	
+
 	@UiHandler("menuCorsi")
 	void doClickCorsi(ClickEvent event) {
 		final String voce=menuCorsi.getSelectedValue();
-		
+
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
@@ -250,7 +250,7 @@ public class RegistrazioneEsame extends Composite {
 				}
 				@Override
 				public void onSuccess(ArrayList<Esame> esami) {
-					
+
 					for(int i=0;i<esami.size();i++) {
 						for(int a=0; a<corsiStudenti.size(); a++) {
 							if(esami.get(i).getIdCorso() == corsiStudenti.get(a)) {
@@ -263,35 +263,35 @@ public class RegistrazioneEsame extends Composite {
 				}
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
-	
-	
+
+
+
 	@UiField
 	Button btnIscrizione;
-	
+
 	@UiField
 	Button btnHome;
-	
+
 	@UiField
 	Button btnRegistrazione;
-	
+
 	@UiField
 	Button btnVoti;
-	
+
 	@UiField
 	Button btnLogout;
-	
+
 	@UiField
 	Button btnEsame;
-	
+
 	@UiField
 	ListBox menuCorsi;
-	
+
 	@UiField
 	Label dataAppello;
-	
-	
-	
+
+
+
 }

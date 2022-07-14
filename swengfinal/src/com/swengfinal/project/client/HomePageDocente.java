@@ -23,14 +23,14 @@ import com.swengfinal.project.shared.Utente;
 public class HomePageDocente extends Composite {
 
 	private static HomePageDocenteUiBinder uiBinder = GWT.create(HomePageDocenteUiBinder.class);
-	
+
 	@UiTemplate("HomePageDocente.ui.xml")
 	interface HomePageDocenteUiBinder extends UiBinder<Widget, HomePageDocente> {
 	}
 
 	public HomePageDocente() {
 		initWidget(uiBinder.createAndBindUi(this));
-		
+
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnHome.getElement().getStyle().setWidth(70.0, Unit.PX);
@@ -45,14 +45,14 @@ public class HomePageDocente extends Composite {
 		btnLogout.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnLogout.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnLogout.getElement().getStyle().setMarginLeft(800.0, Unit.PX);
-		
+
 		getUtente();
 		getCorso();
 		getEsame();
-			
-			
+
+
 	}
-	
+
 	public void getUtente() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -62,22 +62,22 @@ public class HomePageDocente extends Composite {
 					Window.alert("ERRORE!");
 
 				}
-				
+
 				@Override
 				public void onSuccess(Utente user) {
 					lblNome.setText(user.getNome());
 					lblCognome.setText(user.getCognome());
 					lblMail.setText(user.getEmail());
-					
+
 
 				}
 
-					
+
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
+
 	public void getCorso() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -88,30 +88,30 @@ public class HomePageDocente extends Composite {
 					System.out.println(a);
 
 				}
-				
+
 				@Override
 				public void onSuccess(ArrayList<Corso> corsi) {
 					String tmp = "";
 					for(int i=0;i<corsi.size();i++)
 					{
-						
+
 						tmp += corsi.get(i).getNomeCorso() + ", ";
-						
+
 
 					}
 					lblCorsi.setText(tmp);
-					
+
 
 				}
 
-					
+
 			});
 		}catch(Error e){
-			};
+		};
 	}
 
 	public void getEsame() {
-		
+
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
@@ -121,85 +121,85 @@ public class HomePageDocente extends Composite {
 					System.out.println(a);
 
 				}
-				
+
 				@Override
 				public void onSuccess(ArrayList<Esame> esami) {
 					String tmp = "";
 					for(int i=0;i<esami.size();i++)
 					{
-						
+
 						tmp += esami.get(i).getNomeEsame() + ", ";
-						
+
 
 					}
 					lblEsami.setText(tmp);
-					
+
 
 				} 
 
-					
+
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
+
 	@UiHandler("btnHome")
-	   void doClickSubmit(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePageDocente());
-	   }
-	
+	void doClickSubmit(ClickEvent event) {
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePageDocente());
+	}
+
 	@UiHandler("btnCorso")
 	void doClickDip(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageCorsoDocente());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new PageCorsoDocente());
 	}
-	
+
 	@UiHandler("btnEsame")
 	void doClickContatti(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageEsameDocente());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new PageEsameDocente());
 	}
-	
+
 	@UiHandler("btnVoti")
 	void doClickHome(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageVotiDocente());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new PageVotiDocente());
 	}
-	
+
 	@UiHandler("btnLogout")
 	void doClickLogout(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePage());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePage());
 	}
-	
+
 	@UiField
 	Button btnCorso;
-	
+
 	@UiField
 	Button btnHome;
-	
+
 	@UiField
 	Button btnEsame;
-	
+
 	@UiField
 	Button btnVoti;
-	
+
 	@UiField
 	Button btnLogout;
-	
+
 	@UiField
 	Label lblNome;
-	
+
 	@UiField
 	Label lblCognome;
-	
+
 	@UiField
 	Label lblMail;
-	
+
 	@UiField
 	Label lblCorsi;
-	
+
 	@UiField
 	Label lblEsami;
 

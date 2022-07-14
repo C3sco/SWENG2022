@@ -20,13 +20,13 @@ public class FormStudente extends Composite {
 	private static FormStudenteUiBinder uiBinder = GWT.create(FormStudenteUiBinder.class);
 
 	interface FormStudenteUiBinder extends UiBinder<Widget, FormStudente> {
-		
-		
+
+
 	}
 
 	public FormStudente() {
 		initWidget(uiBinder.createAndBindUi(this));
-		
+
 		txtMail.getElement().getStyle().setMarginLeft(10.0, Unit.PX);
 		txtPassword.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
 		txtMatricola.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
@@ -38,11 +38,11 @@ public class FormStudente extends Composite {
 		btnSubmit.getElement().getStyle().setWidth(70.0, Unit.PX);
 	}
 
-	
+
 	@UiHandler("btnSubmit")
 	void doClickSubmit2(ClickEvent event) {
-		
-		
+
+
 		ArrayList<String> datiUtenti = new ArrayList<String>();
 		datiUtenti.add(txtMail.getText());
 		datiUtenti.add(txtPassword.getText());
@@ -51,60 +51,60 @@ public class FormStudente extends Composite {
 		datiUtenti.add(txtLuogoNascita.getText());
 		datiUtenti.add(txtDataNascita.getText());
 		datiUtenti.add(txtMatricola.getText());
-		
-		
-		
+
+
+
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-		
-		
+
+
 		greetingService.registrazioneStudente(datiUtenti, new AsyncCallback<String>() {
-			
+
 			public void onFailure(Throwable c) {
 				Alert a = new Alert("Errore!");
 				System.out.println(a);
 			}
-			
+
 			@Override
 			public void onSuccess(String result) {
 				if(result.equals("Registrazione completata")) {
 					RootPanel.get("container").clear();
 					//Account.email = txtMail.getText();
 					//Account.tipoAccount = 1;
-				
+
 					RootPanel.get("container").add(new Login());
 				}else {
 					Alert a = new Alert("Errore! Registrazione");
 					System.out.println(a);
 				} 	
-				
+
 			}
 		});
-			
+
 	}
-	
+
 	@UiField
 	TextBox txtMail;
-	
+
 	@UiField
 	TextBox txtPassword;
-	
-	
+
+
 	@UiField
 	TextBox txtMatricola;
-	
+
 	@UiField
 	TextBox txtNome;
-	
+
 	@UiField
 	TextBox txtCognome;
-	
+
 	@UiField
 	TextBox txtLuogoNascita;
-	
+
 	@UiField
 	TextBox txtDataNascita;
-	
-	
+
+
 	@UiField
 	Button btnSubmit;
 }

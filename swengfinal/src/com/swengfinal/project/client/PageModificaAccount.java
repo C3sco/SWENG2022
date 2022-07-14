@@ -22,7 +22,7 @@ import com.swengfinal.project.shared.Utente;
 public class PageModificaAccount extends Composite {
 
 	private static PageModificaAccountUiBinder uiBinder = GWT.create(PageModificaAccountUiBinder.class);
-	
+
 	private static Utente utente;
 
 	interface PageModificaAccountUiBinder extends UiBinder<Widget, PageModificaAccount> {
@@ -30,7 +30,7 @@ public class PageModificaAccount extends Composite {
 
 	public PageModificaAccount() {
 		initWidget(uiBinder.createAndBindUi(this));
-		
+
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnHome.getElement().getStyle().setWidth(70.0, Unit.PX);
@@ -51,53 +51,53 @@ public class PageModificaAccount extends Composite {
 		txtData.getElement().getStyle().setMarginLeft(40.0, Unit.PX);
 		btnModificaAccount.getElement().getStyle().setMargin(10.0, Unit.PX);
 		btnEliminaAccount.getElement().getStyle().setMargin(10.0, Unit.PX);
-		
+
 		addUtenti();
-		
+
 	}
-	
+
 	@UiHandler("btnHome")
-	   void doClickSubmit(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePageAdmin());
-	   }
-	
+	void doClickSubmit(ClickEvent event) {
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePageAdmin());
+	}
+
 	@UiHandler("btnCreazione")
 	void doClickDip(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageCreazioneAccount());
-			
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new PageCreazioneAccount());
+
 	}
-	
+
 	@UiHandler("btnModifica")
 	void doClickContatti(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageModificaAccount());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new PageModificaAccount());
 	}
-	
-	
+
+
 	@UiHandler("btnLogout")
 	void doClickLogout(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePage());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePage());
 	}
-	
+
 	@UiHandler("btnModificaAccount")
 	void doClickCreaAccount(ClickEvent event) {
 		ArrayList<String>dati = new ArrayList<String>();
 		String email=menuUtenti.getSelectedValue();
-			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
-			greetingService.getUtente(Account.email, new AsyncCallback<Utente>() {
-				public void onFailure(Throwable caught) {
-					Window.alert("ERRORE!");
-				}
-				@Override
-				public void onSuccess(Utente user) {
-					utente = user;	 
-				}				
-			});
-		
+		greetingService.getUtente(Account.email, new AsyncCallback<Utente>() {
+			public void onFailure(Throwable caught) {
+				Window.alert("ERRORE!");
+			}
+			@Override
+			public void onSuccess(Utente user) {
+				utente = user;	 
+			}				
+		});
+
 		if(txtPassword.getText()!="") {
 			dati.add(0, txtPassword.getText());
 		}else {
@@ -123,77 +123,77 @@ public class PageModificaAccount extends Composite {
 		}else {
 			dati.add(0, utente.getLuogoNascita());
 		}
-		
+
 		dati.add(0,txtPassword.getText());
 		dati.add(1, txtCognome.getText());
 		dati.add(2, txtNome.getText());
 		dati.add(3, txtData.getText());
 		dati.add(4, txtLuogo.getText());
 		//Window.alert("Corso modificato");
-		
-		
-		
+
+
+
 		final GreetingServiceAsync greetingService2 = GWT.create(GreetingService.class);
-		
+
 		greetingService2.updateUtente(dati, email, new AsyncCallback<String>() {
-			
+
 			public void onFailure(Throwable c) {
 				Alert a = new Alert("Errore:" + c);
 				System.out.println(a);
 				RootPanel.get("container").clear();
 				RootPanel.get("container").add(new PageModificaAccount());
 			}
-			
+
 			@Override
 			public void onSuccess(String result) {
 				if(result.equals("Successo")) {
 					RootPanel.get("container").clear();
 					Alert a = new Alert("Utente modificato con successo!");
 					System.out.println(a);
-				
+
 					RootPanel.get("container").add(new PageModificaAccount());
 				}else {
 					Alert a = new Alert("Errore!");
 					System.out.println(a);
 				} 	
-				
+
 			}
 		}); 
 	}
-	
+
 	@UiHandler("btnEliminaAccount")
 	void doClickElimnaAccount(ClickEvent event) {
 		String email=menuUtenti.getSelectedValue();
-		
+
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-		
+
 		greetingService.deleteUtente(email, new AsyncCallback<String>() {
-				
-				public void onFailure(Throwable c) {
-					Alert a = new Alert("Errore:" + c);
-					System.out.println(a);
+
+			public void onFailure(Throwable c) {
+				Alert a = new Alert("Errore:" + c);
+				System.out.println(a);
+				RootPanel.get("container").clear();
+				RootPanel.get("container").add(new PageModificaAccount());
+			}
+
+			@Override
+			public void onSuccess(String result) {
+				if(result.equals("Successo")) {
 					RootPanel.get("container").clear();
+					Alert a = new Alert("Utente eliminato con successo!");
+					System.out.println(a);
+
 					RootPanel.get("container").add(new PageModificaAccount());
-				}
-				
-				@Override
-				public void onSuccess(String result) {
-					if(result.equals("Successo")) {
-						RootPanel.get("container").clear();
-						Alert a = new Alert("Utente eliminato con successo!");
-						System.out.println(a);
-					
-						RootPanel.get("container").add(new PageModificaAccount());
-					}else {
-						Alert a = new Alert("Errore!");
-						System.out.println(a);
-					} 	
-					
-				}
-			}); 
+				}else {
+					Alert a = new Alert("Errore!");
+					System.out.println(a);
+				} 	
+
+			}
+		}); 
 	}
-	
-	
+
+
 	public void addUtenti() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -212,54 +212,54 @@ public class PageModificaAccount extends Composite {
 							menuUtenti.addItem(utenti.get(i).getEmail());
 							listUtenti.addItem(utenti.get(i).getEmail());
 						}
-						
+
 					}
 				}
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
-	
+
+
 	@UiField
 	Button btnCreazione;
-	
+
 	@UiField
 	Button btnHome;
-	
+
 	@UiField
 	Button btnModifica;
-	
+
 	@UiField
 	Button btnLogout;
-	
+
 	@UiField
 	Button btnModificaAccount;
-	
+
 	@UiField
 	Button btnEliminaAccount;
-	
+
 	@UiField
 	ListBox menuUtenti;
-	
+
 	@UiField
 	TextBox txtPassword;
-	
+
 	@UiField
 	ListBox listUtenti;
-	
+
 	@UiField
 	TextBox txtNome;
-	
+
 	@UiField
 	TextBox txtCognome;
-	
+
 	@UiField
 	TextBox txtLuogo;
-	
+
 	@UiField
 	TextBox txtData;
-	
-	
+
+
 
 }

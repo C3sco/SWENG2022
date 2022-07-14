@@ -29,21 +29,21 @@ public class PageVoti extends Composite {
 	private static  ArrayList<Voto> votiFinal = new ArrayList<Voto>();
 	public static Studente studente = new Studente();
 	private static ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
-	
+
 	@UiTemplate("PageVoti.ui.xml")
 	interface PageVotiUiBinder extends UiBinder<Widget, PageVoti> {
 	}
 
 	public PageVoti(ArrayList<Voto> list) {
-		
+
 		initWidget(uiBinder.createAndBindUi(this));
-		
+
 		corsiFinal.clear();
-		
+
 		getUtente();
 		votiFinal=list;
 		addTable();
-		
+
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnHome.getElement().getStyle().setWidth(70.0, Unit.PX);
@@ -61,13 +61,13 @@ public class PageVoti extends Composite {
 		cellTable.getElement().getStyle().setFontSize(24.0, Unit.PX);
 		cellTable.getElement().getStyle().setMarginTop(35.0, Unit.PX);
 		cellTable.getElement().getStyle().setMarginLeft(450.0, Unit.PX);
-		
+
 		getCorsiDisponibili();
 
 	}
-	
-	
-	
+
+
+
 	public void getUtente() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -82,7 +82,7 @@ public class PageVoti extends Composite {
 				}		
 			});
 		}catch(Error e){
-			};
+		};
 	}
 	/*
 	public void getVoti() {
@@ -106,7 +106,7 @@ public class PageVoti extends Composite {
 	}*/
 
 	public void addTable() {
-		
+
 		TextColumn<Voto> esameColumn=new TextColumn<Voto>() {
 			@Override
 			public String getValue(Voto obj) {
@@ -114,7 +114,7 @@ public class PageVoti extends Composite {
 			}
 		};
 		cellTable.addColumn(esameColumn, "Esame");
-		
+
 		TextColumn<Voto> votoColumn=new TextColumn<Voto>() {
 			@Override
 			public String getValue(Voto obj) {
@@ -122,17 +122,17 @@ public class PageVoti extends Composite {
 			}
 		};
 		cellTable.addColumn(votoColumn, "Voto");
-		
-		
+
+
 		//cellTable.
-		
-		 cellTable.setRowCount(votiFinal.size(), true);
-		 
-		 cellTable.setRowData(0, votiFinal);
-	     
-		 
+
+		cellTable.setRowCount(votiFinal.size(), true);
+
+		cellTable.setRowData(0, votiFinal);
+
+
 	}
-	
+
 	public void getCorsiDisponibili() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -144,7 +144,7 @@ public class PageVoti extends Composite {
 				}
 				@Override
 				public void onSuccess(ArrayList<Corso> corsi) {
-					
+
 					for(int i=0;i<corsi.size();i++) {
 						corsiFinal.add(corsi.get(i));
 						//txtNomeCorso.addItem(corsi.get(i).getNomeCorso());
@@ -152,55 +152,55 @@ public class PageVoti extends Composite {
 				}
 			});
 		}catch(Error e){
-			};
+		};
 	}
-	
+
 	@UiHandler("btnHome")
-	   void doClickSubmit(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePageUtente());
-	   }
-	
+	void doClickSubmit(ClickEvent event) {
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePageUtente());
+	}
+
 	@UiHandler("btnIscrizione")
 	void doClickDip(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageCorsiDisponibili(corsiFinal));
-			
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new PageCorsiDisponibili(corsiFinal));
+
 	}
-	
+
 	@UiHandler("btnRegistrazione")
 	void doClickContatti(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new RegistrazioneEsame());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new RegistrazioneEsame());
 	}
-	
+
 	@UiHandler("btnVoti")
 	void doClickHome(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new PageVoti(votiFinal));
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new PageVoti(votiFinal));
 	}
-	
+
 	@UiHandler("btnLogout")
 	void doClickLogout(ClickEvent event) {
-			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new HomePage());
+		RootPanel.get("container").clear();
+		RootPanel.get("container").add(new HomePage());
 	}
-	
+
 	@UiField
 	Button btnIscrizione;
-	
+
 	@UiField
 	Button btnHome;
-	
+
 	@UiField
 	Button btnRegistrazione;
-	
+
 	@UiField
 	Button btnVoti;
-	
+
 	@UiField
 	Button btnLogout;
-	
+
 	@UiField
 	CellTable<Voto> cellTable;
 

@@ -12,10 +12,6 @@ public class Alert extends DialogBox  {
 
 	private DialogBox messaggio = null;
 
-	/**
-	 * Costruttore della classe MyDialogBox
-	 * @param testo Testo da visualizzare
-	 */
 	public Alert(String testo){
 
 		this.messaggio = new DialogBox(false, true);
