@@ -22,28 +22,72 @@ public interface GreetingService extends RemoteService {
 	/**
 	 * Metodi utente
 	 */
+	
+	/**
+	 * Metodo per la registrazione dello studente, prende in input un ArrayList con i dati dello studente
+	 * e restituisce un messaggio se l'operazione è andata a buon fine o meno
+	 **/
 	String registrazioneStudente(ArrayList<String> dati) throws IllegalArgumentException;
 	
+	/**
+	 * Metodo per la registrazione della segretaria, prende in input un ArrayList con i dati
+	 * dell'account della segreteria e restituisce un messaggio se l'operazione è andata a buon fine o meno
+	 **/
 	String registrazioneSegreteria(ArrayList<String> dati) throws IllegalArgumentException;
 	
+	/**
+	 * Metodo per la registrazione dell'admin, prende in input un ArrayList con i dati dell'admin
+	 * e restituisce un messaggio se l'operazione è andata a buon fine o meno
+	 **/
 	String registrazioneAdmin(ArrayList<String> dati) throws IllegalArgumentException;
 	
+	/**
+	 * Metodo per la registrazione del docente, prende in input un ArrayList con i dati del docente
+	 * e restituisce un messaggio se l'operazione è andata a buon fine o meno
+	 **/
 	String registrazioneDocente(ArrayList<String> dati) throws IllegalArgumentException;
 	
+	/**
+	 * Metodo per la gestione del login, prende in input la mail e la password scritti nel form
+	 * e restituisce un oggetto di tipo utente se l'operazione è andata a buon fine o meno
+	 **/
 	Utente login(String username, String password) throws IllegalArgumentException;
 	
+	/**
+	 * Metodo che restituisce le informazioni dell'utente, verificando la mail passata in input restituisce 
+	 * i dati dell'utente se l'operazione è andata a buon fine
+	 **/
 	String getInfoUtente(String email)throws IllegalArgumentException;
 	
+	/**
+	 * Metodo che restituisce un utente la cui mail corrisponde a quella passata in input
+	 **/
 	Utente getUtente(String email) throws IllegalArgumentException;
 	
+	/**
+	 * Metodo che restituisce le informazioni dell'utente, verificando la mail passata in input restituisce 
+	 * i dati dell'utente se l'operazione è andata a buon fine
+	 **/
 	ArrayList<Studente> getStudenti() throws IllegalArgumentException;
 	
+	/**
+	 * Metodo che restituisce una lista con tutti i docenti registrati
+	 **/
 	ArrayList<Docente> getDocenti() throws IllegalArgumentException;
 	
+	/**
+	 * Metodo che restituisce una lista con tutti i docenti registrati
+	 **/
 	ArrayList<Utente> getUtentiAll() throws IllegalArgumentException;
 	
+	/**
+	 * Metodo che elimina l'utente, la cui mail corrisponde a quella passata input
+	 **/
 	String deleteUtente(String email) throws IllegalArgumentException;
 	
+	/**
+	 * Metodo si occupa di modificare l'utente, la cui mail corrisponde a quella passata input e insieme ai dati da aggiornare
+	 **/
 	String updateUtente(ArrayList<String> utenteUpdate, String email) throws IllegalArgumentException;
 	
 	/**
