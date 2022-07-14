@@ -33,7 +33,7 @@ public class dbIscrizioneCorso {
 		
 		if(!found) {
 			tmp++;
-			iscrizioni.put(iscrizioni.size(), iscrizione); // Aggiunta mail studente al relativo corso
+			iscrizioni.put(tmp, iscrizione); // Aggiunta mail studente al relativo corso
 			db.commit();
 			db.close();
 			return "Successo";

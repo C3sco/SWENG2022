@@ -60,14 +60,12 @@ public class dbEsame {
 		DB db = getDB();
 		Esame esame = new Esame();
 		BTreeMap<Integer, Esame> esami = db.getTreeMap("EsamiMap");
-		int idEsame=0;
 		for(Entry<Integer, Esame> test : esami.entrySet()) {
             if(test.getValue().getIdCorso() == idCorso) {
                 esame = test.getValue() ;
-                idEsame=test.getValue().getIdEsame();
+                esami.remove(test.getKey());
             }
         }
-		esami.remove(idEsame);
 		if(dati.get(0).length()>=1)
 		{
 			esame.setData(dati.get(0));
@@ -86,7 +84,7 @@ public class dbEsame {
 			esame.setOra(dati.get(3));
 		}
 		
-		esami.put(idEsame, esame);
+		esami.put(esame.getIdEsame(), esame);
 		db.commit();
 		db.close();
 		

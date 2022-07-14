@@ -282,7 +282,7 @@ public class PageEsameDocente extends Composite {
 
 		int id=0;
 		for(int i=0;i<corsiFinal.size();i++) {
-			if(corsiFinal.get(i).getNomeCorso()==menuUpdateCorsi.getSelectedValue()) {
+			if(corsiFinal.get(i).getNomeCorso()==menuCorsi.getSelectedValue()) {
 				id = corsiFinal.get(i).getIdCorso();
 			}
 		}

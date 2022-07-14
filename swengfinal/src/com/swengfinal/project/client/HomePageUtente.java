@@ -32,8 +32,6 @@ public class HomePageUtente extends Composite {
 	private static  ArrayList<Voto> votiFinal = new ArrayList<Voto>();
 	private static final ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
 	
-	private static ArrayList<Integer> corsiStudenti = new ArrayList<Integer>();
-	
 
 	@UiTemplate("HomePageUtente.ui.xml")
 	interface HomePageUtenteUiBinder extends UiBinder<Widget, HomePageUtente> {
@@ -49,7 +47,6 @@ public class HomePageUtente extends Composite {
 		getVoti();
 		getCorsoStudente();
 		getEsamiStudente();
-		getCorsiStudente();
 		
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHome.getElement().getStyle().setHeight(50.0, Unit.PX);
@@ -194,28 +191,6 @@ public class HomePageUtente extends Composite {
 			};
 	}
 	
-	/* Ritorna tutti i corsi a cui l'utente è iscritto */
-	public void getCorsiStudente() {
-		try {
-			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-
-			greetingService.getCorsoStudente(Account.email,new AsyncCallback<ArrayList<Integer>>() {
-				public void onFailure(Throwable caught) {
-					Window.alert("ERRORE!");
-
-				}
-				@Override
-				public void onSuccess(ArrayList<Integer> corsi) {
-					corsiStudenti.clear();
-					for(int i=0;i<corsi.size();i++) {
-						corsiStudenti.add(corsi.get(i));
-					}
-				}
-			});
-		}catch(Error e){
-			};
-	}
-	
 	public void getEsamiStudente() {
 		try {
 			final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -262,7 +237,7 @@ public class HomePageUtente extends Composite {
 	@UiHandler("btnRegistrazione")
 	void doClickContatti(ClickEvent event) {
 			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new RegistrazioneEsame(corsiStudenti, esamiStudenti));
+			RootPanel.get("container").add(new RegistrazioneEsame());
 	}
 	
 	@UiHandler("btnVoti")

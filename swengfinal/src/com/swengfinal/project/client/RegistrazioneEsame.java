@@ -9,8 +9,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
-import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -30,9 +28,6 @@ public class RegistrazioneEsame extends Composite {
 	private static RegistrazioneEsameUiBinder uiBinder = GWT.create(RegistrazioneEsameUiBinder.class);
 	
 	private static ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
-	
-	private static ArrayList<Esame> esamiDisponibili=new ArrayList<Esame>();
-
 
 	@UiTemplate("RegistrazioneEsame.ui.xml")
 	interface RegistrazioneEsameUiBinder extends UiBinder<Widget, RegistrazioneEsame> {
@@ -40,30 +35,23 @@ public class RegistrazioneEsame extends Composite {
 	
 	private static  ArrayList<Voto> votiFinal = new ArrayList<Voto>();
 	
-	private static ArrayList<Integer> corsiStudenti = new ArrayList<Integer>();
+	private static final ArrayList<Integer> corsiStudenti = new ArrayList<Integer>();
 	
-	private static ArrayList<Esame> esamiStudenti = new ArrayList<Esame>();
-	
-	
+	private static final ArrayList<Esame> esamiStudenti = new ArrayList<Esame>();
 	
 	//private static final ArrayList<Integer> idCorsiDisponibileEsame = new ArrayList<Integer>();
 
-	public RegistrazioneEsame(ArrayList<Integer>list, ArrayList<Esame> list1) {
+	public RegistrazioneEsame() {
 		initWidget(uiBinder.createAndBindUi(this));
-		
-		corsiStudenti=list;
-		esamiStudenti=list1;
-		
-		esamiDisponibili.clear();
 		
 		menuCorsi.clear();
 		getVoti();
-		//getCorsiStudente();
+		getCorsiStudente();
 		getCorsiDisponibili();
-		//getEsami();
+		getEsami();
 		getEsamiDisponibili();
 		//addOptionMenuEsami();
-		newTable();
+		
 		//corsiFinal.clear();
 		
 		btnHome.getElement().getStyle().setMarginRight(10, Unit.PX);
@@ -80,8 +68,7 @@ public class RegistrazioneEsame extends Composite {
 		btnLogout.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnLogout.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnLogout.getElement().getStyle().setMarginLeft(820.0, Unit.PX);
-		cellTable.getElement().getStyle().setFontSize(24.0, Unit.PX);
-        cellTable.getElement().getStyle().setMarginTop(35.0, Unit.PX);
+		
 		
 			
 		
@@ -161,7 +148,7 @@ public class RegistrazioneEsame extends Composite {
 			for(int j=0;j<esamiStudenti.size();j++) { // Esame
 				if(corsiStudenti.get(i)==esamiStudenti.get(j).getIdCorso()) {
 					menuCorsi.addItem(esamiStudenti.get(j).getNomeEsame());
-					esamiDisponibili.add(esamiStudenti.get(j));
+
 				}
 			}
 		}
@@ -204,7 +191,7 @@ public class RegistrazioneEsame extends Composite {
 	@UiHandler("btnRegistrazione")
 	void doClickContatti(ClickEvent event) {
 			RootPanel.get("container").clear();
-			RootPanel.get("container").add(new RegistrazioneEsame(corsiStudenti, esamiStudenti));
+			RootPanel.get("container").add(new RegistrazioneEsame());
 	}
 	
 	@UiHandler("btnVoti")
@@ -248,10 +235,10 @@ public class RegistrazioneEsame extends Composite {
 	
 		});
 		RootPanel.get("container").clear();
-		RootPanel.get("container").add(new RegistrazioneEsame(corsiStudenti, esamiStudenti));
+		RootPanel.get("container").add(new RegistrazioneEsame());
 	}
 	
-	/*@UiHandler("menuCorsi")
+	@UiHandler("menuCorsi")
 	void doClickCorsi(ClickEvent event) {
 		final String voce=menuCorsi.getSelectedValue();
 		
@@ -270,7 +257,7 @@ public class RegistrazioneEsame extends Composite {
 						for(int a=0; a<corsiStudenti.size(); a++) {
 							if(esami.get(i).getIdCorso() == corsiStudenti.get(a)) {
 								if(esami.get(i).getNomeEsame().equals(voce)) {
-									
+									dataAppello.setText(esami.get(i).getData());
 								}
 							}
 						}
@@ -279,58 +266,9 @@ public class RegistrazioneEsame extends Composite {
 			});
 		}catch(Error e){
 			};
-	}*/
+	}
 	
-	public void newTable() {
-
-        TextColumn<Esame> nameColumn=new TextColumn<Esame>() {
-            @Override
-            public String getValue(Esame obj) {
-                return obj.getNomeEsame();
-            }
-        };
-        cellTable.addColumn(nameColumn, "Esame");
-
-        TextColumn<Esame> cfuColumn=new TextColumn<Esame>() {
-
-            public String getValue(Esame obj) {
-                return obj.getCfu();
-            }
-        };
-
-        cellTable.addColumn(cfuColumn, "CFU");
-
-        TextColumn<Esame> dataColumn=new TextColumn<Esame>() {
-            @Override
-            public String getValue(Esame obj) {
-                return obj.getData();
-            }
-        };
-        cellTable.addColumn(dataColumn, "Data");
-
-        TextColumn<Esame> oraColumn=new TextColumn<Esame>() {
-            @Override
-            public String getValue(Esame obj) {
-                return obj.getOra();
-            }
-        };
-        cellTable.addColumn(oraColumn, "Ora");
-
-        TextColumn<Esame> aulaColumn=new TextColumn<Esame>() {
-            @Override
-            public String getValue(Esame obj) {
-                return obj.getAula();
-            }
-        };
-        cellTable.addColumn(aulaColumn, "Aula");
-
-        cellTable.setRowCount(esamiDisponibili.size(), true);
-
-        cellTable.setRowData(0, esamiDisponibili);
-
-
-
-    }
+	
 	
 	@UiField
 	Button btnIscrizione;
@@ -354,7 +292,7 @@ public class RegistrazioneEsame extends Composite {
 	ListBox menuCorsi;
 	
 	@UiField
-	CellTable cellTable;
+	Label dataAppello;
 	
 	
 	
