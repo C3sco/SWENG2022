@@ -7,13 +7,11 @@ import org.mapdb.BTreeMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 
-import com.swengfinal.project.shared.Esame;
-import com.swengfinal.project.shared.IscrizioneCorso;
 import com.swengfinal.project.shared.IscrizioneEsame;
 
 
 public class dbIscrizioneEsame {
-	private static Integer tmp = 0;
+
 	private static DB getDB() {
 		DB db = DBMaker.newFileDB(new File("dbIscrizioneEsame")).make();
 		return db;
@@ -32,8 +30,8 @@ public class dbIscrizioneEsame {
 		}
 		
 		if(!found) {
-			tmp++;
-			iscrizioniEsami.put(tmp, iscrizione); // Aggiunta mail studente al relativo corso
+
+			iscrizioniEsami.put(iscrizioniEsami.size(), iscrizione); // Aggiunta mail studente al relativo corso
 			db.commit();
 			return "Successo";
 			

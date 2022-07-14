@@ -13,6 +13,12 @@ import com.swengfinal.project.shared.IscrizioneCorso;
 
 public class dbIscrizioneCorso {
 	private static Integer tmp = 0;
+	/*
+	public dbIscrizioneCorso (){
+		DB db = getDB();
+		tmp= 
+	}*/
+	
 	private static DB getDB() {
 		DB db = DBMaker.newFileDB(new File("dbIscrizioneCorso")).make();
 		return db;
@@ -24,7 +30,21 @@ public class dbIscrizioneCorso {
 		
 		IscrizioneCorso iscrizione = new IscrizioneCorso(idCorso, email);
 		boolean found = false;
+
 		
+	//	IscrizioneCorso id = new IscrizioneCorso(100,"tmp");
+		/*
+		IscrizioneCorso idSave= new IscrizioneCorso(0,"");
+		for(Entry<Integer, IscrizioneCorso> test : iscrizioni.entrySet()) {
+			if(test.getValue().getMailStudente()=="tmp") {
+				idSave = test.getValue();
+				iscrizioni.remove(test.getKey());
+			}
+		}
+		Integer id = idSave.getIdCorso();
+		
+		iscrizioni.put(idSave.getIdCorso()+1, idSave);
+		*/
 		for(Entry<Integer, IscrizioneCorso> test : iscrizioni.entrySet()) {
 			if(idCorso == test.getValue().getIdCorso() && email.equals(test.getValue().getMailStudente())) {
 				found = true;
@@ -33,6 +53,7 @@ public class dbIscrizioneCorso {
 		
 		if(!found) {
 			iscrizioni.put(iscrizioni.size(), iscrizione); // Aggiunta mail studente al relativo corso
+			tmp++;
 			db.commit();
 			db.close();
 			return "Successo";
