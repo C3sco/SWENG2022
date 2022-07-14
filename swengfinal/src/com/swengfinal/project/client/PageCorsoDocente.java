@@ -17,9 +17,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-import com.sun.java.swing.plaf.windows.resources.windows;
 import com.swengfinal.project.shared.Corso;
-import com.swengfinal.project.shared.Utente;
 
 public class PageCorsoDocente extends Composite {
 	

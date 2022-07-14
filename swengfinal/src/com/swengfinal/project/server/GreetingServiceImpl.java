@@ -11,12 +11,6 @@ import com.swengfinal.project.shared.Voto;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-import org.mapdb.DB;
-import org.mapdb.DBMaker;
-import org.mapdb.HTreeMap;
-import org.mapdb.Serializer;
-
-import java.io.File;
 import java.util.ArrayList;
 
 /**

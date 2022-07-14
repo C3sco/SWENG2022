@@ -1,9 +1,7 @@
 package com.swengfinal.project.server;
 
 
-import com.swengfinal.project.client.Alert;
 import com.swengfinal.project.shared.Amministratore;
-import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.Docente;
 import com.swengfinal.project.shared.Segreteria;
 import com.swengfinal.project.shared.Studente;
@@ -37,7 +35,7 @@ public class dbUtenti {
 			}
 		} return find;
 	}
-	
+	/*
 	private static boolean checkMatricola(String matricola) {
 		boolean find = false;
 		DB db = getDB();
@@ -54,7 +52,7 @@ public class dbUtenti {
 			}
 		}
 		return find;
-	}
+	}*/
 	
 	public static String registrazioneStudente(ArrayList<String> dati) {
 		DB db = getDB();
@@ -154,7 +152,6 @@ public class dbUtenti {
 	public static String deleteUtente(String email) {
 		DB db = getDB();
 		BTreeMap<Integer, Utente> utenti = db.getTreeMap("UtentiMap");
-		
 		
 		utenti.remove(email);
 		db.commit();

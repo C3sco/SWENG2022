@@ -1,7 +1,6 @@
 package com.swengfinal.project.shared;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Segreteria extends Utente implements Serializable{
 	

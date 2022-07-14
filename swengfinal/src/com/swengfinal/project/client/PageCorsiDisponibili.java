@@ -1,13 +1,8 @@
 package com.swengfinal.project.client;
 
 
-import com.gargoylesoftware.htmlunit.javascript.host.Console;
-import com.google.gwt.canvas.dom.client.Context;
-import com.google.gwt.cell.client.ValueUpdater;
+
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.EventTarget;
-import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -20,27 +15,17 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.Voto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import javax.swing.plaf.TableUI;
-import javax.swing.text.TableView.TableCell;
-
-
 
 public class PageCorsiDisponibili extends Composite{
 	private static ArrayList<Corso> corsiFinal = new ArrayList<Corso>();
 	private static PageCorsiDisponibiliUiBinder uiBinder = GWT.create(PageCorsiDisponibiliUiBinder.class);
-	private static int tmp = 0;
 	private static final ArrayList<Voto> votiFinal = new ArrayList<Voto>();
 	@UiTemplate("PageCorsiDisponibili.ui.xml")
 	interface PageCorsiDisponibiliUiBinder extends UiBinder<Widget, PageCorsiDisponibili> {

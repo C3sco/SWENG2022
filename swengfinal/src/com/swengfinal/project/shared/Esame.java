@@ -1,7 +1,6 @@
 package com.swengfinal.project.shared;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.io.Serializable;
 
 public class Esame implements Serializable{

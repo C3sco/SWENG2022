@@ -1,7 +1,6 @@
 package com.swengfinal.project.client;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
@@ -18,7 +17,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.swengfinal.project.client.PageCorsiDisponibili;
 import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.Voto;
 import com.swengfinal.project.shared.Studente;

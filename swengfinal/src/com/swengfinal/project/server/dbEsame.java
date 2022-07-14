@@ -8,10 +8,8 @@ import org.mapdb.BTreeMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 
-import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.Esame;
-import com.swengfinal.project.shared.Segreteria;
-import com.swengfinal.project.shared.Voto;
+
 
 public class dbEsame {
 	private static DB getDB() {

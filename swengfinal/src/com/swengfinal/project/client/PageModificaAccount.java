@@ -17,7 +17,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.swengfinal.project.shared.Amministratore;
-import com.swengfinal.project.shared.Esame;
 import com.swengfinal.project.shared.Utente;
 
 public class PageModificaAccount extends Composite {

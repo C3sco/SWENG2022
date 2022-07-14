@@ -1,6 +1,6 @@
 package com.swengfinal.project.server;
 
-import com.swengfinal.project.client.Alert;
+
 import com.swengfinal.project.shared.Corso;
 
 import org.mapdb.BTreeMap;
@@ -18,7 +18,7 @@ public class dbCorso {
 		DB db = DBMaker.newFileDB(new File("dbCorso")).make();
 		return db;
 	}
-	
+	/*
 	private static boolean checkCorso(Integer idCorso) { //se corso esiste allora ritorna true
 		boolean find = false;
 		
@@ -31,7 +31,7 @@ public class dbCorso {
 			}
 		}
 		return find;
-	}
+	}*/
 	
 	private static int posizioneCorso( String nomeCorso)
 	{

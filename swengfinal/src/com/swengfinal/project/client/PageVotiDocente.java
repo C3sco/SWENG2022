@@ -16,13 +16,12 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-import com.swengfinal.project.shared.Corso;
 import com.swengfinal.project.shared.Esame;
 
 public class PageVotiDocente extends Composite {
 
 	private static PageVotiDocenteUiBinder uiBinder = GWT.create(PageVotiDocenteUiBinder.class);
-	private static final ArrayList<String> iscrizioni = new ArrayList<String>();
+	//private static final ArrayList<String> iscrizioni = new ArrayList<String>();
 
 	@UiTemplate("PageVotiDocente.ui.xml")
 	interface PageVotiDocenteUiBinder extends UiBinder<Widget, PageVotiDocente> {

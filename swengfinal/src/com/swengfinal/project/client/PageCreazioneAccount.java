@@ -16,7 +16,6 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-import com.swengfinal.project.shared.Docente;
 import com.swengfinal.project.shared.Studente;
 import com.swengfinal.project.shared.Utente;
 
