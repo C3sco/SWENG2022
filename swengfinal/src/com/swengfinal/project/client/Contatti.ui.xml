@@ -14,13 +14,8 @@
 		li {
 		  float: left;
 		}
-		table{
-			text-align:center;
-			border-left: blue 2px solid;
-			border-right: lightblue 1px dotted;
-			border-top: lightblue 1px dotted;
-			border-bottom: lightblue 1px dotted;
-		}
+		
+
 		th{
 			padding:10px;
 		}
@@ -29,6 +24,8 @@
 			border: 2px black solid;
 
 		}
+		
+
 		  
 	
 	</ui:style>
@@ -66,8 +63,7 @@
     
     <br></br>
 
-
-    <table style="width:300px" >
+    <table style="width:300px; border-left:blue 2px solid; text-align:center; border-right: lightblue 1px dotted; border-top: lightblue 1px dotted;border-bottom: lightblue 1px dotted;">
         <thead>
             <tr>
                 <th><img src="mail.png" width="30px"> </img></th>
@@ -96,6 +92,7 @@
         </thead>
     </table>
     <br></br>
+ 
   
 	</g:HTMLPanel>
 </ui:UiBinder> 
