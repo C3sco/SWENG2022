@@ -54,9 +54,7 @@ public class Login extends Composite {
 		txtPassword.getElement().getStyle().setMarginLeft(35.0, Unit.PX);
 		btnSubmit.getElement().getStyle().setHeight(40.0, Unit.PX);
 		btnSubmit.getElement().getStyle().setWidth(70.0, Unit.PX);
-		btnRegistrazione.getElement().getStyle().setHeight(50.0, Unit.PX);
-		btnRegistrazione.getElement().getStyle().setWidth(90.0, Unit.PX);
-		btnRegistrazione.getElement().getStyle().setMarginLeft(10.0, Unit.PX);
+
 	}
 
 	//final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
@@ -83,11 +81,6 @@ public class Login extends Composite {
 	void doClickHome(ClickEvent event) {
 		RootPanel.get("container").clear();
 		RootPanel.get("container").add(new HomePage());
-	}
-	@UiHandler("btnRegistrazione")
-	void doClickRegistrazione(ClickEvent event) {
-		RootPanel.get("container").clear();
-		RootPanel.get("container").add(new Registrazione());
 	}
 
 	public void getStudenti() {
@@ -128,11 +121,6 @@ public class Login extends Composite {
 			public void onSuccess(Utente user) {
 				Account.email = txtMail.getText();
 
-				//Account.tipoAccount = user.getTipologia();
-
-
-
-
 				RootPanel.get("container").clear();
 				if(user instanceof Studente) {
 					Account.matricola=((Studente) user).getMatricola();
@@ -169,9 +157,6 @@ public class Login extends Composite {
 
 	@UiField
 	Button btnContatti;
-
-	@UiField
-	Button btnRegistrazione;
 
 	@UiField
 	TextBox txtMail;

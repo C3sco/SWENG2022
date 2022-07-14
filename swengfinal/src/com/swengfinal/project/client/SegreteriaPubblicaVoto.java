@@ -35,9 +35,6 @@ public class SegreteriaPubblicaVoto extends Composite {
 		btnHomeSegreteria.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnHomeSegreteria.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnHomeSegreteria.getElement().getStyle().setWidth(70.0, Unit.PX);
-		btnInserisciVoto.getElement().getStyle().setHeight(50.0, Unit.PX);
-		btnInserisciVoto.getElement().getStyle().setWidth(90.0, Unit.PX);
-		btnInserisciVoto.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnPubblicaVoto.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnPubblicaVoto.getElement().getStyle().setWidth(90.0, Unit.PX);
 		btnPubblicaVoto.getElement().getStyle().setMarginRight(10, Unit.PX);
@@ -117,11 +114,6 @@ public class SegreteriaPubblicaVoto extends Composite {
 		RootPanel.get("container").add(new HomePageSegreteria(listaStudenti));
 	}
 
-	@UiHandler("btnInserisciVoto")
-	void doClickInserisciVoto(ClickEvent event) {
-		RootPanel.get("container").clear();
-		RootPanel.get("container").add(new SegreteriaInserisciVoto());
-	}
 
 	@UiHandler("btnPubblicaVoto")
 	void doClickPubblicVoto(ClickEvent event) {
@@ -214,9 +206,6 @@ public class SegreteriaPubblicaVoto extends Composite {
 
 	@UiField
 	Button btnHomeSegreteria;
-
-	@UiField
-	Button btnInserisciVoto;
 
 	@UiField
 	Button btnPubblicaVoto;

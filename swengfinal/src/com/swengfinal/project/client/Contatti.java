@@ -39,9 +39,7 @@ public class Contatti extends Composite {
 		btnContatti.getElement().getStyle().setMarginRight(10, Unit.PX);
 		btnLogin.getElement().getStyle().setHeight(50.0, Unit.PX);
 		btnLogin.getElement().getStyle().setWidth(70.0, Unit.PX);
-		btnRegistrazione.getElement().getStyle().setHeight(50.0, Unit.PX);
-		btnRegistrazione.getElement().getStyle().setWidth(90.0, Unit.PX);
-		btnRegistrazione.getElement().getStyle().setMarginLeft(10.0, Unit.PX);
+		
 	}
 
 	@UiHandler("btnLogin")
@@ -67,12 +65,6 @@ public class Contatti extends Composite {
 		RootPanel.get("container").clear();
 		RootPanel.get("container").add(new HomePage());
 	}
-	@UiHandler("btnRegistrazione")
-	void doClickRegistrazione(ClickEvent event) {
-		RootPanel.get("container").clear();
-		RootPanel.get("container").add(new Registrazione());
-	}
-
 
 	@UiField
 	Button btnLogin;
@@ -85,8 +77,5 @@ public class Contatti extends Composite {
 
 	@UiField
 	Button btnContatti;
-
-	@UiField
-	Button btnRegistrazione;
 
 }

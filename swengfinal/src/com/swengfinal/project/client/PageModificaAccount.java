@@ -85,10 +85,10 @@ public class PageModificaAccount extends Composite {
 	@UiHandler("btnModificaAccount")
 	void doClickCreaAccount(ClickEvent event) {
 		ArrayList<String>dati = new ArrayList<String>();
-		String email=menuUtenti.getSelectedValue();
+		String email=listUtenti.getSelectedValue();
 		final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
-		greetingService.getUtente(Account.email, new AsyncCallback<Utente>() {
+		greetingService.getUtente(email, new AsyncCallback<Utente>() {
 			public void onFailure(Throwable caught) {
 				Window.alert("ERRORE!");
 			}
@@ -106,29 +106,29 @@ public class PageModificaAccount extends Composite {
 		if(txtCognome.getText()!="") {
 			dati.add(1, txtCognome.getText());
 		}else {
-			dati.add(0, utente.getCognome());
+			dati.add(1, utente.getCognome());
 		}
 		if(txtNome.getText()!="") {
 			dati.add(2, txtNome.getText());
 		}else {
-			dati.add(0, utente.getNome());
+			dati.add(2, utente.getNome());
 		}
 		if(txtData.getText()!="") {
 			dati.add(3, txtData.getText());
 		}else {
-			dati.add(0, utente.getDataNascita());
+			dati.add(3, utente.getDataNascita());
 		}
 		if(txtLuogo.getText()!="") {
 			dati.add(4, txtLuogo.getText());
 		}else {
-			dati.add(0, utente.getLuogoNascita());
+			dati.add(4, utente.getLuogoNascita());
 		}
-
+/*
 		dati.add(0,txtPassword.getText());
 		dati.add(1, txtCognome.getText());
 		dati.add(2, txtNome.getText());
 		dati.add(3, txtData.getText());
-		dati.add(4, txtLuogo.getText());
+		dati.add(4, txtLuogo.getText());*/
 		//Window.alert("Corso modificato");
 
 

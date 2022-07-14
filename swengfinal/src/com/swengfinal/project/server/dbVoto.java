@@ -39,7 +39,7 @@ public class dbVoto {
 				found=true; //ritorna id del Corso
 			}
 		}
-		if(!found) {
+		if(dati.get(1).length()>=1 && dati.get(2).length()>=1 && dati.get(3).length()>=1 && !found) {
 			voti.put(voto.getIdVoto(), voto);
 			db.commit();
 			db.close();

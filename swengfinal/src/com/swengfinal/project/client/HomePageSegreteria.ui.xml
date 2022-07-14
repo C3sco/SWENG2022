@@ -23,10 +23,6 @@
 	       	<gwt:Button ui:field = "btnHomeSegreteria" text="Home"
                  />
 	       </li>
-	       <li  id="Inserisci Voto">
-	       	<gwt:Button ui:field = "btnInserisciVoto" text="Inserisci Voto"
-                 />
-	       </li>
 	        <li  id="Pubblica Voto">
 	       	<gwt:Button ui:field = "btnPubblicaVoto" text="Pubblica Voto"
                  />

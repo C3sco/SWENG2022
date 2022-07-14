@@ -223,7 +223,7 @@ public class RegistrazioneEsame extends Composite {
 			@Override
 			public void onSuccess(String result) {
 				if(result=="Successo") {
-					Alert nice = new Alert("Successo!");
+					Alert nice = new Alert("Iscrizione all'esame effettuata!");
 					System.out.println(nice);
 				}else if(result=="Errore") {
 					Alert e = new Alert("Sei gia iscritto a questo esame!");

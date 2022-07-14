@@ -160,7 +160,7 @@ public class PageVotiDocente extends Composite {
 					RootPanel.get("container").add(new PageVotiDocente());
 				}else if(result.equals("Errore")){
 					RootPanel.get("container").clear();
-					Alert a = new Alert("Esame gia sostenuto, voto esistente");
+					Alert a = new Alert("Errore nell'invio del voto, ricontrolla i parametri");
 					System.out.println(a);
 					RootPanel.get("container").add(new PageVotiDocente());
 				}   	
